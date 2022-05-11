@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Ubuntu相关读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="《完美应用Ubuntu》读书笔记ch06 Ubuntu软件包和存储管理软件包格式：Red Hat为RPM格式，Debian为DEB格式。DEB在丰富程度和易用性上略高RPM一筹 6.1 深入了解Ubuntu软件包格式RPM和DEB二者都有二进制和源码两种格式，例如DEB软件包分为  二进制软件包：扩展名为deb的二进制文件 源码软件包：通常包含   源码描述文件.dsc 源码包文件.orig.ta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu相关读书笔记">
+<meta property="og:url" content="http://example.com/2021/07/19/ubuntu-linux-os/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="《完美应用Ubuntu》读书笔记ch06 Ubuntu软件包和存储管理软件包格式：Red Hat为RPM格式，Debian为DEB格式。DEB在丰富程度和易用性上略高RPM一筹 6.1 深入了解Ubuntu软件包格式RPM和DEB二者都有二进制和源码两种格式，例如DEB软件包分为  二进制软件包：扩展名为deb的二进制文件 源码软件包：通常包含   源码描述文件.dsc 源码包文件.orig.ta">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-19T09:00:31.000Z">
+<meta property="article:modified_time" content="2022-05-11T03:19:10.222Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ubuntu-linux-os" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/19/ubuntu-linux-os/" class="article-date">
+  <time class="dt-published" datetime="2021-07-19T09:00:31.000Z" itemprop="datePublished">2021-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Ubuntu相关读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="《完美应用Ubuntu》读书笔记"><a href="#《完美应用Ubuntu》读书笔记" class="headerlink" title="《完美应用Ubuntu》读书笔记"></a>《完美应用Ubuntu》读书笔记</h2><h1 id="ch06-Ubuntu软件包和存储管理"><a href="#ch06-Ubuntu软件包和存储管理" class="headerlink" title="ch06 Ubuntu软件包和存储管理"></a>ch06 Ubuntu软件包和存储管理</h1><p>软件包格式：Red Hat为RPM格式，Debian为DEB格式。<br>DEB在丰富程度和易用性上略高RPM一筹</p>
+<h2 id="6-1-深入了解Ubuntu软件包格式"><a href="#6-1-深入了解Ubuntu软件包格式" class="headerlink" title="6.1 深入了解Ubuntu软件包格式"></a>6.1 深入了解Ubuntu软件包格式</h2><p>RPM和DEB二者都有二进制和源码两种格式，例如DEB软件包分为</p>
+<ol>
+<li>二进制软件包：扩展名为deb的二进制文件</li>
+<li>源码软件包：通常包含</li>
+</ol>
+<ul>
+<li>源码描述文件.dsc</li>
+<li>源码包文件.orig.tar.gz</li>
+<li>源码包补丁文件.diff.gz</li>
+</ul>
+<p>DEB软件包之间常见的依赖关系</p>
+<ol>
+<li>Depends：依赖</li>
+<li>Conflicts：不能共存</li>
+<li>Recommend：推荐安装</li>
+</ol>
+<p>Ubuntu16.04起支持SNAP软件包，优势是不存在复杂的依赖关系并且与操作系统隔离，更加安全</p>
+<p>软件包管理程序大致可以分为</p>
+<ol>
+<li>前端（由新到旧）：Ubuntu Software、Ubuntu软件中心（USC）、新立得（Synaptic）</li>
+<li>后端：dpkg、<a href="#3-5">tasksel</a>、aptitude、apt-cache/apt-get</li>
+</ol>
+<h2 id="6-2-使用软件包管理程序"><a href="#6-2-使用软件包管理程序" class="headerlink" title="6.2 使用软件包管理程序"></a>6.2 使用软件包管理程序</h2><p>对于由多个软件包构成的应用程序，它可以自动解决软件包的依赖关系</p>
+<h2 id="6-3-软件源管理"><a href="#6-3-软件源管理" class="headerlink" title="6.3 软件源管理"></a>6.3 软件源管理</h2><p>Ubuntu软件仓库类似于应用商店，又称为软件源</p>
+<p>默认情况下，第三方的非开源应用无法包含在Ubuntu默认的软件源；但如果这些应用很常用怎么办？Canonical合作伙伴专门解决这个问题，但默认不开启。开启方法：软件和更新 -&gt; 其他软件 -&gt; Canonical Parthners -&gt; Yes</p>
+<p>不能把Debian的软件源设置给Ubuntu系统；Ubuntu与其<a href="#Ubuntu%E9%9D%9E%E6%AD%A3%E5%BC%8F%E7%9A%84%E8%A1%8D%E7%94%9F%E7%89%88%E6%9C%AC">非官方衍生版本</a>MINT和Elementary的软件源不通用；</p>
+<p>PPA软件仓库是第三方开发者的在线打包和发布软件仓库，可视为扩展和补充，更新及时但稍欠稳妥。<br>命令行下，可以使用add-apt-repository命令添加PPA软件仓库。</p>
+<h2 id="6-4-Ubuntu软件包后端管理工具"><a href="#6-4-Ubuntu软件包后端管理工具" class="headerlink" title="6.4 Ubuntu软件包后端管理工具"></a>6.4 Ubuntu软件包后端管理工具</h2><p>apt-get和aptitude可以调用dpkg</p>
+<p>本书默认采用Guake终端运行命令行</p>
+<h3 id="6-4-1-后端的最底层——dpkg"><a href="#6-4-1-后端的最底层——dpkg" class="headerlink" title="6.4.1 后端的最底层——dpkg"></a>6.4.1 后端的最底层——dpkg</h3><p>不建议直接用<code>sudo dpkg -i name.deb</code>安装，因为它无法自动解决软件包复杂的依赖关系</p>
+<h3 id="6-4-2-后端自动化管理"><a href="#6-4-2-后端自动化管理" class="headerlink" title="6.4.2 后端自动化管理"></a>6.4.2 后端自动化管理</h3><p>aptitude、apt-cache/apt-get都能自动解决依赖关系；至于tasksel，则是一次安装一组软件包，适合安装桌面环境这种庞大的程序</p>
+<p><strong>本章未读完</strong></p>
+<h2 id="16-3-部署和配置Nginx-Web服务器"><a href="#16-3-部署和配置Nginx-Web服务器" class="headerlink" title="16.3 部署和配置Nginx Web服务器"></a>16.3 部署和配置Nginx Web服务器</h2><h3 id="16-3-1-部署Nginx-Web服务器"><a href="#16-3-1-部署Nginx-Web服务器" class="headerlink" title="16.3.1 部署Nginx Web服务器"></a>16.3.1 部署Nginx Web服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y nginx</span><br><span class="line">sudo systemctl start nginx</span><br><span class="line">sudo lsof -i:80</span><br></pre></td></tr></table></figure>
+<h3 id="16-3-2-深入Nginx-Web配置目录"><a href="#16-3-2-深入Nginx-Web配置目录" class="headerlink" title="16.3.2 深入Nginx Web配置目录"></a>16.3.2 深入Nginx Web配置目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo echo</span><br><span class="line">cd /stc/nginx</span><br><span class="line">ll</span><br><span class="line">grep &#x27;include /etc/nginx&#x27; nginx.conf</span><br><span class="line">ls conf.d</span><br><span class="line">ls sites-*</span><br><span class="line">cat fastcgi* | less</span><br></pre></td></tr></table></figure>
+<h3 id="16-3-2-配置Nginx-Web服务器"><a href="#16-3-2-配置Nginx-Web服务器" class="headerlink" title="16.3.2 配置Nginx Web服务器"></a>16.3.2 配置Nginx Web服务器</h3><p>nginx.conf 的默认内容注解。一般应用环境通常采用默认值即可</p>
+<p>sites-enabled/default 的默认内容注解。文件末尾以注释形式给出了虚拟主机的配置模板</p>
+<p>定制实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name ubuntu.com;</span><br><span class="line">        root &#x2F;var&#x2F;www&#x2F;ubuntucom;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16-3-4-全面管理Nginx-Web服务器"><a href="#16-3-4-全面管理Nginx-Web服务器" class="headerlink" title="16.3.4 全面管理Nginx Web服务器"></a>16.3.4 全面管理Nginx Web服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop nginx</span><br><span class="line">sudo systemctl restart nginx</span><br><span class="line">sudo systemctl enable nginx	#随系统自启动</span><br><span class="line">sudo systemctl disable nginx</span><br></pre></td></tr></table></figure>
+<h2 id="16-3节已读完"><a href="#16-3节已读完" class="headerlink" title="16.3节已读完"></a>16.3节已读完</h2><h2 id="《Ubuntu-linux操作系统》读书笔记"><a href="#《Ubuntu-linux操作系统》读书笔记" class="headerlink" title="《Ubuntu linux操作系统》读书笔记"></a>《Ubuntu linux操作系统》读书笔记</h2><h2 id="内容提要"><a href="#内容提要" class="headerlink" title="内容提要"></a>内容提要</h2><p>本书主要讲解Ubuntu的配置管理、桌面应用、编程和软件开发。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>前两章是基础部分，讲解Linux基本知识、Ubuntu Linux的安装、图形界面与命令行的基本操作。</li>
+<li>第3章至第7章介绍各类系统配置管理，涉及用户与组、文件与目录、磁盘存储、软件包安装，以及进程、系统启动、服务、任务调度和系统日志等高级管理，这些都是Ubuntu Linux系统管理员、操作员和程序开发人员等需要掌握的基本技能。</li>
+<li>第8章简单介绍了桌面应用软件的功能特性和基本使用，Ubuntu Linux已被许多用户用来进行编程和软件开发。</li>
+<li>第9章讲解最基本的Linux编程——Shell编程，编写Shell脚本也属于高级系统管理内容，这对于管理员来说非常必要。</li>
+<li>第10章至第12章讲解软件开发，涉及C/C++、Java、Android和PHP等应用程序，重点不是如何编写程序，而是在Ubuntu Linux系统中如何部署和使用软件开发环境，让读者掌握基本的应用开发流程。</li>
+<li>Web应用一般需要部署到网络服务器，最后一章还介绍了LAMP平台和Ubuntu Linux服务器版</li>
+</ol>
+<h1 id="ch01"><a href="#ch01" class="headerlink" title="ch01"></a>ch01</h1><h2 id="1-1-Linux与Ubuntu"><a href="#1-1-Linux与Ubuntu" class="headerlink" title="1.1 Linux与Ubuntu"></a>1.1 Linux与Ubuntu</h2><p>从技术角度看，Linux是一个内核。内核指的是一个提供硬件抽象层、磁盘及文件系统控制、多任务等功能的系统软件。一个内核不是一套完整的操作系统。一套基于Linux内核的完整操作系统称为Linux操作系统</p>
+<ol>
+<li>Red Hat Linux是商业上运作最成功的一个Linux发行套件，普及程度很高，由Red Hat公司发行。Red Hat Linux中的RPM软件包格式可以说是Linux社区的一个事实标准，被广泛使用于其他Linux发行套件中。目前RedHat分为两个系列：</li>
+</ol>
+<ul>
+<li>一个是Red Hat Enterprise Linux （简称RHEL），Red Hat提供收费技术支持和更新，适合服务器用户；</li>
+<li>另一个是Fedora（第7版以前为Fedora Core），它的定位是桌面用户，Fedora是Red Hat公司新技术的实验场，许多新的技术都会在Fedora Core中检验，如果稳定则会考虑加入Red Hat Enterprise Linux中。Fedora预计每年发行2～3次的发行版本。</li>
+</ul>
+<ol>
+<li>值得一提的是CentOS（Community Enterprise Operating System）是RHEL源代码再编译的免费版，它继承了Red Hat Linux的稳定性，而且又提供免费更新。2014年1月8日CentOS宣布加入Red Hat公司，承诺继续免费。</li>
+<li>SUSE（读音为[ˈsuːsə]）是欧洲大陆最流行的Linux版本，也是目前历史最久的商业发行版之一，起源于德国，后被Novell收购。主要版本有：SUSE Linux，针对个人用户，可以免费下载；另一个SUSE Linux Enterprise Server（SLES）是基于企业服务器端的。如果需要使用数据库高级服务和电子邮件网络应用，则可以考虑选用SUSE。</li>
+<li>Debian（读音为[ˈdɛ.bi.ən]）是迄今为止完全遵循GNU规范的Linux系统。Ubuntu是Debian的一个改版，也是现在最流行的Linux桌面系统。下面将重点介绍这两个发行版本。</li>
+</ol>
+<h3 id="1-1-5-后来居上的Ubuntu-Linux"><a href="#1-1-5-后来居上的Ubuntu-Linux" class="headerlink" title="1.1.5 后来居上的Ubuntu Linux"></a>1.1.5 后来居上的Ubuntu Linux</h3><p>发作oo-boon-too的音，国际音标为[uːˈbuːntuː]。中文音译为“乌班图”。Ubuntu基于Debian发行版，与Debian的不同在于它每6个月会发布一个新版本。1. Ubuntu的父版本——Debian</p>
+<p>Ubuntu每半年发行一个新的版本，版本号由发布年月组成。例如第一个版本，4.10代表是在2004年10月发行的。Ubuntu会发行长期支持版本（简称LTS），更新维护的时间比较长，大约两年会推出一个正式的大改版版本。<br>自Ubuntu 12.04 LTS开始，桌面版和服务器版均可获得为期5年的技术支持。</p>
+<h5 id="Ubuntu衍生版本："><a href="#Ubuntu衍生版本：" class="headerlink" title="Ubuntu衍生版本："></a>Ubuntu衍生版本：</h5><ol>
+<li>Ubuntu Server Edition：现与桌面版同步发行，可用作多种服务器。与桌面版本相比，服务器版的光盘映像较小，运行时对硬件要求较低，最少需要500MB硬盘空间和64MB内存。服务器版通常不提供任何桌面环境。</li>
+<li>Kubuntu：使用和Ubuntu一样的软件库，但不采用GNOME，而是采用KDE作为默认的桌面环境，以满足偏爱KDE的Ubuntu用户。</li>
+<li>Edubuntu：是为教育量身定做的发行版，包含很多教育软件，可以帮助教师方便地搭建网络学习环境，管理电子教室。</li>
+<li>Xubuntu：属于轻量级的发行版，使用Xfce4作为默认桌面环境，与Ubuntu采用一样的软件库。</li>
+<li>Ubuntu Studio：适合于音频、视频和图像设计的版本，使用Xfce4作为默认的桌面环境。</li>
+<li>Ubuntu JeOS：一个高度精简的、专门面向虚拟化应用的版本。</li>
+<li>Ubuntu Kylin（优麒麟）：语言的默认设置为中文，为中国用户专门定制。</li>
+</ol>
+<h5 id="Ubuntu非正式的衍生版本"><a href="#Ubuntu非正式的衍生版本" class="headerlink" title="Ubuntu非正式的衍生版本"></a>Ubuntu非正式的衍生版本</h5><ul>
+<li>Ubuntu（专注于安全工具）、Ubuntu Lite（针对旧电脑）、Dubuntu（由中国爱好者开发的Ubuntu改进版）等。</li>
+<li>除了桌面版和服务器版之外，Canonical公司还针对其他平台发布Ubuntu版本，如Ubuntu for Android用于Android手机的版本，Ubuntu Touch是基于Ubuntu和Android的手机/平板操作系统，Ubuntu TV是用于智能电视的版本。</li>
+</ul>
+<p>目前全世界桌面操作系统市场约有5%由Linux家族所占据，其中约有一半为Ubuntu。</p>
+<h2 id="1-2-安装Ubuntu操作系统"><a href="#1-2-安装Ubuntu操作系统" class="headerlink" title="1.2 安装Ubuntu操作系统"></a>1.2 安装Ubuntu操作系统</h2><p>Linux使用设备名称加分区编号来标明分区。</p>
+<ol>
+<li>SCSI磁盘、SATA磁盘（串口硬盘）均可表示为“sd”，并且在“sd”之后使用小写字母表示磁盘编号，磁盘编号之后是分区编号，使用阿拉伯数字表示。</li>
+<li>IDE磁盘使用“hd”表示，表示方法同SCSI磁盘。</li>
+</ol>
+<p>Ubuntu支持在一台计算机中安装多个操作系统，可以通过使用GRUB多重启动管理器来引导Windows等操作系统。</p>
+<h2 id="1-3-熟悉Ubuntu桌面环境"><a href="#1-3-熟悉Ubuntu桌面环境" class="headerlink" title="1.3 熟悉Ubuntu桌面环境"></a>1.3 熟悉Ubuntu桌面环境</h2><p>可选择“挂起”命令，让系统暂时进入休眠（待机）状态。</p>
+<p>默认的显示分辨率为800像素×600像素，一般不能满足实际需要。首先就要修改屏幕分辨率，打开“系统设置”界面，单击“硬件”区域的“显示”</p>
+<p>有些软件包安装不成功，会遇到“下载软件包文件失败”“下载软件仓库信息失败”一类的提示，这主要是软件源的问题，解决的办法是变更软件源。</p>
+<h6 id="打开“系统设置”界面，单击“系统”区域的“软件和更新”按钮打开如图1-38所示的界面，从“下载自”下拉列表中选择所需的软件源。如果选择“其他站点”，将打开如图1-39所示的对话框，从列表中选择一个下载服务器作为软件源，或者直接单击“选择最佳服务器”（这种情况由于要测试速度，可能要耗费较长时间）。"><a href="#打开“系统设置”界面，单击“系统”区域的“软件和更新”按钮打开如图1-38所示的界面，从“下载自”下拉列表中选择所需的软件源。如果选择“其他站点”，将打开如图1-39所示的对话框，从列表中选择一个下载服务器作为软件源，或者直接单击“选择最佳服务器”（这种情况由于要测试速度，可能要耗费较长时间）。" class="headerlink" title="打开“系统设置”界面，单击“系统”区域的“软件和更新”按钮打开如图1-38所示的界面，从“下载自”下拉列表中选择所需的软件源。如果选择“其他站点”，将打开如图1-39所示的对话框，从列表中选择一个下载服务器作为软件源，或者直接单击“选择最佳服务器”（这种情况由于要测试速度，可能要耗费较长时间）。"></a>打开“系统设置”界面，单击“系统”区域的“软件和更新”按钮打开如图1-38所示的界面，从“下载自”下拉列表中选择所需的软件源。如果选择“其他站点”，将打开如图1-39所示的对话框，从列表中选择一个下载服务器作为软件源，或者直接单击“选择最佳服务器”（这种情况由于要测试速度，可能要耗费较长时间）。</h6><h1 id="ch03"><a href="#ch03" class="headerlink" title="ch03"></a>ch03</h1><h2 id="3-3-使用命令行工具管理用户和组"><a href="#3-3-使用命令行工具管理用户和组" class="headerlink" title="3.3 使用命令行工具管理用户和组"></a>3.3 使用命令行工具管理用户和组</h2><p>查看全部用户列表，可以考虑使用<code>awk -F&#39;:&#39; &#39;&#123; print $1&#125;&#39; /etc/passwd</code></p>
+<p>添加一个管理员的语法格式<br><code>adduser --system [--home 用户主文件夹] [--shell SHELL] [--no-create-home （无主文 件夹）] [--uid 用户 ID] [--gecos GECOS] [--group | --ingroup 用户组 | --gid 组 ID] [--disabled-password（禁用密码）] [--disabled-login （禁止登录）] 用户名</code></p>
+<p>useradd [选项] 该命令的选项较多。例如</p>
+<ol>
+<li>-d用于指定用户主目录；</li>
+<li>-g用于指定该用户所属主要组（名称或ID均可）；</li>
+<li>-G用于指定用户所属其他组列表，各组之间用逗号分隔；</li>
+<li>-r指定创建一个系统账户，建立系统账户时不会建立主目录，其UID也会有限制；</li>
+<li>-s指定用户登录时所使用的Shell，默认为/bin/bash；</li>
+<li>-u指定新用户的UID。</li>
+</ol>
+<p>对于没有指定上述选项的情况，系统将</p>
+<ol>
+<li>根据etc/default/useradd配置文件中的定义为新建用户账户提供默认值，如是否创建用户私有目录等。</li>
+<li>利用/etc/skel/目录为新用户初始化主目录。/etc/skel目录一般是存放用户启动文件的目录，这个目录由root权限控制，当管理员添加用户时，这个目录下的文件自动复制到新添加的用户的家目录下；/etc/skel目录下的文件都是隐藏文件，也就是类似.file格式的；可通过修改、添加、删除/etc/skel目录下的文件，来为用户提供一个统一、标准的、默认的用户环境。</li>
+<li>默认情况下创建用户账户的同时也会建立一个与用户名同名的组账户，该组作为用户的主组（默认组）。<br><code>useradd -D</code>用于显示或默认的useradd配置</li>
+</ol>
+<p>Ubuntu还特别提供一个adduser，该命令执行过程中可提供交互对话</p>
+<p>创建用户时如果没有设置密码，账户将处于锁定状态，此时用户账户将无法登录系统。可到/etc/shadow文件中查看，密码部分为！</p>
+<p>使用passwd命令为用户设置密码<code>passwd [选项] [用户名]</code> </p>
+<ol>
+<li>使用带-l选项的passwd命令可锁定账户密码</li>
+<li>使用带-u选项的passwd命令可解除锁定</li>
+<li>使用带-S选项的passwd命令可查看某账户的当前状态</li>
+<li>使用带-d选项的passwd命令可删除密码</li>
+</ol>
+<p>对于已创建的用户账户，可使用usermod命令来修改其各项属性，包括用户名、主目录、用户组、登录Shell等，用法<code>usermod [选项] 用户名</code>。大部分选项与添加用户所用的useradd命令相同，这里重点介绍几个不同的选项。</p>
+<ol>
+<li>使用-l选项改变用户账户名。　　usermod -l 新用户名 原用户名</li>
+<li>使用-L选项锁定账户，临时禁止该用户登录。　　usermod -L 用户名</li>
+<li>如果要解除账户锁定，使用-U选项即可。</li>
+</ol>
+<p>可以使用命令chfn来更改用户的个人信息，如真实姓名、办公电话等。语法格式如下：<code>chfn [选项] [用户名]</code>。选项-f表示全名（真实姓名），-h表示家庭电话，-o表示办公地址。</p>
+<p>要删除账户，可使用userdel命令来实现，其用法如下：<code>userdel [-r] 用户名</code>。如果使用选项-r，则在删除该账户的同时，一并删除该账户对应的主目录和邮件目录。注意userdel不允许删除正在使用（已经登录）的用户账户。另一个用户删除命令deluser在Ubuntu中使用较多。</p>
+<p>想查看组列表，可以通过查看组配置文件/etc/group来解决</p>
+<p><strong>关于用户组的内容未读完</strong></p>
+<h1 id="ch05"><a href="#ch05" class="headerlink" title="ch05"></a>ch05</h1><h2 id="5-1-Linux磁盘存储概述"><a href="#5-1-Linux磁盘存储概述" class="headerlink" title="5.1 Linux磁盘存储概述"></a>5.1 Linux磁盘存储概述</h2><ol>
+<li>目前所有硬盘厂商在产品出厂前，已经对硬盘进行了低级格式化处理。低级格式化是物理级的，对硬盘有损伤，影响磁盘寿命。如果硬盘已有物理坏道，则低级格式化会使损伤更严重，加快报废。</li>
+<li>平常所说的格式化就是指高级格式化。高级格式化与操作系统有关，不同的操作系统有不同的格式化程序、不同的格式化结果、不同的磁道划分方法。当一个磁盘分区被格式化之后，就可以被称为卷（Volume）</li>
+</ol>
+<p>在Linux中，设备文件名用字母表示不同的设备接口，例如a表示第1个接口，字母b表示第2个接口，磁盘设备也不例外。</p>
+<ol>
+<li>IDE硬盘（包括光驱设备）由内部连接来区分，最多可以接4个设备。</li>
+</ol>
+<ul>
+<li>/dev/hda表示第1个IDE通道（IDE1）的主设备（master）</li>
+<li>/dev/hdb表示第1个IDE通道的从设备（slave）。</li>
+<li>/dev/hdc和/dev/hdd为第2个IDE通道（IDE2）的主设备和从设备。</li>
+</ul>
+<ol>
+<li>原则上SCSI、SAS、SATA、USB接口硬盘的设备文件名均以/dev/sd开头。这些设备命名依赖于设备的ID号码，不考虑遗漏的ID号码。例如，3个SCSI设备的ID号码分别是0、2、5，设备名分别是/dev/sda、/dev/sdb和/dev/sdc。如果再添加一个ID号码为3的设备，则这个设备将被以/dev/sdc来命名，ID号码为5的设备将改称为/dev/sdd。</li>
+<li>一般情况SATA硬盘类似SCSI，在Linux中用类似/dev/sda这样的设备名表示。</li>
+</ol>
+<p>Linux主要使用MBR和GPT两种分区样式。</p>
+<ol>
+<li>MBR磁盘分区如图5-2所示，最多可支持4个磁盘分区，可通过扩展分区来支持更多的逻辑分区，在Linux中将该分区样式又称为MSDOS。</li>
+<li>一个GPT磁盘内最多可以创建128个主分区，不必创建扩展分区或逻辑分区。特别适合大于2TB的硬盘分区。<br>目前还是采用传统的MBR分区的居多</li>
+</ol>
+<h3 id="磁盘分区命名"><a href="#磁盘分区命名" class="headerlink" title="磁盘分区命名"></a>磁盘分区命名</h3><p>在Linux中，磁盘分区的文件名需要在磁盘设备文件名的基础上加上分区编号。这样，IDE硬盘分区采用/dev/hdxy这样的形式命名，SCSI、SAS、SATA、USB硬盘分区采用/dev/sdxy这样的形式命名，其中x表示设备编号（从a开始），y是分区编号（从1开始）。例如，第一块SCSI硬盘的主分区为sda1，扩展分区为sda2，扩展分区下的一个逻辑分区为sda5（从5开始才用来为逻辑分区命名）。</p>
+<p>ext3是Linux操作系统的主流文件系统格式，Linux内核自2.6.28版开始正式支持新的文件系统ext4。作为ext3的改进版，ext4修改了ext3中部分重要的数据结构，提供更佳的性能和可靠性。其主要特点说明如下</p>
+<ol>
+<li>属于大型文件系统，支持最高1EB（1048576TB）的分区，最大16 TB的单个文件。</li>
+<li>向下兼容于ext3与ext2，可将ext3和ext2的文件系统挂载为ext4分区。</li>
+<li>引入现代文件系统中流行的Extent文件存储方式，以取代ext2/3使用的块映射（block mapping）方式。Extent为一组连续的数据块，可以增加大型文件的效率。ext4支持单一Extent，在单一块大小为4KB的系统中最高可达128MB。</li>
+<li>支持持久预分配，在文件系统层面实现了持久预分配并提供相应的API，比应用软件自己实现更有效率。</li>
+<li>能够尽可能地延迟分配磁盘空间，使用一种称为allocate-on-flush的方式，直到文件在缓存中写完才开始分配数据块并写入磁盘，这样就能优化整个文件的数据块分配。</li>
+<li>支持无限数量的子目录。</li>
+<li>使用日志校验来提高文件系统可靠性。</li>
+<li>支持在线磁盘碎片整理。</li>
+</ol>
+<p>Linux Native和Linux Swap是Linux特有的分区类型。</p>
+<ol>
+<li>Ubuntu Linux至少需要一个Linux Native分区</li>
+<li>Swap分区应该大于或等于物理内存的大小。建议物理内存在2GB以下时，Swap分区的大小为物理内存的2～2.5倍，如果物理内存在2GB以上，则Swap分区的大小设为与物理内存大小相同即可</li>
+<li>引导分区不是必需的，如果没有创建引导分区，引导文件就安装在根分区中。</li>
+</ol>
+<p>fdisk是各种Linux发行版本中最常用的分区工具，使用灵活，简单易用。parted功能更强大，支持的分区类型非常多，而且可以调整原有分区尺寸，只是操作复杂一些。Ubuntu提供一个基于文本窗口界面的分区工具cfdisk，它比fdisk的操作界面更为直观</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/19/ubuntu-linux-os/" data-id="cl310rf3t0012gctk7o26c94j" data-title="Ubuntu相关读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/mysql-ji-shu-nei-mu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《mysql技术内幕》读书笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/07/shell-program-demo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">shell例程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/07/shell-program-demo/">shell例程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/06/unix-bian-cheng-yi-shu/">《UNIX编程艺术》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《mysql技术内幕》读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本书的主要内容 ch01-MySQL入门 ch02-使用SQL管理数据 ch03-数据类型 ch10-MYSQL管理简介  本书的主要内容各章路线图 基本概念 编写程序 管理 参考附录  阅读本书的方法 对SQL熟悉，从第二章开始 如果你的职责是管理mysql的安装，读第十章  ch01 MySQL入门跳过 ch02 使用SQL管理数据第一章介绍了MySQL的许多功能，以及SQL的某些基本用法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《mysql技术内幕》读书笔记">
+<meta property="og:url" content="http://example.com/2021/07/21/mysql-ji-shu-nei-mu/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本书的主要内容 ch01-MySQL入门 ch02-使用SQL管理数据 ch03-数据类型 ch10-MYSQL管理简介  本书的主要内容各章路线图 基本概念 编写程序 管理 参考附录  阅读本书的方法 对SQL熟悉，从第二章开始 如果你的职责是管理mysql的安装，读第十章  ch01 MySQL入门跳过 ch02 使用SQL管理数据第一章介绍了MySQL的许多功能，以及SQL的某些基本用法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-21T12:25:14.000Z">
+<meta property="article:modified_time" content="2022-05-11T03:19:10.206Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mysql-ji-shu-nei-mu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/21/mysql-ji-shu-nei-mu/" class="article-date">
+  <time class="dt-published" datetime="2021-07-21T12:25:14.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《mysql技术内幕》读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#%E6%9C%AC%E4%B9%A6%E7%9A%84%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9">本书的主要内容</a></li>
+<li><a href="#ch01-MySQL%E5%85%A5%E9%97%A8">ch01-MySQL入门</a></li>
+<li><a href="#ch02-%E4%BD%BF%E7%94%A8SQL%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE">ch02-使用SQL管理数据</a></li>
+<li><a href="#ch03-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">ch03-数据类型</a></li>
+<li><a href="#ch10-MYSQL%E7%AE%A1%E7%90%86%E7%AE%80%E4%BB%8B">ch10-MYSQL管理简介</a></li>
+</ul>
+<h1 id="本书的主要内容"><a href="#本书的主要内容" class="headerlink" title="本书的主要内容"></a>本书的主要内容</h1><h2 id="各章路线图"><a href="#各章路线图" class="headerlink" title="各章路线图"></a>各章路线图</h2><ol>
+<li>基本概念</li>
+<li>编写程序</li>
+<li>管理</li>
+<li>参考附录</li>
+</ol>
+<h2 id="阅读本书的方法"><a href="#阅读本书的方法" class="headerlink" title="阅读本书的方法"></a>阅读本书的方法</h2><ol>
+<li>对SQL熟悉，从第二章开始</li>
+<li>如果你的职责是管理mysql的安装，读第十章</li>
+</ol>
+<h1 id="ch01-MySQL入门"><a href="#ch01-MySQL入门" class="headerlink" title="ch01 MySQL入门"></a>ch01 MySQL入门</h1><p>跳过</p>
+<h1 id="ch02-使用SQL管理数据"><a href="#ch02-使用SQL管理数据" class="headerlink" title="ch02 使用SQL管理数据"></a>ch02 使用SQL管理数据</h1><p>第一章介绍了MySQL的许多功能，以及SQL的某些基本用法。本章更深入</p>
+<h2 id="2-1-服务器的SQL模式"><a href="#2-1-服务器的SQL模式" class="headerlink" title="2.1 服务器的SQL模式"></a>2.1 服务器的SQL模式</h2><p>sql_mode值</p>
+<ol>
+<li>ANSI_QUOTES ：把双引号识别为一个标识符引用字符</li>
+<li>PIPES_AS_CONCAT ：把<code>||</code>当成字符串连接运算符，而不是OR运算符</li>
+<li>ANSI 标准模式：是一个组合模式，与默认状态相比，其行为更接近于标准SQL</li>
+<li>TRADITIONAL 传统模式：是一个组合模式，处理坏数据时，其行为更接近于传统的SQL服务器</li>
+<li>STRICT_ALL_TABLES 和 STRICT_TRANS_TABLES 将启用严格模式：拒绝接受坏数据</li>
+</ol>
+<p>运行时查询与更改SQL模式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@SESSION</span>.sql_mode;</span><br><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@GLOBAL</span>.sql_mode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> sql_mode <span class="operator">=</span> <span class="string">&#x27;ANSI_QUOTES,PIPES_AS_CONCAT&#x27;</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> sql_mode <span class="operator">=</span> <span class="string">&#x27;TRADITIONAL&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>全局性的设置对所有客户端产生影响</p>
+<p>CF：3.3节；12.3.1节；附录D</p>
+<h2 id="2-2-MySQL的标识符语法和命名规则"><a href="#2-2-MySQL的标识符语法和命名规则" class="headerlink" title="2.2 MySQL的标识符语法和命名规则"></a>2.2 MySQL的标识符语法和命名规则</h2><h3 id="标识符里的字符要合法"><a href="#标识符里的字符要合法" class="headerlink" title="标识符里的字符要合法"></a>标识符里的字符要合法</h3><ol>
+<li>不加引号的标识符可以由a-zA-Z0-9、美元符号、下划线以及Unicode扩展字符U+0080~U+FFFF</li>
+</ol>
+<ul>
+<li>MySQL支持标识符以数字开头的做法不常见，还要特别留意它是否包含e/E</li>
+</ul>
+<ol>
+<li>标识符还可以用反引号`引起来，它支持使用<strong>除</strong>NUL字节和Unicode补充字符（&gt;=U+10000）<strong>以外</strong>的任何字符</li>
+</ol>
+<ul>
+<li>如果标识符是SQL保留字或包含空格，那么引号就会很有用</li>
+</ul>
+<h3 id="服务器的SQL模式-ANSI-QUOTES-和-IGNORE-SPACE-对引号有影响"><a href="#服务器的SQL模式-ANSI-QUOTES-和-IGNORE-SPACE-对引号有影响" class="headerlink" title="服务器的SQL模式 ANSI_QUOTES 和 IGNORE_SPACE 对引号有影响"></a>服务器的SQL模式 ANSI_QUOTES 和 IGNORE_SPACE 对引号有影响</h3><h3 id="标识符的最大长度是64个字符，别名的最大长度是256个字符"><a href="#标识符的最大长度是64个字符，别名的最大长度是256个字符" class="headerlink" title="标识符的最大长度是64个字符，别名的最大长度是256个字符"></a>标识符的最大长度是64个字符，别名的最大长度是256个字符</h3><h3 id="标识符限定符：db-name-tbl-name-col-name-或-根据上下文使用部分限定名"><a href="#标识符限定符：db-name-tbl-name-col-name-或-根据上下文使用部分限定名" class="headerlink" title="标识符限定符：db_name.tbl_name.col_name 或 根据上下文使用部分限定名"></a>标识符限定符：db_name.tbl_name.col_name 或 根据上下文使用部分限定名</h3><h2 id="2-3-SQL语句的大小写规则"><a href="#2-3-SQL语句的大小写规则" class="headerlink" title="2.3 SQL语句的大小写规则"></a>2.3 SQL语句的大小写规则</h2><p>在Unix上创建表时，要考虑以后要否迁移到一台不区分大小写的机器上。建议统一使用小写字母，特别对于InnoDB而言。</p>
+<h3 id="SQL关键字、函数名：不区分大小写"><a href="#SQL关键字、函数名：不区分大小写" class="headerlink" title="SQL关键字、函数名：不区分大小写"></a>SQL关键字、函数名：不区分大小写</h3><h3 id="数据库名、表名、视图名：取决于底层文件系统，Unix要区分大小写"><a href="#数据库名、表名、视图名：取决于底层文件系统，Unix要区分大小写" class="headerlink" title="数据库名、表名、视图名：取决于底层文件系统，Unix要区分大小写"></a>数据库名、表名、视图名：取决于底层文件系统，Unix要区分大小写</h3><h3 id="存储函数、存储过程、事件：不区分大小写"><a href="#存储函数、存储过程、事件：不区分大小写" class="headerlink" title="存储函数、存储过程、事件：不区分大小写"></a>存储函数、存储过程、事件：不区分大小写</h3><p>但触发器的名字要区分大小写，这一点与标准SQL的行为有所不同</p>
+<h3 id="列名、索引名：不区分大小写"><a href="#列名、索引名：不区分大小写" class="headerlink" title="列名、索引名：不区分大小写"></a>列名、索引名：不区分大小写</h3><h3 id="别名要区分大小写，除非-lower-case-table-names-系统变量为非零值"><a href="#别名要区分大小写，除非-lower-case-table-names-系统变量为非零值" class="headerlink" title="别名要区分大小写，除非 lower_case_table_names 系统变量为非零值"></a>别名要区分大小写，除非 lower_case_table_names 系统变量为非零值</h3><h3 id="字符串值：取决于它是二进制还是非二进制串。CF：3-1-2节"><a href="#字符串值：取决于它是二进制还是非二进制串。CF：3-1-2节" class="headerlink" title="字符串值：取决于它是二进制还是非二进制串。CF：3.1.2节"></a>字符串值：取决于它是二进制还是非二进制串。CF：<a href="#">3.1.2节</a></h3><h2 id="2-4-字符集支持"><a href="#2-4-字符集支持" class="headerlink" title="2.4 字符集支持"></a>2.4 字符集支持</h2><p>MySQL支持在不同层次单独指定字符集，还可以为字符集挑选排序规则</p>
+<h3 id="2-4-1-指定字符集"><a href="#2-4-1-指定字符集" class="headerlink" title="2.4.1 指定字符集"></a>2.4.1 指定字符集</h3><p>创建数据库和表时，使用两个字句指定字符集和排序规则</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CHARACTER</span> <span class="keyword">SET</span> 字符集名</span><br><span class="line"><span class="keyword">COLLATE</span> 排序规则名</span><br></pre></td></tr></table></figure>
+<p>这些规则适用于几个层次，局部规则覆盖全局规则，例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE db_name <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_danish_ci</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tbl_name (...) <span class="type">CHARACTER</span> <span class="keyword">SET</span> latin1 <span class="keyword">COLLATE</span> latin1_spanish_ci</span><br><span class="line"></span><br><span class="line"><span class="comment">-- -* 对于表里的列 *- --</span></span><br><span class="line"></span><br><span class="line">c <span class="type">CHAR</span>(<span class="number">10</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_danish_ci</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> l <span class="keyword">FROM</span> t <span class="keyword">ORDER</span> <span class="keyword">BY</span> l <span class="keyword">COLLATE</span> latin1_spanish_ci</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-2-确定可用字符集和当前设置"><a href="#2-4-2-确定可用字符集和当前设置" class="headerlink" title="2.4.2 确定可用字符集和当前设置"></a>2.4.2 确定可用字符集和当前设置</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="keyword">LIKE</span> <span class="string">&#x27;latin%&#x27;</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">COLLATION</span> <span class="keyword">LIKE</span> <span class="string">&#x27;utf8%&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;character\_set\_%&#x27;</span>;</span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;collation\_%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-3-Unicode支持"><a href="#2-4-3-Unicode支持" class="headerlink" title="2.4.3 Unicode支持"></a>2.4.3 Unicode支持</h3><p>MySQL版本5.5.3和5.6.1是支持字符集的分水岭</p>
+<h2 id="2-5-数据库的选择、创建、删除和更改"><a href="#2-5-数据库的选择、创建、删除和更改" class="headerlink" title="2.5 数据库的选择、创建、删除和更改"></a>2.5 数据库的选择、创建、删除和更改</h2><p>在涉及DATABASE的所有语句里，SCHEMA与DATABASE同义</p>
+<h3 id="2-5-1-选择数据库：USE-db-name"><a href="#2-5-1-选择数据库：USE-db-name" class="headerlink" title="2.5.1 选择数据库：USE db_name;"></a>2.5.1 选择数据库：USE db_name;</h3><p>重新连接时无记忆</p>
+<h3 id="2-5-2-创建数据库：CREATE-DATABASE-IF-NOT-EXISTS-db-name-字符集和排序规则"><a href="#2-5-2-创建数据库：CREATE-DATABASE-IF-NOT-EXISTS-db-name-字符集和排序规则" class="headerlink" title="2.5.2 创建数据库：CREATE DATABASE [IF NOT EXISTS] db_name [字符集和排序规则] ;"></a>2.5.2 创建数据库：<code>CREATE DATABASE [IF NOT EXISTS] db_name [字符集和排序规则] ;</code></h3><p>服务器会在其数据目录下创建一个<em>db_name</em>目录，还会在这个目录下创建一个名为db.opt的文件，用于存储全局属性——目前只包含默认字符集和排序规则</p>
+<p>查看方法<code>SHOW CREATE DATABASE db_name\G</code></p>
+<h3 id="2-5-3-删除数据库：DROP-DATABASE-db-name"><a href="#2-5-3-删除数据库：DROP-DATABASE-db-name" class="headerlink" title="2.5.3 删除数据库：DROP DATABASE db_name;"></a>2.5.3 删除数据库：DROP DATABASE db_name;</h3><p>如果执行失败，通常是因为那个数据库的目录里还包含有一些与数据库对象无关的文件。需要手动删除该数据库目录里的残留文件和目录，再调用DROP DATABASE</p>
+<h3 id="2-5-4-更改数据库：ALTER-DATABASE-db-name-字符集和排序规则"><a href="#2-5-4-更改数据库：ALTER-DATABASE-db-name-字符集和排序规则" class="headerlink" title="2.5.4 更改数据库：ALTER DATABASE [db_name] [字符集和排序规则];"></a>2.5.4 更改数据库：<code>ALTER DATABASE [db_name] [字符集和排序规则];</code></h3><p>字符集和排序规则至少给定一个</p>
+<h2 id="2-6-表的创建、删除、索引和更改"><a href="#2-6-表的创建、删除、索引和更改" class="headerlink" title="2.6 表的创建、删除、索引和更改"></a>2.6 表的创建、删除、索引和更改</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span></span><br><span class="line">  <span class="keyword">DROP</span> <span class="keyword">TABLE</span></span><br><span class="line"> <span class="keyword">ALTER</span> <span class="keyword">TABLE</span></span><br><span class="line"><span class="keyword">CREATE</span> INDEX</span><br><span class="line">  <span class="keyword">DROP</span> INDEX</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-1-存储引擎的特性"><a href="#2-6-1-存储引擎的特性" class="headerlink" title="2.6.1 存储引擎的特性"></a>2.6.1 存储引擎的特性</h3><p>本书未介绍到的引擎很少用到</p>
+<p><strong>表2-1 MySQL的存储引擎</strong></p>
+<h4 id="2-6-1-1-查看有哪些存储引擎可用：SHOW-ENGINES-G"><a href="#2-6-1-1-查看有哪些存储引擎可用：SHOW-ENGINES-G" class="headerlink" title="2.6.1.1 查看有哪些存储引擎可用：SHOW ENGINES\G"></a>2.6.1.1 查看有哪些存储引擎可用：<code>SHOW ENGINES\G</code></h4><table>
+<thead>
+<tr>
+<th>栏</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Engine:</td>
+<td></td>
+</tr>
+<tr>
+<td>Support:</td>
+<td>可用吗</td>
+</tr>
+<tr>
+<td>Comment:</td>
+<td></td>
+</tr>
+<tr>
+<td>Transactions:</td>
+<td>支持事务处理吗</td>
+</tr>
+<tr>
+<td>XA:</td>
+<td>支持分布式事务吗</td>
+</tr>
+<tr>
+<td>Savepoints:</td>
+<td>支持事务回滚吗</td>
+</tr>
+</tbody></table>
+<h4 id="2-6-1-2-表的磁盘存储方式"><a href="#2-6-1-2-表的磁盘存储方式" class="headerlink" title="2.6.1.2 表的磁盘存储方式"></a>2.6.1.2 表的磁盘存储方式</h4><p>每个表都有一个与之对应的<em>table_name</em>.frm文件用于保存该表的格式（即它的定义）</p>
+<p>各个存储引擎还可能会为表再创建几个特定的文件，用以存储表的内容。也有可能保存在其他地方</p>
+<h4 id="2-6-1-3-InnoDB存储引擎"><a href="#2-6-1-3-InnoDB存储引擎" class="headerlink" title="2.6.1.3 InnoDB存储引擎"></a>2.6.1.3 InnoDB存储引擎</h4><p>默认情况下，InnoDB会把表集中存储在一个系统表空间里，而不像2.6.1.2节所述。</p>
+<h4 id="2-6-1-4-MyISAM存储引擎"><a href="#2-6-1-4-MyISAM存储引擎" class="headerlink" title="2.6.1.4 MyISAM存储引擎"></a>2.6.1.4 MyISAM存储引擎</h4><ol>
+<li>对连续相似的字符串索引值进行压缩，选项PACK_KEYS=1还能压缩数字索引</li>
+<li>AUTO_INCREATMENT提供更多功能。CF：<a href="#">3.4节</a></li>
+<li>每个MyISAM表都有标志表明是否被正常关闭，可用于判断表是否需要检查和修复。CF：<a href="#">14.3.1节</a></li>
+<li>支持全文检索和FULLTEXT索引</li>
+<li>支持空间数据类型和SPATIAL索引</li>
+</ol>
+<h4 id="2-6-1-5-MEMORY存储引擎"><a href="#2-6-1-5-MEMORY存储引擎" class="headerlink" title="2.6.1.5 MEMORY存储引擎"></a>2.6.1.5 MEMORY存储引擎</h4><p>把表存在主存。掉电时内容清空不过与用<code>CREATE TEMPORARY TABLE</code>创建出来的临时表相比，MEMORY表对其他客户端可见。</p>
+<ol>
+<li>使用散列索引，对于“等值比较”非常快，但对于“范围比较”非常慢。不适合ORDER BY</li>
+</ol>
+<ul>
+<li>如果需要范围比较，可以用BTREE索引来代替散列索引。CF：2.6.4.2节和5.1.3节</li>
+</ul>
+<ol>
+<li>表的行长度固定不变，可以使用VARCHAR，但不能使用BLOB和TEXT类型</li>
+</ol>
+<h4 id="2-6-1-6-NDB存储引擎"><a href="#2-6-1-6-NDB存储引擎" class="headerlink" title="2.6.1.6 NDB存储引擎"></a>2.6.1.6 NDB存储引擎</h4><p>是集群（cluster）存储引擎。对此，MySQL服务器实际上变成了其他进程的集群客户端。NDB需要更多扩展性讨论，超出本书范围</p>
+<h4 id="2-6-1-7-其他存储引擎"><a href="#2-6-1-7-其他存储引擎" class="headerlink" title="2.6.1.7 其他存储引擎"></a>2.6.1.7 其他存储引擎</h4><ol>
+<li>ARCHIVE：提供数据归档存储功能。适合大批量存储“写了就不会再更改的行”。存储时压缩，检索时解压。只可包含1个带索引的AUTO_INCREATMENT列</li>
+<li>BLACKHOLE：写操作会被忽略，读操作返回空内容</li>
+<li>CSV：在文本文件中存储逗号分隔值。不支持索引</li>
+<li>FEDREATED：提供访问远程MySQL服务器的能力</li>
+<li>MERGE：提供合并多个MyISAM表为一个逻辑单元的手段，以突破文件系统对MyISAM表的最大尺寸。对于分区表，CF：<a href="#2-6-2-5-%E4%BD%BF%E7%94%A8%E5%88%86%E5%8C%BA%E8%A1%A8">2.6.2.5节</a></li>
+</ol>
+<h3 id="2-6-2-创建表"><a href="#2-6-2-创建表" class="headerlink" title="2.6.2 创建表"></a>2.6.2 创建表</h3><p>简单的CREATE TABLE只需指定表名和各个列。</p>
+<p>可以在创建表时指定如何索引。对于MyISAM表来说，如果计划在查询前先填入大量的数据，那最好先创建不带索引的表，填入数据后再为它加上索引。</p>
+<p>本节将重点介绍CREATE TABLE语句的5种重要扩展。关于列定义的细节CF：<a href="#ch03-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">ch03-数据类型</a></p>
+<h4 id="2-6-2-1-表选项"><a href="#2-6-2-1-表选项" class="headerlink" title="2.6.2.1 表选项"></a>2.6.2.1 表选项</h4><p>不想使用默认的存储特性，就要在右括号之后加上表选项。CF：附录E</p>
+<p>想指定存储引擎：<code>CREATE TABLE t (i INT) ENGINE = ARCHIVE;</code>。如果指定的ENGINE未启用，会看到<code>2 warnings</code>。用<code>SHOW WARNINGS;</code>查看警告信息，用<code>SHOW CREATE TABLE t\G</code>确定表使用了啥引擎</p>
+<p>一定要保证创建表的语句回显<strong>0 warning</strong>；如果想让MySQL在ENGINE不可用时报错，启用NO_ENGINE_SUBSTITUTION模式。</p>
+<h5 id="用于MyISAM的其他选项：MAX-ROWS和AVG-ROW-LENGTH用于调整表的大小"><a href="#用于MyISAM的其他选项：MAX-ROWS和AVG-ROW-LENGTH用于调整表的大小" class="headerlink" title="用于MyISAM的其他选项：MAX_ROWS和AVG_ROW_LENGTH用于调整表的大小"></a>用于MyISAM的其他选项：MAX_ROWS和AVG_ROW_LENGTH用于调整表的大小</h5><h4 id="2-6-2-2-暂时性表的创建"><a href="#2-6-2-2-暂时性表的创建" class="headerlink" title="2.6.2.2 暂时性表的创建"></a>2.6.2.2 暂时性表的创建</h4><p>在把脚本当做批处理作业运行时，IF NOT EXIST 很有用。</p>
+<p>如果可能存在名字相同但结构不同的表，更谨慎的做法是在<code>CREATE TABLE</code>之前放置<code>DROP TABLE IF EXISTS</code></p>
+<h4 id="2-6-2-3-TEMPORARY表"><a href="#2-6-2-3-TEMPORARY表" class="headerlink" title="2.6.2.3 TEMPORARY表"></a>2.6.2.3 TEMPORARY表</h4><p><code>CREATE TEMPORARY TABLE tb1_name ... ;</code>创建出来的的表会在会话终止时自动消失</p>
+<p>及时将临时性的MEMORY表释放掉是个好习惯，建议用<code>DROP TEMPORARY TABLE</code></p>
+<p>如果TEMPORARY表名字与已有的永久表相同，永久表的名字会被暂时隐藏</p>
+<p>连接池机制的自动重连问题会给TEMPORARY带来麻烦</p>
+<h4 id="2-6-2-4-根据其他表或查询结果来创建表"><a href="#2-6-2-4-根据其他表或查询结果来创建表" class="headerlink" title="2.6.2.4 根据其他表或查询结果来创建表"></a>2.6.2.4 根据其他表或查询结果来创建表</h4><ol>
+<li><code>CREATE [TEMPORARY] TABLE new_t LIKE old_t;</code>会创建与原有表结构相同的空副本；想填充数据还需要<code>INSERT INTO new_t SELECT * FROM old_t;</code>。</li>
+<li><code>CREATE TABLE triple_pi SELECT PI() * 3 AS col_name ;</code>可以根据任意一条SELECT语句的查询结果创建新表。</li>
+</ol>
+<ul>
+<li>默认不复制所有的列属性，如AUTO_INCREATMENT</li>
+<li>不会复制索引</li>
+<li>如果不用AS提供别名，新表的列名会直接使用了表达式文本<code>PI() * 3</code></li>
+</ul>
+<p><code>CREATE TABLE ... SELECT</code>的不足之处：不复制索引、可能丢失列属性。可以保留的列属性包括：NOT NULL与否、默认值、列注释、字符集和排序规则。补救方案：</p>
+<ol>
+<li>在SELECT部分用CAST()函数强制使用某些属性</li>
+<li>在CREATE部分提供显式的列定义，同时必须在SELECT部分提供匹配的别名<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> mytb1 (i <span class="type">INT</span> UNSIGNED, t <span class="type">TIME</span>, d <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="number">1</span> <span class="keyword">AS</span> i,</span><br><span class="line"><span class="built_in">CAST</span>(CURTIME() <span class="keyword">AS</span> <span class="type">TIME</span>) <span class="keyword">AS</span> t,</span><br><span class="line"><span class="built_in">CAST</span>(PI() <span class="keyword">AS</span> <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">5</span>)) <span class="keyword">AS</span> d;</span><br></pre></td></tr></table></figure>
+<h4 id="2-6-2-5-使用分区表"><a href="#2-6-2-5-使用分区表" class="headerlink" title="2.6.2.5 使用分区表"></a>2.6.2.5 使用分区表</h4>用PARTITION BY子句定义分区函数及其它选项</li>
+<li>根据范围来分区，适用于：日期、收入水平、重量等等</li>
+<li>根据列表来分区，如：邮编、电话区号、按地理区域划分</li>
+<li>根据散列值来分区，可自行提供散列函数</li>
+</ol>
+<p>例如创建表时按年分区到2013</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> log_part (</span><br><span class="line">	dt DATETIME <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	info <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	INDEX (dt)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(<span class="keyword">YEAR</span>(dt)) (</span><br><span class="line">	<span class="keyword">PARTITION</span> p0 <span class="keyword">VALUES</span> LESS THAN (<span class="number">2010</span>),</span><br><span class="line">	<span class="keyword">PARTITION</span> p1 <span class="keyword">VALUES</span> LESS THAN (<span class="number">2011</span>),</span><br><span class="line">	<span class="keyword">PARTITION</span> p2 <span class="keyword">VALUES</span> LESS THAN (<span class="number">2012</span>),</span><br><span class="line">	<span class="keyword">PARTITION</span> p3 <span class="keyword">VALUES</span> LESS THAN (<span class="number">2013</span>),</span><br><span class="line">	<span class="keyword">PARTITION</span> pmax <span class="keyword">VALUES</span> LESS THAN MAXVALUE</span><br><span class="line">);</span><br><span class="line"><span class="comment">-- -* 当到了2014年时进一步划分 *- --</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> log_part REORGANIZE <span class="keyword">PARTITION</span> pmax</span><br><span class="line"><span class="keyword">INTO</span> (</span><br><span class="line">	<span class="keyword">PARTITION</span> p4 <span class="keyword">VALUES</span> LESS THAN (<span class="number">2014</span>),</span><br><span class="line">	<span class="keyword">PARTITION</span> pmax <span class="keyword">VALUES</span> LESS THAN MAXVALUE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>若想将存储分散到不同的物理设备上，则需要用到分区选项 DATA_DIRECTORY 和 INDEX_DIRECTORY。CF：附录E</p>
+<h3 id="2-6-3-删除表"><a href="#2-6-3-删除表" class="headerlink" title="2.6.3 删除表"></a>2.6.3 删除表</h3><p>删除不存在的表会报错，<code>DROP TABLE IF EXISTS</code>只会给出警告信息</p>
+<h3 id="2-6-4-索引表"><a href="#2-6-4-索引表" class="headerlink" title="2.6.4 索引表"></a>2.6.4 索引表</h3><h4 id="2-6-4-1-存储引擎的索引特性"><a href="#2-6-4-1-存储引擎的索引特性" class="headerlink" title="2.6.4.1 存储引擎的索引特性"></a>2.6.4.1 存储引擎的索引特性</h4><p>多种灵活的索引创建办法</p>
+<ol>
+<li>单列索引或多列复合索引</li>
+<li>唯一值或重复值</li>
+<li>同一个表可创建多个索引</li>
+<li>前缀索引</li>
+</ol>
+<p>表2-3展示InnoDB、MyISAM、MEMORY所支持的索引功能</p>
+<h4 id="2-6-4-2-创建索引"><a href="#2-6-4-2-创建索引" class="headerlink" title="2.6.4.2 创建索引"></a>2.6.4.2 创建索引</h4><p>ALTER TABLE比CREATE TABLE更灵活，可用来创建任何一种索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> INDEX	index_name (index_columns);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span>	index_name (index_columns);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> FULLTEXT	index_name (index_columns);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> SPATIAL	index_name (index_columns);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (index_columns);</span><br></pre></td></tr></table></figure>
+<p>其中SPATIAL和PRIMARY KEY只能用于NOT NULL</p>
+<p>索引UNIQUE和PRIMARY KEY都只包含唯一值，区别如下</p>
+<ol>
+<li>每个表只能包含一个PRIMARY KEY，但可以防止多个UNIQUE索引</li>
+<li>UNIQUE可以包含NULL值</li>
+</ol>
+<p>想为MEMORY表创建BTREE索引，在CREATE里增加USING子句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> namelist(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	name <span class="type">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	INDEX (id) <span class="keyword">USING</span> BTREE,</span><br><span class="line">	INDEX (name(<span class="number">10</span>)) <span class="comment">-- -* 前缀索引 *- --</span></span><br><span class="line">) ENGINE <span class="operator">=</span> MEMORY;</span><br></pre></td></tr></table></figure>
+<p>可以看出，前缀索引的语法是col_name(n)</p>
+<p>为FULLTEXT指定前缀长度会被MySQL忽略。但有些列不能使用满列值方式的索引</p>
+<ol>
+<li>对于BLOB或TEXT列，只能创建前缀索引</li>
+<li>如果在MyISAM表中创建的索引的总长度超过1000，必须使用前缀索引</li>
+</ol>
+<h4 id="2-6-4-3-删除索引"><a href="#2-6-4-3-删除索引" class="headerlink" title="2.6.4.3 删除索引"></a>2.6.4.3 删除索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> INDEX</span><br><span class="line"><span class="keyword">DROP</span> INDEX `<span class="keyword">PRIMARY</span>` <span class="keyword">ON</span> tb1_name;</span><br><span class="line"><span class="keyword">DROP</span> INDEX index_name <span class="keyword">ON</span> tb1_name;</span><br></pre></td></tr></table></figure>
+<p>删除列时，索引会隐式地受到影响</p>
+<h3 id="2-6-5-更改表结构"><a href="#2-6-5-更改表结构" class="headerlink" title="2.6.5 更改表结构"></a>2.6.5 更改表结构</h3><p>ALTER前后都可以用SHOW CREATE TABLE来查看和验证</p>
+<h4 id="更改列的数据类型"><a href="#更改列的数据类型" class="headerlink" title="更改列的数据类型"></a>更改列的数据类型</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb1_name MODIFY col_name MEDIUMINT UNSIGNED;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb1_name MODIFY old_name new_name MEDIUMINT UNSIGNED;</span><br></pre></td></tr></table></figure>
+<h4 id="更改存储引擎"><a href="#更改存储引擎" class="headerlink" title="更改存储引擎"></a>更改存储引擎</h4><p><code>ALTER TABLE tb1_name ENGINE = InnoDB;</code>注意事如下</p>
+<ol>
+<li>从InnoDB转成其他引擎时，外键约束会消失</li>
+<li>MEMORY表在服务器退出时会消失</li>
+<li>包含BLOB列的表无法转成MEMORY引擎</li>
+</ol>
+<h2 id="2-7-获取数据库元数据"><a href="#2-7-获取数据库元数据" class="headerlink" title="2.7 获取数据库元数据"></a>2.7 获取数据库元数据</h2><p>多种方式</p>
+<ol>
+<li>SHOW语句</li>
+<li>查询INFORMATION_SCHEMA数据库里的表</li>
+<li>命令行程序：mysqlshow、mysqldump</li>
+</ol>
+<h3 id="2-7-1-SHOW"><a href="#2-7-1-SHOW" class="headerlink" title="2.7.1 SHOW"></a>2.7.1 SHOW</h3><p><code>SHOW COLUMNS FROM table_name</code>有别名<code>DESCREBE table_name</code>或<code>EXPLAIN table_name</code></p>
+<p>确定某表是否存在的几种方式，适用于不同场景</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TABLES [<span class="keyword">FROM</span> db_name] <span class="keyword">LIKE</span> <span class="string">&#x27;table%name&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> table_name;	<span class="comment">-- 最适合MyISAM</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="literal">FALSE</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ENGINE <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_NAME<span class="operator">=</span><span class="string">&#x27;table_name&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-7-2-借助INFORMATION-SCHEMA获取元数据"><a href="#2-7-2-借助INFORMATION-SCHEMA获取元数据" class="headerlink" title="2.7.2 借助INFORMATION_SCHEMA获取元数据"></a>2.7.2 借助INFORMATION_SCHEMA获取元数据</h3><p>用 SELECT 访问 INFORMATION_SCHEMA 比用 SHOW 更灵活</p>
+<p><strong>简述各个表</strong></p>
+<h3 id="2-7-3-从命令行获取元数据"><a href="#2-7-3-从命令行获取元数据" class="headerlink" title="2.7.3 从命令行获取元数据"></a>2.7.3 从命令行获取元数据</h3><p>从不带参数的mysqlshow开始逐级深入到表</p>
+<p>记得指定必要的连接参数选项，如–host、–user或–password</p>
+<p>借助<code>mysqldump --no-data db_name [tb1_name] ...</code>查看表定义</p>
+<h2 id="2-8-多表检索与连接操作"><a href="#2-8-多表检索与连接操作" class="headerlink" title="2.8 多表检索与连接操作"></a>2.8 多表检索与连接操作</h2><p>在<a href="#ch01-MySQL%E5%85%A5%E9%97%A8">ch01</a>重点讨论了对单表使用 SELECT、FROM、WHERE、GROUP BY、ORDER BY、HAVING、LIMIT。</p>
+<p>多表查询语句包括：连接操作、子查询、UNION</p>
+<h3 id="2-8-1-内连接"><a href="#2-8-1-内连接" class="headerlink" title="2.8.1 内连接"></a>2.8.1 内连接</h3><p>算笛卡尔积的几个等价的运算符：INNER JOIN、CROSS JOIN、JOIN、逗号。因逗号运算符的优先级问题而建议避免使用逗号。</p>
+<p>如果被连接的两表有同名列，USING子句可简化语法<code>SELECT t1.*, t2.* FROM t1 JOIN t2 USING (same_col);</code></p>
+<h3 id="2-8-2-限定列引用"><a href="#2-8-2-限定列引用" class="headerlink" title="2.8.2 限定列引用"></a>2.8.2 限定列引用</h3><p>自连接操作需要用AS为表取一个别名</p>
+<h3 id="2-8-3-左外连接和右外连接"><a href="#2-8-3-左外连接和右外连接" class="headerlink" title="2.8.3 左外连接和右外连接"></a>2.8.3 左外连接和右外连接</h3><p>LEFT JOIN会在左表的某行在右表里无匹配时连接右表的一个全NULL的假行</p>
+<p>注意事项：如果右表里本来就包含值为NULL的列，就无法区分原生NULL与标识未匹配行的NULL</p>
+<p>想找到左表里哪些行在右表里无匹配：<br><code>SELECT t1.*  FROM t1 LEFT JOIN t2 ON t1.i1 = t2.i2  WHERE t2.i2 IS NULL;</code></p>
+<p>NATURAL LEFT JOIN 就是自动指定 USING(同名列) 的 LEFT JOIN</p>
+<h2 id="2-9-子查询"><a href="#2-9-子查询" class="headerlink" title="2.9 子查询"></a>2.9 子查询</h2><p>子查询可以依赖外层查询里的值。CF：<a href="#2-9-5-%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2">2.9.5 相关子查询</a></p>
+<p>如果子查询用在有副作用的语句，它会被禁止查询正在被修改的表</p>
+<p>子查询的类型</p>
+<ol>
+<li>标量子查询：可以出现在任何允许使用标量操作数的地方</li>
+<li>行子查询：通常需要行构造器来实现比较，例如下面语句返回与特朗普出生于同一个州和城市的那些总统<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> prisident </span><br><span class="line"><span class="keyword">WHERE</span> (city, state) <span class="operator">=</span> </span><br><span class="line">(<span class="keyword">SELECT</span> city, state <span class="keyword">FROM</span> prisident</span><br><span class="line"> <span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;Trump&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>列子查询</li>
+<li>表子查询</li>
+</ol>
+<h3 id="2-9-1-带关系比较运算符的子查询"><a href="#2-9-1-带关系比较运算符的子查询" class="headerlink" title="2.9.1 带关系比较运算符的子查询"></a>2.9.1 带关系比较运算符的子查询</h3><p>由于不能在WHERE里使用聚合函数，用sql选取出生最早的总统需要做如下改写：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> prisident <span class="keyword">WHERE</span> birth <span class="operator">=</span> <span class="built_in">MIN</span>(birth);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> prisident </span><br><span class="line"><span class="keyword">WHERE</span> birth <span class="operator">=</span> (<span class="keyword">SELECT</span> <span class="built_in">MIN</span>(birth) <span class="keyword">FROM</span> prisident);</span><br></pre></td></tr></table></figure>
+<h3 id="2-9-2-IN和NOT-IN实际上就是-SOME和-lt-gt-ALL的同义词"><a href="#2-9-2-IN和NOT-IN实际上就是-SOME和-lt-gt-ALL的同义词" class="headerlink" title="2.9.2 IN和NOT IN实际上就是= SOME和&lt;&gt; ALL的同义词"></a>2.9.2 <code>IN</code>和<code>NOT IN</code>实际上就是<code>= SOME</code>和<code>&lt;&gt; ALL</code>的同义词</h3><p>可用于各种类型的子查询</p>
+<h3 id="2-9-3-ALL、ANY和SOME子查询"><a href="#2-9-3-ALL、ANY和SOME子查询" class="headerlink" title="2.9.3 ALL、ANY和SOME子查询"></a>2.9.3 ALL、ANY和SOME子查询</h3><p>SOME是ANY的同义词</p>
+<p>下面语句返回最早出生的总统</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> prisident</span><br><span class="line"><span class="keyword">WHERE</span> birth <span class="operator">&lt;=</span> <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> birth <span class="keyword">FROM</span> prisident);</span><br></pre></td></tr></table></figure>
+<h3 id="2-9-4-EXISTS和NOT-EXISTS"><a href="#2-9-4-EXISTS和NOT-EXISTS" class="headerlink" title="2.9.4 EXISTS和NOT EXISTS"></a>2.9.4 EXISTS和NOT EXISTS</h3><p><code>SELECT EXISTS (SELECT * FROM absence);</code>测试子查询是否为空<br>（博主注：用<code>SELECT COUNT(*)&gt;0 FROM absence</code>不就好了）</p>
+<h3 id="2-9-5-相关子查询"><a href="#2-9-5-相关子查询" class="headerlink" title="2.9.5 相关子查询"></a>2.9.5 相关子查询</h3><p>通常配合EXISTS用于在某个表里查找在另一个表里有匹配的行，或没有匹配的行。工作原理：把值从外层查询传递到子查询，并检查其是否满足子查询里的条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id, name <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line">(<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> absence <span class="keyword">WHERE</span> absence.id <span class="operator">=</span> student.id);</span><br></pre></td></tr></table></figure>
+<h3 id="2-9-6-FROM子句里的子查询"><a href="#2-9-6-FROM子句里的子查询" class="headerlink" title="2.9.6 FROM子句里的子查询"></a>2.9.6 FROM子句里的子查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="number">1</span>,<span class="number">2</span>) <span class="keyword">AS</span> l <span class="keyword">INNER</span> <span class="keyword">JOIN</span> (<span class="keyword">SELECT</span> <span class="number">3</span>,<span class="number">4</span>) <span class="keyword">AS</span> r;</span><br><span class="line"><span class="operator">+</span><span class="comment">---+---+---+---+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span> <span class="operator">|</span> <span class="number">2</span> <span class="operator">|</span> <span class="number">3</span> <span class="operator">|</span> <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---+---+---+---+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span> <span class="operator">|</span> <span class="number">2</span> <span class="operator">|</span> <span class="number">3</span> <span class="operator">|</span> <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---+---+---+---+</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-9-7-将子查询改写为连接操作"><a href="#2-9-7-将子查询改写为连接操作" class="headerlink" title="2.9.7 将子查询改写为连接操作"></a>2.9.7 将子查询改写为连接操作</h3><h4 id="2-9-7-1-改写-WHERE-…-IN-子查询"><a href="#2-9-7-1-改写-WHERE-…-IN-子查询" class="headerlink" title="2.9.7.1 改写 WHERE … IN 子查询"></a>2.9.7.1 改写 WHERE … IN 子查询</h4><p>一般情况下，下述两个查询模式等价</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t1 <span class="keyword">WHERE</span> col1 <span class="keyword">IN</span> </span><br><span class="line">(<span class="keyword">SELECT</span> col2 <span class="keyword">FROM</span> t2 <span class="keyword">WHERE</span> col2 <span class="operator">=</span> <span class="keyword">value</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> t1.<span class="operator">*</span> <span class="keyword">FROM</span> t1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> t2</span><br><span class="line"><span class="keyword">ON</span> t1.col1 <span class="operator">=</span> t2.col2 <span class="keyword">WHERE</span> t2.col2 <span class="operator">=</span> <span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
+<p>如果t2包含col2的多个实例，DISTINCT是必要的</p>
+<h4 id="2-9-7-2-改写-WHERE-…-NOT-IN-子查询"><a href="#2-9-7-2-改写-WHERE-…-NOT-IN-子查询" class="headerlink" title="2.9.7.2 改写 WHERE … NOT IN 子查询"></a>2.9.7.2 改写 WHERE … NOT IN 子查询</h4><p>一般情况下，下述两个查询模式等价</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t1</span><br><span class="line"><span class="keyword">WHERE</span> col1 <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> col2 <span class="keyword">FROM</span> t2);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> t1.<span class="operator">*</span> <span class="keyword">FROM</span> t1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t2 </span><br><span class="line"><span class="keyword">ON</span> t1.col1 <span class="operator">=</span> t2.col2 <span class="keyword">WHERE</span> t2.col2 <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+<p>如果col2本来就包含NULL值，不适合用外连接</p>
+<h2 id="2-10-使用UNION实现多表检索"><a href="#2-10-使用UNION实现多表检索" class="headerlink" title="2.10 使用UNION实现多表检索"></a>2.10 使用UNION实现多表检索</h2><p>UNION可以将多个包含相同数量的列的表数据拼接在一起。特性如下</p>
+<ol>
+<li>列名和数据类型都来自第一个SELECT。</li>
+</ol>
+<ul>
+<li>如果后面SELECT出来的列数据类型不同于第一个SELECT，会进行必要的类型转换</li>
+<li>列是根据位置，而不是根据名字来匹配。</li>
+</ul>
+<ol>
+<li>默认剔除重复行。UNION等同于UNION DISTINCT；想保留重复行要改用UNION ALL。混合使用时“不同联合”的优先级比UNION ALL更高</li>
+<li>使用ORDER BY和LIMIT时要注意对整体操作还是对单个SELECT操作，强烈建议用括号把每一个SELECT语句括起来</li>
+</ol>
+<h2 id="2-11-多表删除和更新"><a href="#2-11-多表删除和更新" class="headerlink" title="2.11 多表删除和更新"></a>2.11 多表删除和更新</h2><p>删除两表中匹配的行<code>DELETE t1, t2 FROM t1 INNER JOIN t2 ON t1.id = t2.id</code></p>
+<p>任意一种SELECT语句支持的连接操作，多表DELETE语句都支持。对两表中不匹配的行的选择语句与删除语句的对比：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t1.<span class="operator">*</span></span><br><span class="line"> <span class="keyword">FROM</span> t1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t2 <span class="keyword">ON</span> t1.i1 <span class="operator">=</span> t2.i2</span><br><span class="line"> <span class="keyword">WHERE</span> t2.i2 <span class="keyword">IS</span> <span class="keyword">NULL</span>;`</span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> t1</span><br><span class="line"> <span class="keyword">FROM</span> t1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t2 <span class="keyword">ON</span> t1.i1 <span class="operator">=</span> t2.i2</span><br><span class="line"> <span class="keyword">WHERE</span> t2.i2 <span class="keyword">IS</span> <span class="keyword">NULL</span>;`</span><br></pre></td></tr></table></figure>
+
+<p>有些多表UPDATE语句既能用子查询也能用连接操作。想要复制列值，只能用连接操作：<br>`UPDATE t1, t2 SET t2.a = t1.a WHERE t2.id = t1.id;</p>
+<p>InnoDB引擎的外键关系能协助多表删除和更新，需要包含约束条件：</p>
+<ul>
+<li>ON DELETE CASCADE 或</li>
+<li>ON UPDATE CASCADE</li>
+</ul>
+<h2 id="2-12-事务处理"><a href="#2-12-事务处理" class="headerlink" title="2.12 事务处理"></a>2.12 事务处理</h2><p>金融业通常需要InnoDB；对于记录网页访问情况的应用，能接受损失几行记录，可以使用MyISAM。</p>
+<h3 id="2-12-1-利用事务保证语句安全执行"><a href="#2-12-1-利用事务保证语句安全执行" class="headerlink" title="2.12.1 利用事务保证语句安全执行"></a>2.12.1 利用事务保证语句安全执行</h3><p>与oracle不同，MySQL默认运行模式是自动提交。显式执行事务的方式</p>
+<ol>
+<li><code>SET autocommit = 0; ... ;SET autocommit = 1;</code></li>
+<li>先调用BEGIN（或START TRANSACTION），事务处理过程中可以调用ROLLBACK撤销更改，最后用COMMIT结束事务。</li>
+</ol>
+<p>默认情况下，一个mysql程序实例中尚未提交的更改在其他mysql程序实例中不可见</p>
+<p>如果在事务处理过程中调用了START TRANSACTION语句，会隐式提交当前事务再开始新事务</p>
+<p>DDL语句和那些与锁定有关的语句不能成为事务的一部分。<strong>隐式提交的语句</strong></p>
+<p>在事务提交前结束会话或意外中断，服务器会自动回滚</p>
+<p>注意事项：非事务表总是待在自动提交模式下，如果在某个事务里修改了一个非事务表，那么这个修改无法被回滚还原</p>
+<h3 id="2-12-2-SAVEPOINT"><a href="#2-12-2-SAVEPOINT" class="headerlink" title="2.12.2 SAVEPOINT"></a>2.12.2 SAVEPOINT</h3><p>ROLLBACK TO savepoint_name;用于回滚到标记点</p>
+<h3 id="2-12-3-事务隔离"><a href="#2-12-3-事务隔离" class="headerlink" title="2.12.3 事务隔离"></a>2.12.3 事务隔离</h3><p>MyISAM使用表级锁定机制，InnoDB使用比较底层的锁定方式。</p>
+<p>InnoDB的事务隔离级别功能可以控制：一个客户端的事务是否应该看到另一个客户端的事务所做的修改。4个级别如下</p>
+<ol>
+<li>READ UNCOMMITTED </li>
+<li>READ COMMITTED</li>
+<li>REPEATABLE READ（默认）</li>
+<li>SERIALIZABLE</li>
+</ol>
+<p><strong>本章未读完</strong></p>
+<h2 id="2-13-InnoDB对外键定义语法的支持还不完备"><a href="#2-13-InnoDB对外键定义语法的支持还不完备" class="headerlink" title="2.13 InnoDB对外键定义语法的支持还不完备"></a>2.13 InnoDB对外键定义语法的支持还不完备</h2><h2 id="2-14-使用FULLTEXT搜索"><a href="#2-14-使用FULLTEXT搜索" class="headerlink" title="2.14 使用FULLTEXT搜索"></a>2.14 使用FULLTEXT搜索</h2><h1 id="ch03-数据类型"><a href="#ch03-数据类型" class="headerlink" title="ch03 数据类型"></a>ch03 数据类型</h1><p>TIMESTAMP和拥有AUTO_INCREATMENT的整数具有特殊行为</p>
+<h2 id="3-1-数据值类别"><a href="#3-1-数据值类别" class="headerlink" title="3.1 数据值类别"></a>3.1 数据值类别</h2><h3 id="3-1-1-数值"><a href="#3-1-1-数值" class="headerlink" title="3.1.1 数值"></a>3.1.1 数值</h3><h4 id="3-1-1-1-精确值数和近似值数"><a href="#3-1-1-1-精确值数和近似值数" class="headerlink" title="3.1.1.1 精确值数和近似值数"></a>3.1.1.1 精确值数和近似值数</h4><p>MySQL能识别的数字包括：整数、定点数、浮点数以及位域值</p>
+<p>带小数部分的1.23456属于精确值；而1.58E5属于近似值</p>
+<p>MySQL会根据以下规则来决定是使用精确计算还是近似运算</p>
+<ol>
+<li>只要表达式里有近似值，就会被当做浮点（近似）表达式来进行计算</li>
+<li>如果表达式只包含整数精确值，会以BIGINT（64位）精度来进行计算</li>
+<li>如果表达式只包含精确值，但小数，会以具有65位精度的DECIMAL算法来进行计算</li>
+<li>如果字符串参与计算，通常会被转换成双精度浮点值</li>
+</ol>
+<h4 id="3-1-1-2-位域值"><a href="#3-1-1-2-位域值" class="headerlink" title="3.1.1.2 位域值"></a>3.1.1.2 位域值</h4><p>例如 b’1001’ 和 0b1001 都等于十进制9。在SELECT里将它们+0能按10进制显示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> b<span class="string">&#x27;1001&#x27;</span><span class="operator">+</span><span class="number">0</span>, <span class="built_in">CAST</span>(<span class="number">0</span>b1001 <span class="keyword">AS</span> UNSIGNED);</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+--------------------------+</span></span><br><span class="line"><span class="operator">|</span> b<span class="string">&#x27;1001&#x27;</span><span class="operator">+</span><span class="number">0</span> <span class="operator">|</span> <span class="built_in">CAST</span>(<span class="number">0</span>b1001 <span class="keyword">AS</span> UNSIGNED) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+--------------------------+</span></span><br><span class="line"><span class="operator">|</span>         <span class="number">9</span> <span class="operator">|</span>                        <span class="number">9</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+--------------------------+</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-1-2-字符串值"><a href="#3-1-2-字符串值" class="headerlink" title="3.1.2 字符串值"></a>3.1.2 字符串值</h3><p>字符串两边的引号尽量使用单引号</p>
+<p>书写字符串值的十六进制记法</p>
+<ol>
+<li>X’val’记法要求val的数字个数为偶数，例如：X’61626364’</li>
+<li>0xval记法后面跟着多个十六进制数字，例如：0x61626364</li>
+</ol>
+<h4 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h4><ol>
+<li>二进制串是一组字节序列。不涉及字符集；没有特殊的比较或排序属性</li>
+</ol>
+<ul>
+<li>想对二进制串使用UPPER()或LOWER()需要先用CONVERT(str USING charset)做类型转换</li>
+</ul>
+<ol start="2">
+<li>非二进制串是个字符序列。字符集决定了哪些字符可以用以及如何解释；每个字符集都有一种或多种排序规则</li>
+</ol>
+<h4 id="字符集支持"><a href="#字符集支持" class="headerlink" title="字符集支持"></a>字符集支持</h4><p>默认字符集是latin1，但环境变量$LANG或$LC_ALL会被mysql检测到并进行相应的调整。（博主注：Ubuntu选择中国语言时会自动置LANG=’zh_CN.UTF-8’）</p>
+<p>有两种记法可将某个字符串常量强制解释为某种指定的字符集</p>
+<ol>
+<li><code>_utf8 &#39;str&#39;</code></li>
+<li>`N’str’</li>
+</ol>
+<h4 id="字符串的长度如何定义"><a href="#字符串的长度如何定义" class="headerlink" title="字符串的长度如何定义"></a>字符串的长度如何定义</h4><ol>
+<li>LENGTH()测量字节数</li>
+<li>CHAR_LENGTH()测量字符数</li>
+</ol>
+<h4 id="3-1-2-2-字符集相关的系统变量"><a href="#3-1-2-2-字符集相关的系统变量" class="headerlink" title="3.1.2.2 字符集相关的系统变量"></a>3.1.2.2 字符集相关的系统变量</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;character\_set\_%&#x27;</span>;</span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;collation\_%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>直接修改这些变量并不方便，建议修改方式</p>
+<ol>
+<li><code>SET NAME &#39;utf8&#39;;</code></li>
+<li>命令行选项–default-character-set</li>
+<li>环境变量LANG或LC_ALL</li>
+</ol>
+<h3 id="3-1-3-日期与时间"><a href="#3-1-3-日期与时间" class="headerlink" title="3.1.3 日期与时间"></a>3.1.3 日期与时间</h3><p>ISO8601格式：<code>2008-12-31T12:00:00.123456</code></p>
+<p>函数DATE_FORMAT()用于改变日期的显示格式；函数STR_TO_DATE()用于转换日期的输入格式</p>
+<h3 id="3-1-4-空间值"><a href="#3-1-4-空间值" class="headerlink" title="3.1.4 空间值"></a>3.1.4 空间值</h3><p>OpenGIS规范：<code>SET @pt = POINTFROMTEXT(&#39;POINT(10 20)&#39;);</code></p>
+<h3 id="3-1-5-布尔值"><a href="#3-1-5-布尔值" class="headerlink" title="3.1.5 布尔值"></a>3.1.5 布尔值</h3><p>零为假，任何非零、非NULL的值为真</p>
+<h3 id="3-1-6-NULL值"><a href="#3-1-6-NULL值" class="headerlink" title="3.1.6 NULL值"></a>3.1.6 NULL值</h3><p>NULL没有类型，以NULL为参数传递给运算符与函数，大多会返回NULL</p>
+<h2 id="3-2-MySQL数据类型"><a href="#3-2-MySQL数据类型" class="headerlink" title="3.2 MySQL数据类型"></a>3.2 MySQL数据类型</h2><p><strong>本章未读完</strong></p>
+<h1 id="ch10-MYSQL管理简介"><a href="#ch10-MYSQL管理简介" class="headerlink" title="ch10 MYSQL管理简介"></a>ch10 MYSQL管理简介</h1><p>每一项任务都很重要，但不需要立刻把它们全部学会。可以把本书作为参考，需要时再回头查询</p>
+<p><strong>本章未读完</strong></p>
+<p>接下来的几章将对这些概要进行详细讨论</p>
+<h1 id="ch11-MySQL数据目录"><a href="#ch11-MySQL数据目录" class="headerlink" title="ch11 MySQL数据目录"></a>ch11 MySQL数据目录</h1><p>本书假定Unix用户名和组名都是mysql</p>
+<h2 id="11-1-数据目录位置"><a href="#11-1-数据目录位置" class="headerlink" title="11.1 数据目录位置"></a>11.1 数据目录位置</h2><ul>
+<li>通过源码安装时，数据目录默认为/usr/local/mysql/data。可在运行CMake时用选项修改数据目录</li>
+<li>通过RPM包安装时，数据目录默认为/var/lib/mysql。（博主注：在Ubuntu用apt安装也一样）</li>
+<li>在Windows系统里，默认数据目录取决于Windows版本</li>
+</ul>
+<p>想知道服务器的数据目录在什么地方，可以使用</p>
+<ol>
+<li>mysqladmin variables | grep datadir</li>
+<li>SHOW VARIABLES LIKE ‘datadir’;</li>
+</ol>
+<p><strong>本章未读完</strong></p>
+<h2 id="以上为《mysql技术内幕》读书笔记，查询语句为MySQL语法"><a href="#以上为《mysql技术内幕》读书笔记，查询语句为MySQL语法" class="headerlink" title="以上为《mysql技术内幕》读书笔记，查询语句为MySQL语法"></a>以上为《mysql技术内幕》读书笔记，查询语句为MySQL语法</h2><p>以下为《数据库系统概念》读书笔记，查询语句为sql标准语法</p>
+<h1 id="ch04-中级SQL"><a href="#ch04-中级SQL" class="headerlink" title="ch04 中级SQL"></a>ch04 中级SQL</h1><h2 id="4-1-连接表达式"><a href="#4-1-连接表达式" class="headerlink" title="4.1 连接表达式"></a>4.1 连接表达式</h2><h3 id="4-1-1-连接条件"><a href="#4-1-1-连接条件" class="headerlink" title="4.1.1 连接条件"></a>4.1.1 连接条件</h3><ol>
+<li>join … using 子句只需要在指定的属性上的取值匹配</li>
+<li>on 条件允许在参与连接的关系上设置通用的谓词</li>
+</ol>
+<h3 id="4-1-2-外连接"><a href="#4-1-2-外连接" class="headerlink" title="4.1.2 外连接"></a>4.1.2 外连接</h3><ol>
+<li>内连接：不保留未匹配元组</li>
+<li>左外连接：只保留出现在左表的元组</li>
+<li>右外连接：只保留出现在右表的元组</li>
+<li>全外连接：保留出现在两个关系中的元组</li>
+</ol>
+<p>左外连接用于查询在左表中但不在右表中的元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id</span><br><span class="line"><span class="keyword">from</span> lhs <span class="keyword">natural</span> <span class="keyword">left</span> <span class="keyword">join</span> rhs</span><br><span class="line"><span class="keyword">where</span> rhs.col <span class="keyword">is</span> <span class="keyword">null</span> ;</span><br></pre></td></tr></table></figure>
+<p>在外连接中使用on与where不同，on条件是外连接声明的一部分；不满足on后面条件的元组也会被加入连接结果，只不过有一边的属性会被赋为空值</p>
+<p>natural是using(同名列)的语法糖，using是on等值比较的语法糖，但on<strong>不是</strong>where的语法糖</p>
+<h3 id="4-1-3-连接类型和条件"><a href="#4-1-3-连接类型和条件" class="headerlink" title="4.1.3 连接类型和条件"></a>4.1.3 连接类型和条件</h3><ol>
+<li>natural、using、on 都是连接条件</li>
+<li>inner、left outer、right outer、full outer 都是连接类型。关键词inner是可选的</li>
+</ol>
+<h2 id="4-2-视图"><a href="#4-2-视图" class="headerlink" title="4.2 视图"></a>4.2 视图</h2><p>出于安全考虑，让所有用户都看到整个逻辑模型是不合适的。</p>
+<p>虚关系并<strong>不</strong>预先计算并存储</p>
+<p>视图：不是逻辑模型的一部分，但作为虚关系对用户可见的关系</p>
+<h3 id="4-1-1-视图定义"><a href="#4-1-1-视图定义" class="headerlink" title="4.1.1 视图定义"></a>4.1.1 视图定义</h3><p><code>create view view_name as &lt; query expression &gt; ;</code></p>
+<h3 id="4-1-2-SQL查询中使用视图"><a href="#4-1-2-SQL查询中使用视图" class="headerlink" title="4.1.2 SQL查询中使用视图"></a>4.1.2 SQL查询中使用视图</h3><p>如果在视图定义中使用了聚集函数，可以显式指定列名，例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> dept_total_salary( dept_name, total_salary ) <span class="keyword">AS</span></span><br><span class="line">	<span class="keyword">SELECT</span> dept_name, <span class="built_in">SUM</span>( salary )</span><br><span class="line">	<span class="keyword">FROM</span> instructor</span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name;</span><br></pre></td></tr></table></figure>
+<p>定以后的视图名可以出现在任何允许出现关系名的地方</p>
+<h3 id="4-1-3-物化视图"><a href="#4-1-3-物化视图" class="headerlink" title="4.1.3 物化视图"></a>4.1.3 物化视图</h3><p>频繁使用视图的应用将从视图的物化中获益。那些需要快速响应聚集计算的查询也会从物化视图中受益。</p>
+<p>SQL没有定义指定物化视图的标准方式。某些数据库系统允许DBA控制每个物化视图采用定期维护还是触发维护。</p>
+<h3 id="4-1-4-视图更新"><a href="#4-1-4-视图更新" class="headerlink" title="4.1.4 视图更新"></a>4.1.4 视图更新</h3><p>视图一般只读不可写</p>
+<p>可更新的视图需要满足的4个条件</p>
+<p>即使满足这些条件，向视图中插入一条不满足视图的where子句的数据也会带来麻烦。</p>
+<h2 id="4-3-事务"><a href="#4-3-事务" class="headerlink" title="4.3 事务"></a>4.3 事务</h2><p>ch14学习事务的更多特性；ch15和ch16介绍在单个数据库中实现事务的相关问题，ch19介绍跨多个数据库上实现事务的相关问题。</p>
+<h2 id="4-4-完整性约束"><a href="#4-4-完整性约束" class="headerlink" title="4.4 完整性约束"></a>4.4 完整性约束</h2><p>大多数数据库系统允许用户指定那些只需极小开销就可以检测的完整性约束</p>
+<h3 id="4-4-1-单个关系上的约束"><a href="#4-4-1-单个关系上的约束" class="headerlink" title="4.4.1 单个关系上的约束"></a>4.4.1 单个关系上的约束</h3><ol>
+<li>not null</li>
+<li>unique</li>
+<li>check &lt;谓词&gt;</li>
+</ol>
+<h3 id="4-4-2-主码隐式not-null"><a href="#4-4-2-主码隐式not-null" class="headerlink" title="4.4.2 主码隐式not null"></a>4.4.2 主码隐式not null</h3><h3 id="4-4-3-unique-c1-c2…cn-声明指出了候选码"><a href="#4-4-3-unique-c1-c2…cn-声明指出了候选码" class="headerlink" title="4.4.3 unique(c1,c2…cn)声明指出了候选码"></a>4.4.3 unique(c1,c2…cn)声明指出了候选码</h3><p>除非显式声明，候选码属性可以为null；这是因为空值不等于其他的任何值</p>
+<h3 id="4-4-4-check实际上创建了一个强大的类型系统"><a href="#4-4-4-check实际上创建了一个强大的类型系统" class="headerlink" title="4.4.4 check实际上创建了一个强大的类型系统"></a>4.4.4 check实际上创建了一个强大的类型系统</h3><p>`check (semester in (‘Autumn’,’Winter’,’Spring’,’Summer’))</p>
+<h3 id="4-4-5-参照完整性"><a href="#4-4-5-参照完整性" class="headerlink" title="4.4.5 参照完整性"></a>4.4.5 参照完整性</h3><p>当违反参照完整性约束时，通常回滚。但可以在foreign key子句中指明以下动作</p>
+<ol>
+<li>cascade：级联</li>
+<li>set null：将参照域（dept_name）置为null</li>
+<li>set default：将参照域（dept_name）置为默认值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> course</span><br><span class="line">(...</span><br><span class="line">	<span class="keyword">foreign</span> key (dept_name) <span class="keyword">references</span> department</span><br><span class="line">		[<span class="keyword">on</span> <span class="keyword">delete</span> cascade] <span class="comment">--级联删除</span></span><br><span class="line">		[<span class="keyword">on</span> update cascade]</span><br><span class="line">...);</span><br></pre></td></tr></table></figure>
+如果一个关系的foreign key约束所参照的关系就是它自己，级联操作可能无法恢复完整性约束<h3 id="4-4-6-在事务中暂时违反完整性约束"><a href="#4-4-6-在事务中暂时违反完整性约束" class="headerlink" title="4.4.6 在事务中暂时违反完整性约束"></a>4.4.6 在事务中暂时违反完整性约束</h3>在事务中，默认立即检查约束，而且许多数据库实现不支持延迟约束检查。</li>
+</ol>
+<p>SQL标准允许用initially deferred把完整性约束的检查推迟到事务结束时。</p>
+<p>例如，民政局需要插入Mary和John并将他们登记为夫妻，无论先插入哪个元组都会暂时违反外码约束。允许配偶属性为null可以避开这个问题。</p>
+<h3 id="4-4-7-复杂check条件与断言"><a href="#4-4-7-复杂check条件与断言" class="headerlink" title="4.4.7 复杂check条件与断言"></a>4.4.7 复杂check条件与断言</h3><p>开小很大。如果数据库不支持，可以用触发器来实现等价的功能</p>
+<h2 id="4-5-SQL的数据类型与模式"><a href="#4-5-SQL的数据类型与模式" class="headerlink" title="4.5 SQL的数据类型与模式"></a>4.5 SQL的数据类型与模式</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/mysql-ji-shu-nei-mu/" data-id="cl310rf3p000wgctk0bnsahgd" data-title="《mysql技术内幕》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/10/high-availability-linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《构建高可用Linux服务器》读书笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/19/ubuntu-linux-os/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Ubuntu相关读书笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/07/shell-program-demo/">shell例程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/06/unix-bian-cheng-yi-shu/">《UNIX编程艺术》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

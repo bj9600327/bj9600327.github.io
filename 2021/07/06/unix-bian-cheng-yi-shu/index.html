@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《UNIX编程艺术》读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ch01-哲学 ch02-历史——双流记 ch03-Unix哲学同其他哲学的比较 ch04-模块性：保持清晰，保持简洁 ch05-文本化：好协议产生好实践 ch06-透明性：来点儿光 ch07-多道程序设计：分离进程为独立的功能 ch08-微型语言 ch09-生成：提升规格说明的层次 ch10-配置：迈出正确的第一步 ch11-接口：Unix环境下的用户接口设计模式 ch12-优化 ch13-复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《UNIX编程艺术》读书笔记">
+<meta property="og:url" content="http://example.com/2021/07/06/unix-bian-cheng-yi-shu/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ch01-哲学 ch02-历史——双流记 ch03-Unix哲学同其他哲学的比较 ch04-模块性：保持清晰，保持简洁 ch05-文本化：好协议产生好实践 ch06-透明性：来点儿光 ch07-多道程序设计：分离进程为独立的功能 ch08-微型语言 ch09-生成：提升规格说明的层次 ch10-配置：迈出正确的第一步 ch11-接口：Unix环境下的用户接口设计模式 ch12-优化 ch13-复">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-06T13:27:56.000Z">
+<meta property="article:modified_time" content="2022-05-11T03:19:10.222Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-unix-bian-cheng-yi-shu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/06/unix-bian-cheng-yi-shu/" class="article-date">
+  <time class="dt-published" datetime="2021-07-06T13:27:56.000Z" itemprop="datePublished">2021-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《UNIX编程艺术》读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#ch01-%E5%93%B2%E5%AD%A6">ch01-哲学</a></li>
+<li><a href="#ch02-%E5%8E%86%E5%8F%B2%E2%80%94%E2%80%94%E5%8F%8C%E6%B5%81%E8%AE%B0">ch02-历史——双流记</a></li>
+<li><a href="#ch03-Unix%E5%93%B2%E5%AD%A6%E5%90%8C%E5%85%B6%E4%BB%96%E5%93%B2%E5%AD%A6%E7%9A%84%E6%AF%94%E8%BE%83">ch03-Unix哲学同其他哲学的比较</a></li>
+<li><a href="#ch04-%E6%A8%A1%E5%9D%97%E6%80%A7%EF%BC%9A%E4%BF%9D%E6%8C%81%E6%B8%85%E6%99%B0%EF%BC%8C%E4%BF%9D%E6%8C%81%E7%AE%80%E6%B4%81">ch04-模块性：保持清晰，保持简洁</a></li>
+<li><a href="#ch05-%E6%96%87%E6%9C%AC%E5%8C%96%EF%BC%9A%E5%A5%BD%E5%8D%8F%E8%AE%AE%E4%BA%A7%E7%94%9F%E5%A5%BD%E5%AE%9E%E8%B7%B5">ch05-文本化：好协议产生好实践</a></li>
+<li><a href="#ch06-%E9%80%8F%E6%98%8E%E6%80%A7%EF%BC%9A%E6%9D%A5%E7%82%B9%E5%84%BF%E5%85%89">ch06-透明性：来点儿光</a></li>
+<li><a href="#ch07-%E5%A4%9A%E9%81%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%88%86%E7%A6%BB%E8%BF%9B%E7%A8%8B%E4%B8%BA%E7%8B%AC%E7%AB%8B%E7%9A%84%E5%8A%9F%E8%83%BD">ch07-多道程序设计：分离进程为独立的功能</a></li>
+<li><a href="#ch08-%E5%BE%AE%E5%9E%8B%E8%AF%AD%E8%A8%80">ch08-微型语言</a></li>
+<li><a href="#ch09-%E7%94%9F%E6%88%90%EF%BC%9A%E6%8F%90%E5%8D%87%E8%A7%84%E6%A0%BC%E8%AF%B4%E6%98%8E%E7%9A%84%E5%B1%82%E6%AC%A1">ch09-生成：提升规格说明的层次</a></li>
+<li><a href="#ch10-%E9%85%8D%E7%BD%AE%EF%BC%9A%E8%BF%88%E5%87%BA%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5">ch10-配置：迈出正确的第一步</a></li>
+<li><a href="#ch11-%E6%8E%A5%E5%8F%A3%EF%BC%9AUnix%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">ch11-接口：Unix环境下的用户接口设计模式</a></li>
+<li><a href="#ch12-%E4%BC%98%E5%8C%96">ch12-优化</a></li>
+<li><a href="#ch13-%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9A%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%AE%80%E5%8D%95%EF%BC%8C%E4%BD%86%E5%88%AB%E7%AE%80%E5%8D%95%E8%BF%87%E4%BA%86%E5%A4%B4">ch13-复杂度：尽可能简单，但别简单过了头</a></li>
+</ul>
+<h1 id="译序"><a href="#译序" class="headerlink" title="译序"></a>译序</h1><p>本书总结了历史上Unix众多成功的经验和失败的教训。</p>
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>本书分为四部分：场景、设计、工具和社群</p>
+<h1 id="ch01-哲学"><a href="#ch01-哲学" class="headerlink" title="ch01 哲学"></a>ch01 哲学</h1><h2 id="1-1-文化？什么文化"><a href="#1-1-文化？什么文化" class="headerlink" title="1.1 文化？什么文化"></a>1.1 文化？什么文化</h2><p>有些不成文的行业素养具有与标准手册及教科书同等重要的地位</p>
+<h2 id="1-2-Unix的生命力"><a href="#1-2-Unix的生命力" class="headerlink" title="1.2 Unix的生命力"></a>1.2 Unix的生命力</h2><p>语言、系统调用、工具用法——它们积年不变</p>
+<h2 id="1-3-反对学习Unix文化的理由"><a href="#1-3-反对学习Unix文化的理由" class="headerlink" title="1.3 反对学习Unix文化的理由"></a>1.3 反对学习Unix文化的理由</h2><p>通用性受到怀疑</p>
+<h2 id="1-4-Unix之失"><a href="#1-4-Unix之失" class="headerlink" title="1.4 Unix之失"></a>1.4 Unix之失</h2><p>“只提供机制，不提供策略”令非技术型的终端用户晕头转向</p>
+<h2 id="1-5-Unix之得"><a href="#1-5-Unix之得" class="headerlink" title="1.5 Unix之得"></a>1.5 Unix之得</h2><h3 id="1-5-1-开源软件"><a href="#1-5-1-开源软件" class="headerlink" title="1.5.1 开源软件"></a>1.5.1 开源软件</h3><h3 id="1-5-2-跨平台可移植性和开放标准"><a href="#1-5-2-跨平台可移植性和开放标准" class="headerlink" title="1.5.2 跨平台可移植性和开放标准"></a>1.5.2 跨平台可移植性和开放标准</h3><h3 id="1-5-3-Internet和万维网"><a href="#1-5-3-Internet和万维网" class="headerlink" title="1.5.3 Internet和万维网"></a>1.5.3 Internet和万维网</h3><h3 id="1-5-4-开源社区"><a href="#1-5-4-开源社区" class="headerlink" title="1.5.4 开源社区"></a>1.5.4 开源社区</h3><h3 id="1-5-5-从头到脚的灵活性"><a href="#1-5-5-从头到脚的灵活性" class="headerlink" title="1.5.5 从头到脚的灵活性"></a>1.5.5 从头到脚的灵活性</h3><h3 id="1-5-6-Unix-Hack之趣"><a href="#1-5-6-Unix-Hack之趣" class="headerlink" title="1.5.6 Unix Hack之趣"></a>1.5.6 Unix Hack之趣</h3><h3 id="1-5-7-Unix的经验别处也可适用"><a href="#1-5-7-Unix的经验别处也可适用" class="headerlink" title="1.5.7 Unix的经验别处也可适用"></a>1.5.7 Unix的经验别处也可适用</h3><h2 id="1-6-Unix哲学基础"><a href="#1-6-Unix哲学基础" class="headerlink" title="1.6 Unix哲学基础"></a>1.6 Unix哲学基础</h2><p>Unix哲学是自下而上的</p>
+<p>管道的发明人总结道：一个程序只做一件事，并做好。程序要能协作。程序要能处理文本流，因为这是最通用的接口。</p>
+<h3 id="1-6-1-模块原则：使用简洁的接口拼合简单的部件"><a href="#1-6-1-模块原则：使用简洁的接口拼合简单的部件" class="headerlink" title="1.6.1 模块原则：使用简洁的接口拼合简单的部件"></a>1.6.1 模块原则：使用简洁的接口拼合简单的部件</h3><h3 id="1-6-2-清晰原则：尽量使用简单的算法配合简单的数据结构"><a href="#1-6-2-清晰原则：尽量使用简单的算法配合简单的数据结构" class="headerlink" title="1.6.2 清晰原则：尽量使用简单的算法配合简单的数据结构"></a>1.6.2 清晰原则：尽量使用简单的算法配合简单的数据结构</h3><h3 id="1-6-3-组合原则：以一点点格式解析的代价，换得可以使用通用工具来构造或解读数据流"><a href="#1-6-3-组合原则：以一点点格式解析的代价，换得可以使用通用工具来构造或解读数据流" class="headerlink" title="1.6.3 组合原则：以一点点格式解析的代价，换得可以使用通用工具来构造或解读数据流"></a>1.6.3 组合原则：以一点点格式解析的代价，换得可以使用通用工具来构造或解读数据流</h3><h3 id="1-6-4-分离原则：策略同机制分离，接口同引擎分离"><a href="#1-6-4-分离原则：策略同机制分离，接口同引擎分离" class="headerlink" title="1.6.4 分离原则：策略同机制分离，接口同引擎分离"></a>1.6.4 分离原则：策略同机制分离，接口同引擎分离</h3><h3 id="1-6-5-简洁原则：将程序系统分解为几个能够协作的小部分"><a href="#1-6-5-简洁原则：将程序系统分解为几个能够协作的小部分" class="headerlink" title="1.6.5 简洁原则：将程序系统分解为几个能够协作的小部分"></a>1.6.5 简洁原则：将程序系统分解为几个能够协作的小部分</h3><h3 id="1-6-6-吝啬原则：除非确无它法，不要编写庞大的程序"><a href="#1-6-6-吝啬原则：除非确无它法，不要编写庞大的程序" class="headerlink" title="1.6.6 吝啬原则：除非确无它法，不要编写庞大的程序"></a>1.6.6 吝啬原则：除非确无它法，不要编写庞大的程序</h3><h3 id="1-6-7-透明性原则"><a href="#1-6-7-透明性原则" class="headerlink" title="1.6.7 透明性原则"></a>1.6.7 透明性原则</h3><ul>
+<li>透明性：一眼就能看出软件是在做什么以及怎样做的</li>
+<li>显见性：程序带有监视和显示内部状态的功能</li>
+</ul>
+<h3 id="1-6-8-健壮原则：健壮源于透明与简洁"><a href="#1-6-8-健壮原则：健壮源于透明与简洁" class="headerlink" title="1.6.8 健壮原则：健壮源于透明与简洁"></a>1.6.8 健壮原则：健壮源于透明与简洁</h3><h3 id="1-6-9-表示原则：把知识叠入数据以求逻辑质朴而健壮"><a href="#1-6-9-表示原则：把知识叠入数据以求逻辑质朴而健壮" class="headerlink" title="1.6.9 表示原则：把知识叠入数据以求逻辑质朴而健壮"></a>1.6.9 表示原则：把知识叠入数据以求逻辑质朴而健壮</h3><h3 id="1-6-10-通俗原则：关注目标受众和传统惯例，尽量按照用户最可能熟悉的同样功能接口和相似应用程序来进行建模"><a href="#1-6-10-通俗原则：关注目标受众和传统惯例，尽量按照用户最可能熟悉的同样功能接口和相似应用程序来进行建模" class="headerlink" title="1.6.10 通俗原则：关注目标受众和传统惯例，尽量按照用户最可能熟悉的同样功能接口和相似应用程序来进行建模"></a>1.6.10 通俗原则：关注目标受众和传统惯例，尽量按照用户最可能熟悉的同样功能接口和相似应用程序来进行建模</h3><h3 id="1-6-11-缄默原则：如果一个程序没什么好说的，就保持沉默"><a href="#1-6-11-缄默原则：如果一个程序没什么好说的，就保持沉默" class="headerlink" title="1.6.11 缄默原则：如果一个程序没什么好说的，就保持沉默"></a>1.6.11 缄默原则：如果一个程序没什么好说的，就保持沉默</h3><h3 id="1-6-12-补救原则：出现异常时，马上退出并给出足量错误信息"><a href="#1-6-12-补救原则：出现异常时，马上退出并给出足量错误信息" class="headerlink" title="1.6.12 补救原则：出现异常时，马上退出并给出足量错误信息"></a>1.6.12 补救原则：出现异常时，马上退出并给出足量错误信息</h3><h3 id="1-6-13-经济原则：宁花机器一分，不花程序员一秒"><a href="#1-6-13-经济原则：宁花机器一分，不花程序员一秒" class="headerlink" title="1.6.13 经济原则：宁花机器一分，不花程序员一秒"></a>1.6.13 经济原则：宁花机器一分，不花程序员一秒</h3><h3 id="1-6-14-生成原则：避免手工hack，尽量编写程序去生成程序"><a href="#1-6-14-生成原则：避免手工hack，尽量编写程序去生成程序" class="headerlink" title="1.6.14 生成原则：避免手工hack，尽量编写程序去生成程序"></a>1.6.14 生成原则：避免手工hack，尽量编写程序去生成程序</h3><h3 id="1-6-15-优化原则：先制作原型，再精雕细琢。优化之前先确保能用"><a href="#1-6-15-优化原则：先制作原型，再精雕细琢。优化之前先确保能用" class="headerlink" title="1.6.15 优化原则：先制作原型，再精雕细琢。优化之前先确保能用"></a>1.6.15 优化原则：先制作原型，再精雕细琢。优化之前先确保能用</h3><h3 id="1-6-16-多样原则：广泛采用多种语言、开放的可扩展系统和用户定制机制"><a href="#1-6-16-多样原则：广泛采用多种语言、开放的可扩展系统和用户定制机制" class="headerlink" title="1.6.16 多样原则：广泛采用多种语言、开放的可扩展系统和用户定制机制"></a>1.6.16 多样原则：广泛采用多种语言、开放的可扩展系统和用户定制机制</h3><h3 id="1-6-17-扩展原则：为数据格式和代码留下扩展的空间"><a href="#1-6-17-扩展原则：为数据格式和代码留下扩展的空间" class="headerlink" title="1.6.17 扩展原则：为数据格式和代码留下扩展的空间"></a>1.6.17 扩展原则：为数据格式和代码留下扩展的空间</h3><h2 id="1-7-一言蔽之：Keep-It-Simple-Stupid"><a href="#1-7-一言蔽之：Keep-It-Simple-Stupid" class="headerlink" title="1.7 一言蔽之：Keep It Simple, Stupid!"></a>1.7 一言蔽之：Keep It Simple, Stupid!</h2><h2 id="1-8-应用Unix哲学"><a href="#1-8-应用Unix哲学" class="headerlink" title="1.8 应用Unix哲学"></a>1.8 应用Unix哲学</h2><h2 id="1-9-态度也要紧"><a href="#1-9-态度也要紧" class="headerlink" title="1.9 态度也要紧"></a>1.9 态度也要紧</h2><h1 id="ch02-历史——双流记"><a href="#ch02-历史——双流记" class="headerlink" title="ch02 历史——双流记"></a>ch02 历史——双流记</h1><p>本章通过回顾Unix的历史来阐明如今的Unix文化为什么会呈现当前这种状态</p>
+<h2 id="2-1-起源：Unix的祖辈是小而简单的兼容分时系统"><a href="#2-1-起源：Unix的祖辈是小而简单的兼容分时系统" class="headerlink" title="2.1 起源：Unix的祖辈是小而简单的兼容分时系统"></a>2.1 起源：Unix的祖辈是小而简单的兼容分时系统</h2><h2 id="2-2-黑客的起源和历史"><a href="#2-2-黑客的起源和历史" class="headerlink" title="2.2 黑客的起源和历史"></a>2.2 黑客的起源和历史</h2><h2 id="2-3-开源运动"><a href="#2-3-开源运动" class="headerlink" title="2.3 开源运动"></a>2.3 开源运动</h2><h2 id="2-4-Unix的历史教训"><a href="#2-4-Unix的历史教训" class="headerlink" title="2.4 Unix的历史教训"></a>2.4 Unix的历史教训</h2><h1 id="ch03-Unix哲学同其他哲学的比较"><a href="#ch03-Unix哲学同其他哲学的比较" class="headerlink" title="ch03 Unix哲学同其他哲学的比较"></a>ch03 Unix哲学同其他哲学的比较</h1><h2 id="3-1-操作系统的风格元素"><a href="#3-1-操作系统的风格元素" class="headerlink" title="3.1 操作系统的风格元素"></a>3.1 操作系统的风格元素</h2><p>与不同操作系统相关的设计和编程风格可以追溯出三个源头</p>
+<ol>
+<li>操作系统设计者的意图</li>
+<li>成本和编程环境的限制对设计的均衡影响</li>
+<li>文化随机漂移，传统无非就是先入为主</li>
+</ol>
+<h3 id="3-1-1-最基本的问题：这个操作系统存在对其开发具有决定作用的统一性理念吗？"><a href="#3-1-1-最基本的问题：这个操作系统存在对其开发具有决定作用的统一性理念吗？" class="headerlink" title="3.1.1 最基本的问题：这个操作系统存在对其开发具有决定作用的统一性理念吗？"></a>3.1.1 最基本的问题：这个操作系统存在对其开发具有决定作用的统一性理念吗？</h3><p>一切皆文件</p>
+<h3 id="3-1-2-多任务能力"><a href="#3-1-2-多任务能力" class="headerlink" title="3.1.2 多任务能力"></a>3.1.2 多任务能力</h3><p>顺序的程序加载器 -&gt; 协作式多任务 -&gt; 抢先式多任务</p>
+<h3 id="3-1-3-协作进程"><a href="#3-1-3-协作进程" class="headerlink" title="3.1.3 协作进程"></a>3.1.3 协作进程</h3><p>代价高昂的进程生成和IPC会带来的5个后果</p>
+<h3 id="3-1-4-内部边界"><a href="#3-1-4-内部边界" class="headerlink" title="3.1.4 内部边界"></a>3.1.4 内部边界</h3><p>Unix至少设立了三层内部边界来防范恶意用户或有缺陷的程序</p>
+<ol>
+<li>内存管理</li>
+<li>为多用户设置的真正权限组</li>
+<li>把涉及关键安全性的功能限制在尽可能小的可信代码块上</li>
+</ol>
+<h3 id="3-1-5-文件属性和记录结构"><a href="#3-1-5-文件属性和记录结构" class="headerlink" title="3.1.5 文件属性和记录结构"></a>3.1.5 文件属性和记录结构</h3><p>Unix文件既没有记录结构也没有文件属性</p>
+<ol>
+<li>记录结构：操作系统通过固定长度的记录，了解文件</li>
+<li>文件属性：采用编外数据将文档文件同能够解读它的应用程序关联起来。（Unix使用特征数或是文件内的其他类型数据）</li>
+</ol>
+<h3 id="3-1-6-二进制文件格式"><a href="#3-1-6-二进制文件格式" class="headerlink" title="3.1.6 二进制文件格式"></a>3.1.6 二进制文件格式</h3><p>后果：不透明</p>
+<h3 id="3-1-7-首选用户界面风格"><a href="#3-1-7-首选用户界面风格" class="headerlink" title="3.1.7 首选用户界面风格"></a>3.1.7 首选用户界面风格</h3><p>命令行界面弱的4个后果</p>
+<h3 id="3-1-8-目标受众"><a href="#3-1-8-目标受众" class="headerlink" title="3.1.8 目标受众"></a>3.1.8 目标受众</h3><p>客户端和服务器的区别对开发风格产生影响。其中最明显的就是目标用户能够容忍的界面复杂的级别。Unix是写给程序员的——这个目标用户群在界面复杂度的承受力方面是出了名的。</p>
+<h3 id="3-1-9-开发的门槛"><a href="#3-1-9-开发的门槛" class="headerlink" title="3.1.9 开发的门槛"></a>3.1.9 开发的门槛</h3><p>昂贵的开发工具和复杂晦涩的API造就了小群的精英编程文化</p>
+<h2 id="3-2-操作系统的比较"><a href="#3-2-操作系统的比较" class="headerlink" title="3.2 操作系统的比较"></a>3.2 操作系统的比较</h2><h3 id="3-2-2-MacOS"><a href="#3-2-2-MacOS" class="headerlink" title="3.2.2 MacOS"></a>3.2.2 MacOS</h3><p>经典的MacOS已经寿终正寝。MacOS大多数功能已被引入MacOS X，并同源自Berkeley传统的Unix架构结合在一起。</p>
+<h3 id="3-2-4-Windows-NT"><a href="#3-2-4-Windows-NT" class="headerlink" title="3.2.4 Windows NT"></a>3.2.4 Windows NT</h3><p>Windows ME终结后，目前所有的Windows操作系统都以Windows NT为基础。（本书写作时是2003年）</p>
+<p>每一代技术都随着旧方式被宣告过时而不再有良好支持，开发者必须以不同的方式从头学起</p>
+<p>Unix中很简单的多道程序设计和网络应用到NT下则要牵涉更多基础性概念</p>
+<p>进程生成昂贵，比Unix高出一个数量级</p>
+<p>Unix的配置数据分散在dotfiles和系统数据文件中；而NT则集中存放在注册表中</p>
+<h3 id="3-2-8-Linux"><a href="#3-2-8-Linux" class="headerlink" title="3.2.8 Linux"></a>3.2.8 Linux</h3><p>Linux的长期目标是包容</p>
+<ul>
+<li>专有Unix牺牲在低端硬件上的性能而专门为多处理器和服务器集群调优</li>
+<li>Linux要从过时了的硬件中榨取有用东西，Linux应用程序始终保持瘦小精干的体态</li>
+</ul>
+<h2 id="3-3-种什么籽，得什么果"><a href="#3-3-种什么籽，得什么果" class="headerlink" title="3.3 种什么籽，得什么果"></a>3.3 种什么籽，得什么果</h2><p>Unix竞争者的什么劣势让它们失败</p>
+<ol>
+<li>不可移植性</li>
+<li>不具备良好的网络支持能力</li>
+</ol>
+<h1 id="ch04-模块性：保持清晰，保持简洁"><a href="#ch04-模块性：保持清晰，保持简洁" class="headerlink" title="ch04 模块性：保持清晰，保持简洁"></a>ch04 模块性：保持清晰，保持简洁</h1><p>分析Unix传统是如何教导我们遵循模块化原则的</p>
+<h2 id="4-1-封装和最佳模块大小"><a href="#4-1-封装和最佳模块大小" class="headerlink" title="4.1 封装和最佳模块大小"></a>4.1 封装和最佳模块大小</h2><p>在编码前为API编写一段非正式书面描述</p>
+<p>200到400之间逻辑行的代码使缺陷密度达到最小</p>
+<h2 id="4-2-紧凑性和正交性"><a href="#4-2-紧凑性和正交性" class="headerlink" title="4.2 紧凑性和正交性"></a>4.2 紧凑性和正交性</h2><p>在设计API、命令集、协议以及其他方法时，要认真考虑紧凑性和正交性</p>
+<h3 id="4-2-1-紧凑性就是一个设计是否能装进人脑中"><a href="#4-2-1-紧凑性就是一个设计是否能装进人脑中" class="headerlink" title="4.2.1 紧凑性就是一个设计是否能装进人脑中"></a>4.2.1 紧凑性就是一个设计是否能装进人脑中</h3><ul>
+<li><p>Lisp构建在易于理解且利于组合的抽象概念上，是紧凑的</p>
+</li>
+<li><p>Unix系统调用是半紧凑的</p>
+</li>
+<li><p>C标准库无论如何都算不上是紧凑的</p>
+</li>
+<li><p>在Unix工具软件中：make是紧凑的，autoconf和automake则不是。</p>
+</li>
+<li><p>在通用编程语言中：C和Python是半紧凑的，Perl、java、Emacs Lisp和shell则不是</p>
+</li>
+</ul>
+<h3 id="4-2-2-正交性就是每一个动作只改变一件事，不会影响其他"><a href="#4-2-2-正交性就是每一个动作只改变一件事，不会影响其他" class="headerlink" title="4.2.2 正交性就是每一个动作只改变一件事，不会影响其他"></a>4.2.2 正交性就是每一个动作只改变一件事，不会影响其他</h3><p>Unix的基本API设计在正交性方面虽不完美，但也颇为成功</p>
+<h3 id="4-2-3-SPOT：真理的单点性"><a href="#4-2-3-SPOT：真理的单点性" class="headerlink" title="4.2.3 SPOT：真理的单点性"></a>4.2.3 SPOT：真理的单点性</h3><p>常量、表和元数据只应该声明和初始化一次，并导入其他地方</p>
+<h3 id="4-2-4-紧凑性和强单一中心"><a href="#4-2-4-紧凑性和强单一中心" class="headerlink" title="4.2.4 紧凑性和强单一中心"></a>4.2.4 紧凑性和强单一中心</h3><ol>
+<li>形式法：围绕“解决一个定义明确的问题”的强核心算法组织设计。</li>
+</ol>
+<ul>
+<li>diff使用一个简单、从数学上看很可靠的序列比较方法</li>
+<li>grep围绕正则表达式模式的形式代数问题</li>
+<li>yacc围绕LR语法形式理论</li>
+</ul>
+<ol>
+<li>试探法：凭经验法则得出的解决方案</li>
+</ol>
+<ul>
+<li>有时不可能找到绝对正确的解决方案。例如垃圾邮件过滤——自然语言的理解问题尚未完全解决</li>
+<li>有时形式上正确的方法开销贵得难以想象。例如虚拟内存管理</li>
+</ul>
+<h3 id="4-2-5-分离的价值"><a href="#4-2-5-分离的价值" class="headerlink" title="4.2.5 分离的价值"></a>4.2.5 分离的价值</h3><p>从零开始，抛弃先入之见</p>
+<h2 id="4-3-软件是多层的"><a href="#4-3-软件是多层的" class="headerlink" title="4.3 软件是多层的"></a>4.3 软件是多层的</h2><h3 id="4-3-1-自顶向下和自底向上"><a href="#4-3-1-自顶向下和自底向上" class="headerlink" title="4.3.1 自顶向下和自底向上"></a>4.3.1 自顶向下和自底向上</h3><p>当以下三个条件都成立时，自顶向下不失为好方法：</p>
+<ol>
+<li>能够精确预知程序的任务</li>
+<li>实现过程中，程序规格变化不大</li>
+<li>在底层有充分自由来选择程序完成任务的方式</li>
+</ol>
+<p>如果纯粹地自顶向下编程，常常产生在某些代码上的过度投资效应</p>
+<p>实际代码往往是自顶向下和自底向上综合的产物。这就导致了胶合层的出现</p>
+<h3 id="4-3-2-胶合层"><a href="#4-3-2-胶合层" class="headerlink" title="4.3.2 胶合层"></a>4.3.2 胶合层</h3><p>胶合层必须尽可能薄</p>
+<p>薄胶合层原则可以看做是分离原则的升华。策略（应用逻辑）应该与机制（域原语集）清晰地分离。</p>
+<h3 id="4-3-3-实例分析：被视为薄胶合层的C语言"><a href="#4-3-3-实例分析：被视为薄胶合层的C语言" class="headerlink" title="4.3.3 实例分析：被视为薄胶合层的C语言"></a>4.3.3 实例分析：被视为薄胶合层的C语言</h3><p>除了紧凑、正交和分离，C语言还拥有透明性</p>
+<h2 id="4-4-程序库"><a href="#4-4-程序库" class="headerlink" title="4.4 程序库"></a>4.4 程序库</h2><p>Unix把服务程序集中在一个库中并单独文档化</p>
+<p>库分层的一个重要形式是插件</p>
+<h3 id="4-4-1-实例分析：GIMP插件"><a href="#4-4-1-实例分析：GIMP插件" class="headerlink" title="4.4.1 实例分析：GIMP插件"></a>4.4.1 实例分析：GIMP插件</h3><p>C程序写成的插件可以由GIMP动态载入</p>
+<h2 id="4-5-Unix和面向对象语言"><a href="#4-5-Unix和面向对象语言" class="headerlink" title="4.5 Unix和面向对象语言"></a>4.5 Unix和面向对象语言</h2><p>面向对象（OO）最初在图形系统、GUI和某些仿真程序中被认可。</p>
+<p>OO语言鼓励“具有厚重的胶合与复杂层次”的体系。</p>
+<p>在Unix下，OO语言没能代替非OO的主力语言</p>
+<h2 id="4-6-模块式编码"><a href="#4-6-模块式编码" class="headerlink" title="4.6 模块式编码"></a>4.6 模块式编码</h2><p>编写代码时问以下问题</p>
+<ol>
+<li>有多少全局变量</li>
+<li>单个模块是否在Hatton的最佳范围内</li>
+<li>模块内的单个函数是不是太大了</li>
+<li>代码是否有内部API</li>
+<li>API的入口点是否超过七个</li>
+<li>整个项目中每个模块的入口点数量如何分布</li>
+</ol>
+<h1 id="ch05-文本化：好协议产生好实践"><a href="#ch05-文本化：好协议产生好实践" class="headerlink" title="ch05 文本化：好协议产生好实践"></a>ch05 文本化：好协议产生好实践</h1><p>序列化（保存）操作有时也称为列集，其反向操作（载入）称为散集</p>
+<h2 id="5-1-文本化的重要性"><a href="#5-1-文本化的重要性" class="headerlink" title="5.1 文本化的重要性"></a>5.1 文本化的重要性</h2><p>使用二进制协议的正当例子</p>
+<ol>
+<li>要处理大批量的数据集。例如大图像和多媒体数据格式</li>
+<li>非常关心将数据转化为芯片核心结构所必需的时间或指令开销。例如网络协议</li>
+</ol>
+<h3 id="5-1-1-实例分析：Unix口令文件格式"><a href="#5-1-1-实例分析：Unix口令文件格式" class="headerlink" title="5.1.1 实例分析：Unix口令文件格式"></a>5.1.1 实例分析：Unix口令文件格式</h3><h3 id="5-1-2-实例分析：-newsrc格式"><a href="#5-1-2-实例分析：-newsrc格式" class="headerlink" title="5.1.2 实例分析：.newsrc格式"></a>5.1.2 实例分析：.newsrc格式</h3><h3 id="5-1-3-实例分析：PNG图形文件格式"><a href="#5-1-3-实例分析：PNG图形文件格式" class="headerlink" title="5.1.3 实例分析：PNG图形文件格式"></a>5.1.3 实例分析：PNG图形文件格式</h3><h2 id="5-2-数据文件元格式"><a href="#5-2-数据文件元格式" class="headerlink" title="5.2 数据文件元格式"></a>5.2 数据文件元格式</h2><p>已经得到充分肯定的句法和词法约定</p>
+<h3 id="5-2-1-DSV风格"><a href="#5-2-1-DSV风格" class="headerlink" title="5.2.1 DSV风格"></a>5.2.1 DSV风格</h3><p>/etc/passwd 文件就是一个使用冒号作为值分隔符的DSV格式，这种风格的数据文件一般应通过反斜杠<code>\</code>转义符支持在数据域中包含冒号。</p>
+<p>CSV是反面例子，如果字段值中有逗号，就将整个字段值包括在双引号内</p>
+<h3 id="5-2-2-RFC-822格式"><a href="#5-2-2-RFC-822格式" class="headerlink" title="5.2.2 RFC 822格式"></a>5.2.2 RFC 822格式</h3><p>源于电子邮件</p>
+<h3 id="5-2-3-Cookie-Jar格式"><a href="#5-2-3-Cookie-Jar格式" class="headerlink" title="5.2.3 Cookie-Jar格式"></a>5.2.3 Cookie-Jar格式</h3><p>fortune为随机引用数据库而使用的一种格式</p>
+<h3 id="5-2-4-Record-Jar格式"><a href="#5-2-4-Record-Jar格式" class="headerlink" title="5.2.4 Record-Jar格式"></a>5.2.4 Record-Jar格式</h3><p>是Cookie-Jar和RFC 822的结合</p>
+<h3 id="5-2-5-XML"><a href="#5-2-5-XML" class="headerlink" title="5.2.5 XML"></a>5.2.5 XML</h3><p>适合又复杂递归或嵌套数据结构的格式</p>
+<h3 id="5-2-6-Windows-INI格式"><a href="#5-2-6-Windows-INI格式" class="headerlink" title="5.2.6 Windows INI格式"></a>5.2.6 Windows INI格式</h3><p>适合数据围绕指定的记录或部分能够自然分成“名称-属性对”两层组织结构</p>
+<h3 id="5-2-7-Unix文本文件格式的约定"><a href="#5-2-7-Unix文本文件格式的约定" class="headerlink" title="5.2.7 Unix文本文件格式的约定"></a>5.2.7 Unix文本文件格式的约定</h3><p><strong>共13点</strong></p>
+<h3 id="5-2-8-文件压缩的利弊"><a href="#5-2-8-文件压缩的利弊" class="headerlink" title="5.2.8 文件压缩的利弊"></a>5.2.8 文件压缩的利弊</h3><p>将表现形式的设计和具体压缩方法分离</p>
+<h2 id="5-3-应用协议设计"><a href="#5-3-应用协议设计" class="headerlink" title="5.3 应用协议设计"></a>5.3 应用协议设计</h2><p>应用协议的典范：SMTP、POP3、IMAP</p>
+<h3 id="5-3-1-SMTP，简单的套接字协议"><a href="#5-3-1-SMTP，简单的套接字协议" class="headerlink" title="5.3.1 SMTP，简单的套接字协议"></a>5.3.1 SMTP，简单的套接字协议</h3><p>SMTP是邮件<strong>发送</strong>者启动事务处理的“推”协议</p>
+<h3 id="5-3-2-POP3，邮局协议"><a href="#5-3-2-POP3，邮局协议" class="headerlink" title="5.3.2 POP3，邮局协议"></a>5.3.2 POP3，邮局协议</h3><p>POP3是邮件<strong>接收</strong>者启动事务处理的“拉”协议</p>
+<h3 id="5-3-3-IMAP，互联网消息访问协议"><a href="#5-3-3-IMAP，互联网消息访问协议" class="headerlink" title="5.3.3 IMAP，互联网消息访问协议"></a>5.3.3 IMAP，互联网消息访问协议</h3><p>不是用点号来结束，而是将有效载荷的长度直接放在有效载荷之前发送</p>
+<h2 id="5-4-应用协议元格式"><a href="#5-4-应用协议元格式" class="headerlink" title="5.4 应用协议元格式"></a>5.4 应用协议元格式</h2><ul>
+<li>数据文件元格式是为了简化存储的序列化</li>
+<li>应用协议元格式是为了简化网络间事务处理的序列化</li>
+</ul>
+<h3 id="5-4-1-经典的互联网应用元协议"><a href="#5-4-1-经典的互联网应用元协议" class="headerlink" title="5.4.1 经典的互联网应用元协议"></a>5.4.1 经典的互联网应用元协议</h3><p>使用单行请求和响应，但有效数据载荷可以多行。有效数据载荷要么是8位组数据作为前导，要么以“\r\n”行作为结束符。</p>
+<h3 id="5-4-2-作为通用应用协议的HTTP"><a href="#5-4-2-作为通用应用协议的HTTP" class="headerlink" title="5.4.2 作为通用应用协议的HTTP"></a>5.4.2 作为通用应用协议的HTTP</h3><p>HTTP请求采用类似RFC-822/MINE格式的消息：通常，消息头包含识别和认证信息，第一行是对通用资源指示符（URI）指定的某个资源的方法调用。最重要的方法是GET、PUT和POST。URI最重要的形式是URL</p>
+<h4 id="5-4-2-1-实例分析：freedb-org数据库基于HTTP作为简单地CGI查询"><a href="#5-4-2-1-实例分析：freedb-org数据库基于HTTP作为简单地CGI查询" class="headerlink" title="5.4.2.1 实例分析：freedb.org数据库基于HTTP作为简单地CGI查询"></a>5.4.2.1 实例分析：freedb.org数据库基于HTTP作为简单地CGI查询</h4><h4 id="5-4-2-2-实例分析：互联网打印协议（IPP）使用HTTP1-1作为传输层，所有请求都通过POST方法调用发送"><a href="#5-4-2-2-实例分析：互联网打印协议（IPP）使用HTTP1-1作为传输层，所有请求都通过POST方法调用发送" class="headerlink" title="5.4.2.2 实例分析：互联网打印协议（IPP）使用HTTP1.1作为传输层，所有请求都通过POST方法调用发送"></a>5.4.2.2 实例分析：互联网打印协议（IPP）使用HTTP1.1作为传输层，所有请求都通过POST方法调用发送</h4><h3 id="5-4-3-BEEP：块可扩展交换协议"><a href="#5-4-3-BEEP：块可扩展交换协议" class="headerlink" title="5.4.3 BEEP：块可扩展交换协议"></a>5.4.3 BEEP：块可扩展交换协议</h3><p>支持对等网模式（peer-to-peer）。用户端之间相互交换自描述二进制包序列</p>
+<h3 id="5-4-4-XML-RPC、SOAP和Jabber"><a href="#5-4-4-XML-RPC、SOAP和Jabber" class="headerlink" title="5.4.4 XML-RPC、SOAP和Jabber"></a>5.4.4 XML-RPC、SOAP和Jabber</h3><p>这三个协议都基于XML文档</p>
+<h1 id="ch06-透明性：来点儿光"><a href="#ch06-透明性：来点儿光" class="headerlink" title="ch06 透明性：来点儿光"></a>ch06 透明性：来点儿光</h1><ul>
+<li><p>透明性（被动品质）：能预测到程序行为的大部分情况，并能建立简单的心理模型</p>
+</li>
+<li><p>可显性（主动品质）：软件系统所包含的功能是为了帮助人们对软件建立正确的“做什么、怎样做”的心理模型而设计的</p>
+</li>
+<li><p>Linux的内核源码相当透明，但不具备可显性。</p>
+</li>
+<li><p>Emacs Lisp库是可显的，但却不透明。</p>
+</li>
+</ul>
+<h2 id="6-1-研究实例"><a href="#6-1-研究实例" class="headerlink" title="6.1 研究实例"></a>6.1 研究实例</h2><h3 id="6-1-1-audacity在UI设计中展示透明性"><a href="#6-1-1-audacity在UI设计中展示透明性" class="headerlink" title="6.1.1 audacity在UI设计中展示透明性"></a>6.1.1 audacity在UI设计中展示透明性</h3><h3 id="6-1-2-fetchmail的-v选项使其具有可显性"><a href="#6-1-2-fetchmail的-v选项使其具有可显性" class="headerlink" title="6.1.2 fetchmail的-v选项使其具有可显性"></a>6.1.2 fetchmail的-v选项使其具有可显性</h3><h3 id="6-1-3-gcc的不同命令行选项可以监控解析进程和代码生成进程中的许多中间步骤的结果"><a href="#6-1-3-gcc的不同命令行选项可以监控解析进程和代码生成进程中的许多中间步骤的结果" class="headerlink" title="6.1.3 gcc的不同命令行选项可以监控解析进程和代码生成进程中的许多中间步骤的结果"></a>6.1.3 gcc的不同命令行选项可以监控解析进程和代码生成进程中的许多中间步骤的结果</h3><h3 id="6-1-4-kmail的GUI内容详实但并不令人分心，既显示了事务处理信息，又很容易让人视而不见。"><a href="#6-1-4-kmail的GUI内容详实但并不令人分心，既显示了事务处理信息，又很容易让人视而不见。" class="headerlink" title="6.1.4 kmail的GUI内容详实但并不令人分心，既显示了事务处理信息，又很容易让人视而不见。"></a>6.1.4 kmail的GUI内容详实但并不令人分心，既显示了事务处理信息，又很容易让人视而不见。</h3><h3 id="6-1-5-sng使PNG可以被编辑和被版本控制"><a href="#6-1-5-sng使PNG可以被编辑和被版本控制" class="headerlink" title="6.1.5 sng使PNG可以被编辑和被版本控制"></a>6.1.5 sng使PNG可以被编辑和被版本控制</h3><h3 id="6-1-6-terminfo使用文件系统作为一个简单地层级数据库，符合经济性原则和透明性原则"><a href="#6-1-6-terminfo使用文件系统作为一个简单地层级数据库，符合经济性原则和透明性原则" class="headerlink" title="6.1.6 terminfo使用文件系统作为一个简单地层级数据库，符合经济性原则和透明性原则"></a>6.1.6 terminfo使用文件系统作为一个简单地层级数据库，符合经济性原则和透明性原则</h3><h3 id="6-1-7-Freeciv游戏里，服务器维持共享状态而客户端专注GUI表现；游戏的大部分固定数据，没有编入服务器的代码中"><a href="#6-1-7-Freeciv游戏里，服务器维持共享状态而客户端专注GUI表现；游戏的大部分固定数据，没有编入服务器的代码中" class="headerlink" title="6.1.7 Freeciv游戏里，服务器维持共享状态而客户端专注GUI表现；游戏的大部分固定数据，没有编入服务器的代码中"></a>6.1.7 Freeciv游戏里，服务器维持共享状态而客户端专注GUI表现；游戏的大部分固定数据，没有编入服务器的代码中</h3><h2 id="6-2-为透明性和可显性而设计"><a href="#6-2-为透明性和可显性而设计" class="headerlink" title="6.2 为透明性和可显性而设计"></a>6.2 为透明性和可显性而设计</h2><p>保持简洁，专注代码同其他人交流的方式</p>
+<h3 id="6-2-1-透明性之禅"><a href="#6-2-1-透明性之禅" class="headerlink" title="6.2.1 透明性之禅"></a>6.2.1 透明性之禅</h3><p>不要再具体操作的代码上叠放太多的抽象层</p>
+<h3 id="6-2-2-为透明性和可显性而编码"><a href="#6-2-2-为透明性和可显性而编码" class="headerlink" title="6.2.2 为透明性和可显性而编码"></a>6.2.2 为透明性和可显性而编码</h3><p>透明性和可显性同模块性一样，主要是设计的特性而不是代码的特性。好好思考8个问题</p>
+<h3 id="6-2-3-透明性和避免过度保护"><a href="#6-2-3-透明性和避免过度保护" class="headerlink" title="6.2.3 透明性和避免过度保护"></a>6.2.3 透明性和避免过度保护</h3><p>隐藏细节和无法访问细节有着重要区别。调试和探测开关是良好程序的标志</p>
+<h3 id="6-2-4-透明性和可编辑的表现形式"><a href="#6-2-4-透明性和可编辑的表现形式" class="headerlink" title="6.2.4 透明性和可编辑的表现形式"></a>6.2.4 透明性和可编辑的表现形式</h3><p>一些程序可以把难透明转化为易透明：Audacity、sng、tic、infocmp。这些转换都是可逆、无损的。</p>
+<p>如果二进制对象是动态生成的，或者非常大，那么用<strong>文本化器</strong>转化所有状态可能不实际。在这种情况下，对应的任务是编写一个<strong>浏览器</strong>。例如：Unix上的fsdb、Linux上的debugfs、浏览PostgreSQL数据库的psql、查询文件共享的smbclient</p>
+<p>编写文本化器或浏览器的4个理由</p>
+<p>把文本化器/浏览器作为引擎使用就可以应用“接口和引擎分离”模式</p>
+<h3 id="6-2-5-透明性、故障诊断和故障恢复"><a href="#6-2-5-透明性、故障诊断和故障恢复" class="headerlink" title="6.2.5 透明性、故障诊断和故障恢复"></a>6.2.5 透明性、故障诊断和故障恢复</h3><p>透明性有利于简化调试</p>
+<ol>
+<li>透明的系统可以防止破坏发生</li>
+</ol>
+<ul>
+<li>Windows注册表容易受到错误代码的破坏</li>
+<li>Unix的terminfo数据库可以从单点恢复</li>
+</ul>
+<ol>
+<li>透明的系统更容易实施恢复措施</li>
+</ol>
+<ul>
+<li>SNG文件中的语法错误，人工就可以解决</li>
+<li>专用编辑器可能拒绝载入受损的PNG图像</li>
+</ul>
+<ol>
+<li>透明的系统使故障诊断更加容易</li>
+</ol>
+<ul>
+<li>kmail遵循了补救原则</li>
+<li>SNG格式简化了系统状态的检查，数据的文本化版本具备有用的冗余</li>
+</ul>
+<h2 id="6-3-为可维护性而设计"><a href="#6-3-为可维护性而设计" class="headerlink" title="6.3 为可维护性而设计"></a>6.3 为可维护性而设计</h2><p>为了透明性和可显性而设计的代码已经朝着可维护性的目标前进了许多。还有其他值得效仿的实践</p>
+<ol>
+<li>应用清晰原则：选择简单的算法</li>
+<li>要包含开发者手册</li>
+</ol>
+<h1 id="ch07-多道程序设计：分离进程为独立的功能"><a href="#ch07-多道程序设计：分离进程为独立的功能" class="headerlink" title="ch07 多道程序设计：分离进程为独立的功能"></a>ch07 多道程序设计：分离进程为独立的功能</h1><p>用定义良好的进程间通信或共享文件夹来连通小型进程</p>
+<h2 id="7-1-从性能调整中分离复杂度控制"><a href="#7-1-从性能调整中分离复杂度控制" class="headerlink" title="7.1 从性能调整中分离复杂度控制"></a>7.1 从性能调整中分离复杂度控制</h2><p>除非万不得已，尽量避免使用线程</p>
+<p>进程分解的所有理由，都是我们在<a href="#ch04-%E6%A8%A1%E5%9D%97%E6%80%A7%EF%BC%9A%E4%BF%9D%E6%8C%81%E6%B8%85%E6%99%B0%EF%BC%8C%E4%BF%9D%E6%8C%81%E7%AE%80%E6%B4%81">ch04-模块性</a>提出的模块划分缘由的延续</p>
+<p>另一个原因是为了更强的安全性</p>
+<h2 id="7-2-Unix-IPC方法的分类"><a href="#7-2-Unix-IPC方法的分类" class="headerlink" title="7.2 Unix IPC方法的分类"></a>7.2 Unix IPC方法的分类</h2><p>本章的剩余部分将大致按照由简到繁的顺序介绍各种IPC方法</p>
+<h3 id="7-2-1-把任务转给专门程序"><a href="#7-2-1-把任务转给专门程序" class="headerlink" title="7.2.1 把任务转给专门程序"></a>7.2.1 把任务转给专门程序</h3><p>专门程序运行时并不需要跟父进程交流</p>
+<ul>
+<li>shell out</li>
+<li>bolt-on</li>
+</ul>
+<h4 id="7-2-1-2-例如git-commit调用编辑器"><a href="#7-2-1-2-例如git-commit调用编辑器" class="headerlink" title="7.2.1.2 例如git commit调用编辑器"></a>7.2.1.2 例如git commit调用编辑器</h4><h3 id="7-2-2-管道、重定向和过滤器"><a href="#7-2-2-管道、重定向和过滤器" class="headerlink" title="7.2.2 管道、重定向和过滤器"></a>7.2.2 管道、重定向和过滤器</h3><p>管道线中所有阶段的程序是并发运行的</p>
+<p>管道的主要缺点是单向性，管道线的成员除了终止外不可能回传控制信息</p>
+<p>命名管道已经被命名套接字取代了</p>
+<h4 id="7-2-2-1-more基本上被less取代了，less增加了向后滚屏的能力"><a href="#7-2-2-1-more基本上被less取代了，less增加了向后滚屏的能力" class="headerlink" title="7.2.2.1 more基本上被less取代了，less增加了向后滚屏的能力"></a>7.2.2.1 more基本上被less取代了，less增加了向后滚屏的能力</h4><h4 id="7-2-2-2-制作单词表tr-c-39-alnum-39-39-n-39-sort-iu-grep-v-39-0-9"><a href="#7-2-2-2-制作单词表tr-c-39-alnum-39-39-n-39-sort-iu-grep-v-39-0-9" class="headerlink" title="7.2.2.2 制作单词表tr -c &#39;[:alnum:]&#39; &#39;[\n*]&#39; | sort -iu | grep -v &#39;^[0-9]*$"></a>7.2.2.2 制作单词表<code>tr -c &#39;[:alnum:]&#39; &#39;[\n*]&#39; | sort -iu | grep -v &#39;^[0-9]*$</code></h4><h4 id="7-2-2-3-pic2graph实现展示了仅仅依靠现有工具的管道线能够完成多少任务"><a href="#7-2-2-3-pic2graph实现展示了仅仅依靠现有工具的管道线能够完成多少任务" class="headerlink" title="7.2.2.3 pic2graph实现展示了仅仅依靠现有工具的管道线能够完成多少任务"></a>7.2.2.3 pic2graph实现展示了仅仅依靠现有工具的管道线能够完成多少任务</h4><h4 id="7-2-2-4-计算器程序bc的旧版本通过管道把命令传递给dc"><a href="#7-2-2-4-计算器程序bc的旧版本通过管道把命令传递给dc" class="headerlink" title="7.2.2.4 计算器程序bc的旧版本通过管道把命令传递给dc"></a>7.2.2.4 计算器程序bc的旧版本通过管道把命令传递给dc</h4><ul>
+<li>dc接受简单的逆波兰标记法（RPN）</li>
+<li>bc接受复杂的中缀表示法</li>
+</ul>
+<h4 id="7-2-2-5-反例分析：为什么fetchmail不是管线"><a href="#7-2-2-5-反例分析：为什么fetchmail不是管线" class="headerlink" title="7.2.2.5 反例分析：为什么fetchmail不是管线"></a>7.2.2.5 反例分析：为什么fetchmail不是管线</h4><p>取信程序要决定是否为已取回的每一条消息发送一个删除请求，而管线是单向的</p>
+<h3 id="7-2-3-包装器"><a href="#7-2-3-包装器" class="headerlink" title="7.2.3 包装器"></a>7.2.3 包装器</h3><p>和shellout程序相对的是包装器，经常用于隐藏shell管线的复杂细节</p>
+<h4 id="7-2-3-1-备份脚本tar-czvf-dev-st0-quot-quot"><a href="#7-2-3-1-备份脚本tar-czvf-dev-st0-quot-quot" class="headerlink" title="7.2.3.1 备份脚本tar -czvf /dev/st0 &quot;$@&quot;"></a>7.2.3.1 备份脚本<code>tar -czvf /dev/st0 &quot;$@&quot;</code></h4><h3 id="7-2-4-安全性包装器和Bernstein链"><a href="#7-2-4-安全性包装器和Bernstein链" class="headerlink" title="7.2.4 安全性包装器和Bernstein链"></a>7.2.4 安全性包装器和Bernstein链</h3><p>安全性包装器可调用守门程序检查某类凭证，然后根据返回的状态值有条件地执行另一个程序</p>
+<p>Bernstein链是一个专用化的安全性包装器。和管线类似，只不过每个继发阶段的程序取代了前一阶段的程序，而不是与之并行。</p>
+<ul>
+<li>rblsmtpd使用一组exec把几个程序粘在一起</li>
+<li>qmail包的condredirect和POP3服务器综合使用fork和exec把几个程序粘在一起</li>
+</ul>
+<p>如果应用程序需要setuid或setgid优先权来做事，然后放弃这些权限让后续代码无需被信任，Bernstein链非常有用</p>
+<h3 id="7-2-5-从进程"><a href="#7-2-5-从进程" class="headerlink" title="7.2.5 从进程"></a>7.2.5 从进程</h3><p>主进程和从进程都需要内部状态机处理它们之间的协议以避免发生死锁和竞争。通常只在这两种条件下使用：</p>
+<ol>
+<li>设计的协议无足轻重。例如进度显示程序scp安全拷贝命令把ssh作为从进程调用</li>
+<li>从进程是以我们在<a href="#ch05-%E6%96%87%E6%9C%AC%E5%8C%96%EF%BC%9A%E5%A5%BD%E5%8D%8F%E8%AE%AE%E4%BA%A7%E7%94%9F%E5%A5%BD%E5%AE%9E%E8%B7%B5">ch05-文本化</a>讨论的应用协议进行通讯而设计的<br>否则要考虑使用套接字或共享内存等更趋对等结构的路</li>
+</ol>
+<h3 id="7-2-6-对等进程间通信"><a href="#7-2-6-对等进程间通信" class="headerlink" title="7.2.6 对等进程间通信"></a>7.2.6 对等进程间通信</h3><p>迄今我们已经讨论的各种通讯方法都存在隐含的层次关系。接下来分析对等通信方法</p>
+<h4 id="7-2-6-1-临时文件"><a href="#7-2-6-1-临时文件" class="headerlink" title="7.2.6.1 临时文件"></a>7.2.6.1 临时文件</h4><p>在shell脚本及一些一次性程序中很有用。优点是容易创建、很灵活；缺点是</p>
+<ul>
+<li>被中断时往往会遗留垃圾数据</li>
+<li>临时文件名冲突，通常把shell变量<code>$$</code>展开为进程ID来保证文件名的唯一性</li>
+<li>攻击程序可以读取和修改临时文件来哄骗消费者进程</li>
+</ul>
+<h4 id="7-2-6-2-信号"><a href="#7-2-6-2-信号" class="headerlink" title="7.2.6.2 信号"></a>7.2.6.2 信号</h4><p>Unix的信号是一种软中断</p>
+<p>随信号IPC经常使用的一种技法是pidfile</p>
+<h4 id="7-2-6-3-系统守护程序和常规信号"><a href="#7-2-6-3-系统守护程序和常规信号" class="headerlink" title="7.2.6.3 系统守护程序和常规信号"></a>7.2.6.3 系统守护程序和常规信号</h4><ul>
+<li>SIGHUP：重新初始化</li>
+<li>SIGTERM：温和的关闭信号</li>
+<li>SIGKILL：立即杀死进程，不能被阻塞</li>
+</ul>
+<h4 id="7-2-6-4-fetchmail使用信号通知老进程，避免运行2个实例"><a href="#7-2-6-4-fetchmail使用信号通知老进程，避免运行2个实例" class="headerlink" title="7.2.6.4 fetchmail使用信号通知老进程，避免运行2个实例"></a>7.2.6.4 fetchmail使用信号通知老进程，避免运行2个实例</h4><h4 id="7-2-6-5-套接字通信是按序且可靠的"><a href="#7-2-6-5-套接字通信是按序且可靠的" class="headerlink" title="7.2.6.5 套接字通信是按序且可靠的"></a>7.2.6.5 套接字通信是按序且可靠的</h4><p>性能压力可能会促使你使用共享内存、临时文件或其他要求更多局部性条件的激发，但是现代程序最好设想代码需要增加分布式操作。</p>
+<h5 id="7-2-6-5-1-实例分析：PostgreSQL"><a href="#7-2-6-5-1-实例分析：PostgreSQL" class="headerlink" title="7.2.6.5.1 实例分析：PostgreSQL"></a>7.2.6.5.1 实例分析：PostgreSQL</h5><p>前后端分离，包括一个postmaster的服务器程序和至少三个客户应用程序</p>
+<h5 id="7-2-6-5-2-实例分析：Freeciv"><a href="#7-2-6-5-2-实例分析：Freeciv" class="headerlink" title="7.2.6.5.2 实例分析：Freeciv"></a>7.2.6.5.2 实例分析：Freeciv</h5><p>所有的游戏逻辑都在服务器端处理，GUI的细节在客户端处理。包协议使用TCP/IP传输。其他那些更像实时模拟游戏（特别是仿真视角射击游戏）使用UDP，因为用户通常连续地发送控制动作，所以零星的信号丢失可以忍受，但是延迟确是致命的</p>
+<h4 id="7-2-6-6-共享内存"><a href="#7-2-6-6-共享内存" class="headerlink" title="7.2.6.6 共享内存"></a>7.2.6.6 共享内存</h4><p>Unix中使用mmap把文件映射成可以被多个进程共享的内存</p>
+<p>处理共享内存的程序必须自己处理竞争和死锁问题</p>
+<p>使用共享内存传递大图像以避免套接字通信的开销是得到经验和测试证实的性能优化</p>
+<p>Unix、Win和MacOS都支持套接字，但Win和传统的MacOS不支持mmap调用</p>
+<h2 id="7-3-要避免的问题和方法"><a href="#7-3-要避免的问题和方法" class="headerlink" title="7.3 要避免的问题和方法"></a>7.3 要避免的问题和方法</h2><h3 id="7-3-1-废弃的Unix-IPC方法"><a href="#7-3-1-废弃的Unix-IPC方法" class="headerlink" title="7.3.1 废弃的Unix IPC方法"></a>7.3.1 废弃的Unix IPC方法</h3><p>这些废弃的方法在《Unix网络编程》中有更详细的描述</p>
+<h4 id="7-3-1-1-System-V-IPC，其Linux版本直到2003年中期还存在bug"><a href="#7-3-1-1-System-V-IPC，其Linux版本直到2003年中期还存在bug" class="headerlink" title="7.3.1.1 System V IPC，其Linux版本直到2003年中期还存在bug"></a>7.3.1.1 System V IPC，其Linux版本直到2003年中期还存在bug</h4><h4 id="7-3-1-2-Steams随着TCP-IP归并到Unix内核而变得越来越无用武之地"><a href="#7-3-1-2-Steams随着TCP-IP归并到Unix内核而变得越来越无用武之地" class="headerlink" title="7.3.1.2 Steams随着TCP/IP归并到Unix内核而变得越来越无用武之地"></a>7.3.1.2 Steams随着TCP/IP归并到Unix内核而变得越来越无用武之地</h4><h3 id="7-3-2-远程过程调用"><a href="#7-3-2-远程过程调用" class="headerlink" title="7.3.2 远程过程调用"></a>7.3.2 远程过程调用</h3><p>尽管偶有例外，如NFS和GNOME，但是其他远程过程调用接口形式的尝试大多失败了</p>
+<p>最成功的RPC应用，如NFS，都是那些在应用定义域上本来就只涉及很少量简单数据类型的应用</p>
+<p>RPC使胶合层太厚</p>
+<h3 id="7-3-3-线程只适合那些进程生成昂贵、IPC功能薄弱的操作系统"><a href="#7-3-3-线程只适合那些进程生成昂贵、IPC功能薄弱的操作系统" class="headerlink" title="7.3.3 线程只适合那些进程生成昂贵、IPC功能薄弱的操作系统"></a>7.3.3 线程只适合那些进程生成昂贵、IPC功能薄弱的操作系统</h3><p>Win和MacOS自带的线程模型和中断功能与Unix差别非常大。不要指望线程程序可移植</p>
+<h2 id="7-4-在设计层次上的进程划分"><a href="#7-4-在设计层次上的进程划分" class="headerlink" title="7.4 在设计层次上的进程划分"></a>7.4 在设计层次上的进程划分</h2><p>临时文件、交互性更强的主/从进程关系、套接字、RPC和其他一些双向IPC方法在某种程度上是等价的。我们通过使用套接字或共享内存这种复杂的方法所完成的任务，大多数都可以通过使用临时文件作为信箱和通知信号这种简单的方法来完成。差别很小，主要体现在如何建立通信、何时何地完成信息的列集和散集、可能产生何种缓冲问题，以及如何保障获取信息的原子性</p>
+<h1 id="ch08-微型语言"><a href="#ch08-微型语言" class="headerlink" title="ch08 微型语言"></a>ch08 微型语言</h1><p>做好微型语言设计的方法</p>
+<ol>
+<li>表示法更紧凑、更具表达力。切实利用“软件的缺陷率和使用的语言在很大程度上无关”</li>
+<li>如果规格说明试图描述控制流和数据部署，该把规格说明语言中的控制流从隐式提升到显式了。<br>错误的方法是通过扩展变成微型语言：每次增加一个补丁或者一个仓促而就的特性。</li>
+</ol>
+<h2 id="8-1-理解语言分类法"><a href="#8-1-理解语言分类法" class="headerlink" title="8.1 理解语言分类法"></a>8.1 理解语言分类法</h2><p>图8.1对语言进行分类，由简到繁：<br><code>简单关联名称和属性的文件-&gt;SNG-&gt;正则表达式-&gt;可用于生成代码的声明性语言-&gt;命令性语言-&gt;bc-&gt;解释器</code></p>
+<h2 id="8-2-应用微型语言"><a href="#8-2-应用微型语言" class="headerlink" title="8.2 应用微型语言"></a>8.2 应用微型语言</h2><h3 id="8-2-1-sng使那些编辑、转换和生成工具无需知道任何其他方的设计假定"><a href="#8-2-1-sng使那些编辑、转换和生成工具无需知道任何其他方的设计假定" class="headerlink" title="8.2.1 sng使那些编辑、转换和生成工具无需知道任何其他方的设计假定"></a>8.2.1 sng使那些编辑、转换和生成工具无需知道任何其他方的设计假定</h3><h3 id="8-2-2-正则表达式是一个微型语言能够多么简练的极端例子"><a href="#8-2-2-正则表达式是一个微型语言能够多么简练的极端例子" class="headerlink" title="8.2.2 正则表达式是一个微型语言能够多么简练的极端例子"></a>8.2.2 正则表达式是一个微型语言能够多么简练的极端例子</h3><h3 id="8-2-3-Glade是界面创建程序，可生成描述该界面的XML文件"><a href="#8-2-3-Glade是界面创建程序，可生成描述该界面的XML文件" class="headerlink" title="8.2.3 Glade是界面创建程序，可生成描述该界面的XML文件"></a>8.2.3 Glade是界面创建程序，可生成描述该界面的XML文件</h3><h3 id="8-2-4-m4宏处理程序对描述文本转换的声明性微型语言进行解释"><a href="#8-2-4-m4宏处理程序对描述文本转换的声明性微型语言进行解释" class="headerlink" title="8.2.4 m4宏处理程序对描述文本转换的声明性微型语言进行解释"></a>8.2.4 m4宏处理程序对描述文本转换的声明性微型语言进行解释</h3><p>对于缺乏内置命名过程标记法和文件包含功能的微型语言，可以使用m4作为预处理器。</p>
+<h3 id="8-2-5-XSLT描述XML数据的变换"><a href="#8-2-5-XSLT描述XML数据的变换" class="headerlink" title="8.2.5 XSLT描述XML数据的变换"></a>8.2.5 XSLT描述XML数据的变换</h3><h3 id="8-2-6-The-Documenter’s-Workbench-Tools"><a href="#8-2-6-The-Documenter’s-Workbench-Tools" class="headerlink" title="8.2.6 The Documenter’s Workbench Tools"></a>8.2.6 The Documenter’s Workbench Tools</h3><p>排版格式器troff包含后处理器（驱动器driver）和预处理器</p>
+<p>pic反映了设计主题——用微型语言解释器封装形式的约束条件推理</p>
+<h3 id="8-2-7-fetchmail的运行控制语法，使用可选的纯修饰关键字"><a href="#8-2-7-fetchmail的运行控制语法，使用可选的纯修饰关键字" class="headerlink" title="8.2.7 fetchmail的运行控制语法，使用可选的纯修饰关键字"></a>8.2.7 fetchmail的运行控制语法，使用可选的纯修饰关键字</h3><h3 id="8-2-8-awk逐渐被Perl所取代"><a href="#8-2-8-awk逐渐被Perl所取代" class="headerlink" title="8.2.8 awk逐渐被Perl所取代"></a>8.2.8 awk逐渐被Perl所取代</h3><h3 id="8-2-9-PostScript是一个专门向成像设备描述排版文本和图形的微型语言"><a href="#8-2-9-PostScript是一个专门向成像设备描述排版文本和图形的微型语言" class="headerlink" title="8.2.9 PostScript是一个专门向成像设备描述排版文本和图形的微型语言"></a>8.2.9 PostScript是一个专门向成像设备描述排版文本和图形的微型语言</h3><h3 id="8-2-10-bc和dc都有条件和循环，图灵完备，类型包括无限精度的整数和字符串"><a href="#8-2-10-bc和dc都有条件和循环，图灵完备，类型包括无限精度的整数和字符串" class="headerlink" title="8.2.10 bc和dc都有条件和循环，图灵完备，类型包括无限精度的整数和字符串"></a>8.2.10 bc和dc都有条件和循环，图灵完备，类型包括无限精度的整数和字符串</h3><h3 id="8-2-11-Emacs-Lisp足够强大到作为其他程序的前端"><a href="#8-2-11-Emacs-Lisp足够强大到作为其他程序的前端" class="headerlink" title="8.2.11 Emacs Lisp足够强大到作为其他程序的前端"></a>8.2.11 Emacs Lisp足够强大到作为其他程序的前端</h3><h3 id="8-2-12-JavaScript与其通过DOM对象的浏览器环境之间的结合很棒"><a href="#8-2-12-JavaScript与其通过DOM对象的浏览器环境之间的结合很棒" class="headerlink" title="8.2.12 JavaScript与其通过DOM对象的浏览器环境之间的结合很棒"></a>8.2.12 JavaScript与其通过DOM对象的浏览器环境之间的结合很棒</h3><h2 id="8-3-设计微型语言"><a href="#8-3-设计微型语言" class="headerlink" title="8.3 设计微型语言"></a>8.3 设计微型语言</h2><p>只要应用领域的域原语简单而固定不变，微信语言就可能成为一种好办法，但用户可能希望应用方式要灵活多变</p>
+<h3 id="8-3-1-选择正确的复杂度"><a href="#8-3-1-选择正确的复杂度" class="headerlink" title="8.3.1 选择正确的复杂度"></a>8.3.1 选择正确的复杂度</h3><p>嵌入微型语言功能容易导致滥用，例如JavaScript弹出式广告与Microsoft Word宏病毒</p>
+<p>应用微型语言的风险特性可能必须被禁止。Java和JavaScript已被明确地沙盒化——对环境的访问受限</p>
+<p>不宜对微型语言设计的<strong>本身</strong>采取自底向上的方法</p>
+<h3 id="8-3-2-扩展和嵌入语言"><a href="#8-3-2-扩展和嵌入语言" class="headerlink" title="8.3.2 扩展和嵌入语言"></a>8.3.2 扩展和嵌入语言</h3><ul>
+<li>用C代码扩展脚本语言</li>
+<li>在C程序中嵌入脚本语言</li>
+</ul>
+<ol>
+<li>可以扩展或嵌入Perl</li>
+<li>扩展Python很容易，但嵌入难</li>
+<li>Java有一个接口可调用C的原生方法，只不过这个实践被明确阻止，因为它往往破坏可移植性</li>
+<li>shell的大多数版本都不是为嵌入性和扩展性设计的，但Korn shell（ksh93和后续版本）例外</li>
+</ol>
+<h3 id="8-3-3-编写自定义语法"><a href="#8-3-3-编写自定义语法" class="headerlink" title="8.3.3 编写自定义语法"></a>8.3.3 编写自定义语法</h3><p>数据文件的最小立异 -&gt; XML -&gt; lex和yacc -&gt; m4预处理</p>
+<h3 id="8-3-4-宏——慎用"><a href="#8-3-4-宏——慎用" class="headerlink" title="8.3.4 宏——慎用"></a>8.3.4 宏——慎用</h3><p>宏与带副作用的表达式之间的交互作用可能导致不幸的结果</p>
+<p>宏扩展往往扰乱了错误诊断</p>
+<h3 id="8-3-5-语言还是应用协议"><a href="#8-3-5-语言还是应用协议" class="headerlink" title="8.3.5 语言还是应用协议"></a>8.3.5 语言还是应用协议</h3><p>微型语言能否被其他程序作为从进程交互调用</p>
+<p>取决于输出有没有明确地结束标记或提前告诉输出长度</p>
+<h1 id="ch09-生成：提升规格说明的层次"><a href="#ch09-生成：提升规格说明的层次" class="headerlink" title="ch09 生成：提升规格说明的层次"></a>ch09 生成：提升规格说明的层次</h1><p>尽可能把设计的复杂度从程序代码转移到数据中</p>
+<h2 id="9-1-数据驱动编程需要把代码和代码作用的数据结构划分清楚"><a href="#9-1-数据驱动编程需要把代码和代码作用的数据结构划分清楚" class="headerlink" title="9.1 数据驱动编程需要把代码和代码作用的数据结构划分清楚"></a>9.1 数据驱动编程需要把代码和代码作用的数据结构划分清楚</h2><p>数据驱动编程不同于面向对象，也不同于状态机编写</p>
+<h3 id="9-1-1-ascii程序，把所有字符名的字符串都放在一个表结构中"><a href="#9-1-1-ascii程序，把所有字符名的字符串都放在一个表结构中" class="headerlink" title="9.1.1 ascii程序，把所有字符名的字符串都放在一个表结构中"></a>9.1.1 ascii程序，把所有字符名的字符串都放在一个表结构中</h3><h3 id="9-1-2-统计学的垃圾邮件统计"><a href="#9-1-2-统计学的垃圾邮件统计" class="headerlink" title="9.1.2 统计学的垃圾邮件统计"></a>9.1.2 统计学的垃圾邮件统计</h3><p>传统的垃圾邮件过滤器要求系统管理员维护在垃圾邮件中发现的文本模式信息，而统计学垃圾邮件过滤器却根据用户的反馈生成自己的过滤规则</p>
+<h3 id="9-1-3-fetchmailconf中的元类改动"><a href="#9-1-3-fetchmailconf中的元类改动" class="headerlink" title="9.1.3 fetchmailconf中的元类改动"></a>9.1.3 fetchmailconf中的元类改动</h3><p>由于用户生成fetchmail的配置文件越来越困难，且fetchmail配置文件语法的分析程序相当复杂。我给fetchmail增加了一个–configdump选项用于分析<code>.fetchmailrc</code>，并把结果以Python初始化器格式转储到标准输出。</p>
+<p>如果配置语言会随时间推移增加新的特性和新的类成员，那么用显式的方法编写的对象创建代码将会变得脆弱。更好的方法是数据驱动编程。Lisp和Java程序员称之为内省，其他一些OO语言称之为元类修改；绝大多数OO语言不支持它，但是Python易用</p>
+<h2 id="9-2-专用代码的生成"><a href="#9-2-专用代码的生成" class="headerlink" title="9.2 专用代码的生成"></a>9.2 专用代码的生成</h2><p>有一些比第15章更简单且轻巧得多的代码生成方式</p>
+<h3 id="9-2-1-生成ascii显示的代码"><a href="#9-2-1-生成ascii显示的代码" class="headerlink" title="9.2.1 生成ascii显示的代码"></a>9.2.1 生成ascii显示的代码</h3><p>ascii程序编译时，splashscreen文件自动被揉制成一系列输出函数调用，然后由C预处理器包含到正确的函数中</p>
+<h3 id="9-2-2-为列表生成HTML代码"><a href="#9-2-2-为列表生成HTML代码" class="headerlink" title="9.2.2 为列表生成HTML代码"></a>9.2.2 为列表生成HTML代码</h3><p>旧派Unix的方法是用sed或awk，新学派的解决方案可能集中在Python或Perl</p>
+<h1 id="ch10-配置：迈出正确的第一步"><a href="#ch10-配置：迈出正确的第一步" class="headerlink" title="ch10 配置：迈出正确的第一步"></a>ch10 配置：迈出正确的第一步</h1><p>Unix的程序和周边环境交流的方式分类</p>
+<ol>
+<li>启动环境查询：本章讨论</li>
+<li>交互通道：下一章讨论</li>
+</ol>
+<h2 id="10-1-什么应是可配置的"><a href="#10-1-什么应是可配置的" class="headerlink" title="10.1 什么应是可配置的"></a>10.1 什么应是可配置的</h2><p>答：一切。Unix程序员主要为同行和最老练的用户而设计</p>
+<p>什么不应该可配置？</p>
+<ol>
+<li>能可靠地进行自动检测的东西。经验法则：提高适应能力，除非这样做会产生超过0.7秒的延迟</li>
+<li>用户不应该看到优化开关</li>
+<li>能用脚本包装器或简单管道实现的任务，不要用配置开关</li>
+</ol>
+<p>想增加配置选项时问4个问题</p>
+<h2 id="10-2-配置在哪里"><a href="#10-2-配置在哪里" class="headerlink" title="10.2 配置在哪里"></a>10.2 配置在哪里</h2><p>局部设置覆盖全局设置：</p>
+<ol>
+<li>/etc或其他固有位置</li>
+<li>由系统设置的环境变量</li>
+<li>用户主目录中的运行控制文件</li>
+<li>由用户设置的环境变量</li>
+<li>启动程序的命令行所传递的开关和参数</li>
+</ol>
+<h2 id="10-3-运行控制文件"><a href="#10-3-运行控制文件" class="headerlink" title="10.3 运行控制文件"></a>10.3 运行控制文件</h2><p>如果程序是解释器，那运行控制文件就以该语言语法写成。此外，广泛遵循的有关运行控制语法的设计规定：</p>
+<ol>
+<li>支持说明性注释，并以#开始</li>
+<li>不要区别隐匿的空白符</li>
+<li>把多个空行和注释行视为单个空行</li>
+<li>词法上把文件视作简单的用空白分隔的标记序列，或多行标记</li>
+<li>支持以字符串语法对内嵌空白符的标记</li>
+<li>支持反斜杠语法以在字符串中嵌入特殊字符</li>
+</ol>
+<h3 id="10-3-1-实例分析：-netrc文件"><a href="#10-3-1-实例分析：-netrc文件" class="headerlink" title="10.3.1 实例分析：.netrc文件"></a>10.3.1 实例分析：.netrc文件</h3><p>能理解它的有：所有FTP客户端、部分telnet客户端、smbclient命令行工具和fetchmail程序</p>
+<h3 id="10-3-2-到其他操作系统的可移植性"><a href="#10-3-2-到其他操作系统的可移植性" class="headerlink" title="10.3.2 到其他操作系统的可移植性"></a>10.3.2 到其他操作系统的可移植性</h3><p>大多数非Unix操作系统缺少用户级主目录的概念，配置信息大多存放在Win注册表或程序运行目录</p>
+<h2 id="10-4-环境变量"><a href="#10-4-环境变量" class="headerlink" title="10.4 环境变量"></a>10.4 环境变量</h2><ul>
+<li>在shell中键入set查询</li>
+<li>在C和C++中由库函数getenv查询</li>
+</ul>
+<h3 id="10-4-1-系统环境变量"><a href="#10-4-1-系统环境变量" class="headerlink" title="10.4.1 系统环境变量"></a>10.4.1 系统环境变量</h3><p><code>set | egrep &#39;USER|LOGNAME|HOME|COLNUMS|LINES|SHELL|TERM&#39;</code>以及众所周知的PATH</p>
+<p>当一个环境变量包含多个值域，使用冒号作为分隔符是一个传统。bash和ksh总是把环境变量中冒号分隔的字段解释为文件名，把字段中的<code>~</code>扩展成用户主目录</p>
+<h3 id="10-4-2-用户环境变量"><a href="#10-4-2-用户环境变量" class="headerlink" title="10.4.2 用户环境变量"></a>10.4.2 用户环境变量</h3><p>环境变量值并不真正适合把结构化信息传递到程序中，现代Unix倾向于使用dotfile</p>
+<p>必须由大量不同应用程序共享、独立于应用程序的优先选项：<br><code>set | egrep &#39;EDIT|MAILER|PAGER|BROWSER&#39;</code><br>在ubuntu已经查不到这些了</p>
+<h3 id="10-4-3-何时使用环境变量"><a href="#10-4-3-何时使用环境变量" class="headerlink" title="10.4.3 何时使用环境变量"></a>10.4.3 何时使用环境变量</h3><ol>
+<li>例如：多个仿真终端会查询同样的dotfile，但可能有不同的COLNUMS、LINES和TERM</li>
+<li>变量值随点文件不同而频繁改变，但每次启动都不变化。例如：CVS版本控制系统</li>
+<li>进程唯一的覆盖必须以不要求改变命令行调用的方式来表述。例如：ld改变库加载的位置</li>
+</ol>
+<h3 id="10-4-4-到其他操作系统的可移植性非常有限"><a href="#10-4-4-到其他操作系统的可移植性非常有限" class="headerlink" title="10.4.4 到其他操作系统的可移植性非常有限"></a>10.4.4 到其他操作系统的可移植性非常有限</h3><p>Microsoft支持PATH但不支持Unix程序员认为理所应当的进程ID和当前工作路径等等；传统的MacOS没有环境变量的对应物</p>
+<h2 id="10-5-命令行选项"><a href="#10-5-命令行选项" class="headerlink" title="10.5 命令行选项"></a>10.5 命令行选项</h2><p>区分命令行选项和普通参数的3中约定</p>
+<ol>
+<li>原始的Unix风格：以连字符开头，后面不带参数的模式标志选项可组合在一起使用，大写字符通常是小写字符选项的特殊变种</li>
+<li>GNU风格：以两个连字符开头，选项参数既可以用空白分隔也可以用等号分隔</li>
+<li>X toolkit风格：不能和前两者很好地兼容，不宜使用</li>
+</ol>
+<p>许多工具都接受一个不带任何选项字母的单个连字符，作为伪文件名，指示应用程序从标准输入中读取数据。也习惯把双连字符后面的参数按照字面意义处理</p>
+<h3 id="10-5-1-从-a到-z的命令行选项"><a href="#10-5-1-从-a到-z的命令行选项" class="headerlink" title="10.5.1 从-a到-z的命令行选项"></a>10.5.1 从-a到-z的命令行选项</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有对象</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定读入数据的文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>产生输出的长格式版本</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>将所有输出重定向到指定的输出文件</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>以安静模式运行</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归地处理目录和文件</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>以绝对缄默（安静）模式运行</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>生成详细输出</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>对所有问题回答yes</td>
+</tr>
+</tbody></table>
+<h3 id="10-5-2-到其他操作系统的可移植性"><a href="#10-5-2-到其他操作系统的可移植性" class="headerlink" title="10.5.2 到其他操作系统的可移植性"></a>10.5.2 到其他操作系统的可移植性</h3><p>Win的选项字符通常用<code>/</code></p>
+<h2 id="10-6-如何挑选方法"><a href="#10-6-如何挑选方法" class="headerlink" title="10.6 如何挑选方法"></a>10.6 如何挑选方法</h2><p>环境变量通常覆盖dotfile的设置，但又可能被命令行选项所覆盖。良好的实践是如同make提供-e选项，从而可以覆盖掉环境变量的设置或运行控制文件中的声明。</p>
+<h3 id="10-6-1-fetchmail"><a href="#10-6-1-fetchmail" class="headerlink" title="10.6.1 fetchmail"></a>10.6.1 fetchmail</h3><p>fetchmail仅使用USER和HOME两个环境变量；HOME用于查找<code>.fetchmailrc</code>，没有系统级dotfile，可以从<code>.netrc</code>检索“主机/登录/口令”三元组。</p>
+<p>命令行选项集重复了大部分<code>.fetchmailrc</code>所能够表达的内容。但结果是只有<code>--fetchall和--verbose</code>有高需求</p>
+<h3 id="10-6-2-XFree86服务器"><a href="#10-6-2-XFree86服务器" class="headerlink" title="10.6.2 XFree86服务器"></a>10.6.2 XFree86服务器</h3><p>在启动时，XFree86服务器检查系统级运行控制文件XF86Config获得硬件配置，然后借助HOME查找<code>.Xdefault</code>和<code>.xinitrc</code></p>
+<p>同一台主机运行的多个实例共享同样的运行控制文件，但可以通过选项设置各自唯一的显示号</p>
+<h2 id="10-7-论打破规则"><a href="#10-7-论打破规则" class="headerlink" title="10.7 论打破规则"></a>10.7 论打破规则</h2><p>常规方法都失败时，遵循补救原则给出正确的错误反馈</p>
+<h1 id="ch11-接口：Unix环境下的用户接口设计模式"><a href="#ch11-接口：Unix环境下的用户接口设计模式" class="headerlink" title="ch11 接口：Unix环境下的用户接口设计模式"></a>ch11 接口：Unix环境下的用户接口设计模式</h1><p>接口代码占用的开发时间通常&gt;40%</p>
+<p>Unix接口设计的传统：通讯方式的前瞻性设计、最小立异原则</p>
+<h2 id="11-1-最小立异原则的应用"><a href="#11-1-最小立异原则的应用" class="headerlink" title="11.1 最小立异原则的应用"></a>11.1 最小立异原则的应用</h2><p>尽量允许用户将接口功能委派给熟悉的程序来完成。例如git commit调用文本编辑器</p>
+<p>不能委派时，那就效仿。如果必须实现一个内嵌的编辑器，编辑明令最好是著名命令集的一个子集</p>
+<h2 id="11-2-Unix接口设计的历史"><a href="#11-2-Unix接口设计的历史" class="headerlink" title="11.2 Unix接口设计的历史"></a>11.2 Unix接口设计的历史</h2><p>CLI -&gt; 在字符阵列终端屏幕绘图 -&gt; 开源的 X Window -&gt; 基于X的工具包和窗口管理器</p>
+<h2 id="11-3-接口设计评估"><a href="#11-3-接口设计评估" class="headerlink" title="11.3 接口设计评估"></a>11.3 接口设计评估</h2><p>如何挑选接口风格，使之能适合程序应用和受众群体？五种度量标准</p>
+<ol>
+<li>简洁：一个事务处理需要的动作时间及复杂度有较低的上限</li>
+<li>表现力：接口可以触发相当广泛的行为</li>
+<li>易用性：与接口要求用户记忆的东西成反比</li>
+<li>透明度：所见即所得，用户在使用接口时几乎没有什么状态需要记忆<ul>
+<li>可显性大部分独立于接口风格，本章不把可显性作为衡量标准</li>
+</ul>
+</li>
+<li>脚本化能力：接口能够容易地为其他程序所使用<ul>
+<li>自动完成重复的任务</li>
+</ul>
+</li>
+</ol>
+<h2 id="11-4-CLI和可视接口之间的权衡"><a href="#11-4-CLI和可视接口之间的权衡" class="headerlink" title="11.4 CLI和可视接口之间的权衡"></a>11.4 CLI和可视接口之间的权衡</h2><ol>
+<li><p>CLI优势：更具表达力和脚本化能力，通常（但并不总是）更简洁</p>
+</li>
+<li><p>CLI劣势：易用性低（需要记忆），透明度通常也很低</p>
+<ul>
+<li>GUI也存在自身的问题：难以找到正确的按钮</li>
+</ul>
+</li>
+<li><p>SQL等等命令式微型语言表达力最强，但是易用性最低。但是当接口能力和灵活性至关重要时，它们的威力就无与伦比。如果设计得当，脚本化能力也能得高分</p>
+</li>
+<li><p>绘图、网页浏览器和ppt天然就是可视的，这些应用程序定义域具有以下特性</p>
+<ul>
+<li>透明性有极端价值</li>
+<li>问题定义域的原语操作本身就是可视的：画这个、显示所指物、把它放到这儿</li>
+</ul>
+</li>
+<li><p>在那些不是天然可视的应用中，可视接口最适用于初学用户简单一次性的或者很少发生的任务。随着用户变得越来越熟练，CLI的简洁性和表达力变得要比避免记忆负担更有价值。当问题规模变大、程序行为日趋单一、过程化和重复时，CLI也能发挥效用</p>
+</li>
+<li><p>甚至在天然可视化的定义域中，问题规模的增大也会使天平向CLI风格倾斜。例如网页图片的爬取和图像处理中的批量修改颜色表。</p>
+</li>
+<li><p>GIMP如果要为一对文件生成缩略图，往往是通过脚本语言编写的插件去调用内部的CLI图形编辑器script-fu</p>
+</li>
+</ol>
+<p>长远来看，既支持CLI又支持可视接口很重要</p>
+<h3 id="11-4-1-对比dc-bc与桌面计算器xcalc"><a href="#11-4-1-对比dc-bc与桌面计算器xcalc" class="headerlink" title="11.4.1 对比dc/bc与桌面计算器xcalc"></a>11.4.1 对比dc/bc与桌面计算器xcalc</h3><p>dc可以处理无限精度的算术运算，bc基于dc实现</p>
+<h2 id="11-5-透明、表现力和可配置"><a href="#11-5-透明、表现力和可配置" class="headerlink" title="11.5 透明、表现力和可配置"></a>11.5 透明、表现力和可配置</h2><p>接口是程序员写给程序员的。如果不了解终端用户的意图，最好不要迁就或者放马后炮</p>
+<ul>
+<li>可配置能力的另一面：良好的默认值和简单恢复所有默认值的方法</li>
+<li>表现力的另一面：在程序本身或者在文档中指导使用方法</li>
+</ul>
+<p>透明的接口既具备高级功能又不碍眼</p>
+<p>直观性不同于易用性。诺基亚即使有相当规模的记忆负担，然而只要基本操作是容易的，并且存在一个发现路径，允许通过简单操作让隐藏在更深角落的功能能够一次到位地触发</p>
+<h2 id="11-6-Unix接口设计模式"><a href="#11-6-Unix接口设计模式" class="headerlink" title="11.6 Unix接口设计模式"></a>11.6 Unix接口设计模式</h2><h3 id="11-6-1-过滤器模式"><a href="#11-6-1-过滤器模式" class="headerlink" title="11.6.1 过滤器模式"></a>11.6.1 过滤器模式</h3><p>定义过滤器的3原则</p>
+<ol>
+<li>Postel原则：宽进严出</li>
+<li>不需要的信息也绝不丢弃</li>
+<li>绝不增加无用数据。对格式的控制都应该是可选的</li>
+</ol>
+<p>下述3个模式类似过滤器</p>
+<h3 id="11-6-2-Cantrip模式：clear、rm、touch、startx"><a href="#11-6-2-Cantrip模式：clear、rm、touch、startx" class="headerlink" title="11.6.2 Cantrip模式：clear、rm、touch、startx"></a>11.6.2 Cantrip模式：clear、rm、touch、startx</h3><h3 id="11-6-3-源模式：ls、who、ps、报表产生器"><a href="#11-6-3-源模式：ls、who、ps、报表产生器" class="headerlink" title="11.6.3 源模式：ls、who、ps、报表产生器"></a>11.6.3 源模式：ls、who、ps、报表产生器</h3><h3 id="11-6-4-接收器模式：lpr打印假脱机程序、邮件发送方式下的mail程序"><a href="#11-6-4-接收器模式：lpr打印假脱机程序、邮件发送方式下的mail程序" class="headerlink" title="11.6.4 接收器模式：lpr打印假脱机程序、邮件发送方式下的mail程序"></a>11.6.4 接收器模式：lpr打印假脱机程序、邮件发送方式下的mail程序</h3><h3 id="11-6-5-编译器模式：也用于压缩-解压或图像转换程序上"><a href="#11-6-5-编译器模式：也用于压缩-解压或图像转换程序上" class="headerlink" title="11.6.5 编译器模式：也用于压缩/解压或图像转换程序上"></a>11.6.5 编译器模式：也用于压缩/解压或图像转换程序上</h3><p>上述5个模式都不是交互的</p>
+<h3 id="11-6-6-ed模式是交互的，包括：ftp、sh"><a href="#11-6-6-ed模式是交互的，包括：ftp、sh" class="headerlink" title="11.6.6 ed模式是交互的，包括：ftp、sh"></a>11.6.6 ed模式是交互的，包括：ftp、sh</h3><h3 id="11-6-7-Roguelike模式：vi、emacs、lynx网页浏览器、多数Unix邮件阅读器和新闻阅读器"><a href="#11-6-7-Roguelike模式：vi、emacs、lynx网页浏览器、多数Unix邮件阅读器和新闻阅读器" class="headerlink" title="11.6.7 Roguelike模式：vi、emacs、lynx网页浏览器、多数Unix邮件阅读器和新闻阅读器"></a>11.6.7 Roguelike模式：vi、emacs、lynx网页浏览器、多数Unix邮件阅读器和新闻阅读器</h3><p>来自rogue——使用字符阵列显示的游戏</p>
+<p>命令通常是单键触发且不回显</p>
+<h3 id="11-6-8-引擎和接口分离模式"><a href="#11-6-8-引擎和接口分离模式" class="headerlink" title="11.6.8 引擎和接口分离模式"></a>11.6.8 引擎和接口分离模式</h3><p>MVC</p>
+<ol>
+<li>模型就是Unix世界的引擎，例如数据库服务器</li>
+<li>视图渲染对象，视图由模型通知更新，而不是由控制器显式请求</li>
+<li>控制器处理用户的请求并将它们作为命令传递给模型</li>
+</ol>
+<p>下面是这个模式的几个变种</p>
+<h4 id="11-6-8-1-配置者-执行者组合：fetchmail专注于后台，fetchmailconf醉心于GUI"><a href="#11-6-8-1-配置者-执行者组合：fetchmail专注于后台，fetchmailconf醉心于GUI" class="headerlink" title="11.6.8.1 配置者/执行者组合：fetchmail专注于后台，fetchmailconf醉心于GUI"></a>11.6.8.1 配置者/执行者组合：fetchmail专注于后台，fetchmailconf醉心于GUI</h4><h4 id="11-6-8-2-假脱机-守护进程组合：守护进程不断轮询spool目录，作业成功后从spool目录删除相关请求"><a href="#11-6-8-2-假脱机-守护进程组合：守护进程不断轮询spool目录，作业成功后从spool目录删除相关请求" class="headerlink" title="11.6.8.2 假脱机/守护进程组合：守护进程不断轮询spool目录，作业成功后从spool目录删除相关请求"></a>11.6.8.2 假脱机/守护进程组合：守护进程不断轮询spool目录，作业成功后从spool目录删除相关请求</h4><h4 id="11-6-8-3-驱动-引擎组合："><a href="#11-6-8-3-驱动-引擎组合：" class="headerlink" title="11.6.8.3 驱动/引擎组合："></a>11.6.8.3 驱动/引擎组合：</h4><h4 id="11-6-8"><a href="#11-6-8" class="headerlink" title="11.6.8."></a>11.6.8.</h4><p><strong>本章未读完</strong></p>
+<h1 id="ch12-优化"><a href="#ch12-优化" class="headerlink" title="ch12 优化"></a>ch12 优化</h1><h2 id="12-1-什么也别做，就站在那儿"><a href="#12-1-什么也别做，就站在那儿" class="headerlink" title="12.1 什么也别做，就站在那儿"></a>12.1 什么也别做，就站在那儿</h2><p>摩尔定律暗示：晚半年买电脑就可以获得26%的性能提升</p>
+<h2 id="12-2-先估量，后优化"><a href="#12-2-先估量，后优化" class="headerlink" title="12.2 先估量，后优化"></a>12.2 先估量，后优化</h2><p>性能剖析程序（profiler）注意事项</p>
+<ol>
+<li>工具误差：很短的子程序往往看起来较实际费时</li>
+<li>外部强加的延迟：磁盘和网络访问、缓存填充、进程切换。推荐回归测试</li>
+<li>过多地调用图中顶部结点</li>
+</ol>
+<ul>
+<li>gprof等时间分析工具将子程序的时间开销加到了调用程序中</li>
+<li>推荐让高级例程尽可能多地调用底层例程、而不是内嵌代码</li>
+</ul>
+<p>用R或MATLAB研究多大的数据能放入缓存</p>
+<h2 id="12-3-非定域性之害"><a href="#12-3-非定域性之害" class="headerlink" title="12.3 非定域性之害"></a>12.3 非定域性之害</h2><p>永远不要将核心数据结构和时间关键循环抛出缓存</p>
+<ol>
+<li>使用小型的核心数据结构</li>
+<li>保持代码短小简单</li>
+</ol>
+<h2 id="12-4-吞吐量和延迟"><a href="#12-4-吞吐量和延迟" class="headerlink" title="12.4 吞吐量和延迟"></a>12.4 吞吐量和延迟</h2><p>尽量避免协议的往返</p>
+<p>经验法则：尽可能低的时延设计，和忽略带宽成本，除非profiler明确告知该反其道而行。</p>
+<p>面临吞吐量和延迟时间的权衡时，多数情况下选择低时延。</p>
+<p>以“减少时延的三种常规策略”结束本章</p>
+<h3 id="12-4-1-对可以共享启动开销的事务进行批处理"><a href="#12-4-1-对可以共享启动开销的事务进行批处理" class="headerlink" title="12.4.1 对可以共享启动开销的事务进行批处理"></a>12.4.1 对可以共享启动开销的事务进行批处理</h3><p>对图形API选择正确的物理刷新间隔</p>
+<p>编写持续的服务守护进程，而不是每次启动CLI服务器带来全新会话。理由如下</p>
+<ol>
+<li>控制共享资源的更新</li>
+<li>分期偿还通过多请求读取后台数据库的成本<br>例如DNS后台服务程序named访问保持在内存中的缓存</li>
+</ol>
+<h3 id="12-4-2-允许事务重叠"><a href="#12-4-2-允许事务重叠" class="headerlink" title="12.4.2 允许事务重叠"></a>12.4.2 允许事务重叠</h3><p>IMAP请求带标记，以允许将好几条读请求以流方式发向IMAP服务器</p>
+<h3 id="12-4-3-缓存"><a href="#12-4-3-缓存" class="headerlink" title="12.4.3 缓存"></a>12.4.3 缓存</h3><p>二进制缓存是一项不稳定的技法，应尽量避免。在某种情况下为低延迟而进行的专门优化工作，常常可以更好地改善应用程序设计，从而不再有这样的瓶颈——或者甚至可以转而加速文件系统或是虚拟内存实现</p>
+<h1 id="ch13-复杂度：尽可能简单，但别简单过了头"><a href="#ch13-复杂度：尽可能简单，但别简单过了头" class="headerlink" title="ch13 复杂度：尽可能简单，但别简单过了头"></a>ch13 复杂度：尽可能简单，但别简单过了头</h1><p>对“简单”的理解依赖于：</p>
+<ul>
+<li><a href="#ch04-%E6%A8%A1%E5%9D%97%E6%80%A7%EF%BC%9A%E4%BF%9D%E6%8C%81%E6%B8%85%E6%99%B0%EF%BC%8C%E4%BF%9D%E6%8C%81%E7%AE%80%E6%B4%81">ch04-模块性：保持清晰，保持简洁</a></li>
+<li><a href="#ch11-%E6%8E%A5%E5%8F%A3%EF%BC%9AUnix%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">ch11-接口：Unix环境下的用户接口设计模式</a></li>
+</ul>
+<h2 id="13-1-谈谈复杂度"><a href="#13-1-谈谈复杂度" class="headerlink" title="13.1 谈谈复杂度"></a>13.1 谈谈复杂度</h2><h3 id="13-1-1-复杂度的三个来源"><a href="#13-1-1-复杂度的三个来源" class="headerlink" title="13.1.1 复杂度的三个来源"></a>13.1.1 复杂度的三个来源</h3><ol>
+<li>实现负杂度：Unix程序员所注重的</li>
+<li>接口复杂度：用户注重于界面的复杂度和记忆负担</li>
+<li>代码量：更多行的代码意味着更多的bug</li>
+</ol>
+<p>两种尺度会导致不同方向变化</p>
+<ol>
+<li>manularity（人力尺度）陷阱：如果设计时首先考虑容易实现或代码规模，可能就会简单地将许多底层人物都抛给用户</li>
+<li>blivet（硬撑）陷阱：通常发生在程序为适应及小规模系统而必须用汇编语言写成</li>
+<li>adhocity（过专用）陷阱：例如一个网站工程，本需要集中式的关系数据库，却采用几个不同的关键数据文件，在页面生成时将它们包含的信息聚齐</li>
+</ol>
+<h3 id="13-1-2-接口复杂度和实现复杂度的折中"><a href="#13-1-2-接口复杂度和实现复杂度的折中" class="headerlink" title="13.1.2 接口复杂度和实现复杂度的折中"></a>13.1.2 接口复杂度和实现复杂度的折中</h3><ul>
+<li>MIT哲学：更关注接口简单性。能够引导软件在抽象上做得更好</li>
+<li>New Jersey哲学：更重视实现简单性。更具传播特质</li>
+</ul>
+<h3 id="13-1-3-本质的、选择的和偶然的复杂度"><a href="#13-1-3-本质的、选择的和偶然的复杂度" class="headerlink" title="13.1.3 本质的、选择的和偶然的复杂度"></a>13.1.3 本质的、选择的和偶然的复杂度</h3><p>仅十行的程序，再优雅也无法控制喷气客机</p>
+<ul>
+<li>偶然复杂度可以由良好的设计或者重新设计来去除</li>
+<li>选择复杂度，同某个期望的功能相关联，只能由改变工程的目标来去除</li>
+</ul>
+<h3 id="13-1-4-映射复杂度"><a href="#13-1-4-映射复杂度" class="headerlink" title="13.1.4 映射复杂度"></a>13.1.4 映射复杂度</h3><p>|  图13.1  | 代码库规模 | 实现复杂度 | 接口复杂度 |<br>|偶然复杂度|<br>|选择复杂度|<br>|本质复杂度|</p>
+<h3 id="13-1"><a href="#13-1" class="headerlink" title="13.1."></a>13.1.</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/06/unix-bian-cheng-yi-shu/" data-id="cl310rf3w0016gctkdibhg9yw" data-title="《UNIX编程艺术》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/07/shell-program-demo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          shell例程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/09/tcp-ip-xiang-jie/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《TCP/IP详解》读书笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/07/shell-program-demo/">shell例程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/06/unix-bian-cheng-yi-shu/">《UNIX编程艺术》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

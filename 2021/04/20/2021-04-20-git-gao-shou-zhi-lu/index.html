@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《git高手之路》读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ch02 项目历史管理2.1 有向无环图2.1.1 提交整个工作目录每个开发人员可以访问自己的版本库克隆中任意文件的历史记录，也可以选择只获取版本库的部分历史记录（浅克隆或者只克隆特定分支），也可以只签出特定文件（稀疏签出），但是无法根据日期获取版本库克隆中特定的文件历史记录。第9章会详细介绍如何获取版本库克隆的部分内容，例如处理大量的视频文件时，开发人员需要用到的部分只是其中很小的一个子集。 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《git高手之路》读书笔记">
+<meta property="og:url" content="http://example.com/2021/04/20/2021-04-20-git-gao-shou-zhi-lu/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ch02 项目历史管理2.1 有向无环图2.1.1 提交整个工作目录每个开发人员可以访问自己的版本库克隆中任意文件的历史记录，也可以选择只获取版本库的部分历史记录（浅克隆或者只克隆特定分支），也可以只签出特定文件（稀疏签出），但是无法根据日期获取版本库克隆中特定的文件历史记录。第9章会详细介绍如何获取版本库克隆的部分内容，例如处理大量的视频文件时，开发人员需要用到的部分只是其中很小的一个子集。 2">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-20T11:58:20.000Z">
+<meta property="article:modified_time" content="2022-05-11T03:19:10.190Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2021-04-20-git-gao-shou-zhi-lu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/20/2021-04-20-git-gao-shou-zhi-lu/" class="article-date">
+  <time class="dt-published" datetime="2021-04-20T11:58:20.000Z" itemprop="datePublished">2021-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《git高手之路》读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ch02-项目历史管理"><a href="#ch02-项目历史管理" class="headerlink" title="ch02 项目历史管理"></a>ch02 项目历史管理</h1><h2 id="2-1-有向无环图"><a href="#2-1-有向无环图" class="headerlink" title="2.1 有向无环图"></a>2.1 有向无环图</h2><h3 id="2-1-1-提交整个工作目录"><a href="#2-1-1-提交整个工作目录" class="headerlink" title="2.1.1 提交整个工作目录"></a>2.1.1 提交整个工作目录</h3><p>每个开发人员可以访问自己的版本库克隆中任意文件的历史记录，也可以选择只获取版本库的部分历史记录（浅克隆或者只克隆特定分支），也可以只签出特定文件（稀疏签出），但是无法根据日期获取版本库克隆中特定的文件历史记录。第9章会详细介绍如何获取版本库克隆的部分内容，例如处理大量的视频文件时，开发人员需要用到的部分只是其中很小的一个子集。</p>
+<h3 id="2-1-2-引用的全名（分支和标签）"><a href="#2-1-2-引用的全名（分支和标签）" class="headerlink" title="2.1.2 引用的全名（分支和标签）"></a>2.1.2 引用的全名（分支和标签）</h3><ol>
+<li>存放位置</li>
+</ol>
+<ul>
+<li>分支和标签位于<code>.git/refs/heads/</code>和<code>.git/refs/tags/</code>目录下。</li>
+<li>HEAD指针（通常是一个符号引用，例如<code>refs/heads/master</code>）一般存放于<code>.git/HEAD</code>目录下。</li>
+<li>master分支存放于<code>.git/refs/heads/master/</code>目录下，而且它的全名叫<code>refs/heads/master</code>（换句话说，分支的命名空间是<code>refs/heads/</code>）  </li>
+<li>origin/master一般会存放于<code>.git/refs/remotes/origin/master</code>文件下，并将<code>refs/remotes/origin/master</code>作为其全名</li>
+<li>当前的Git系统可以将标签和分支的信息存放于<code>.git/packed-refs</code>文件中，以避免处理大量的小文件。不过，活动引用采用的元数据格式比较宽松——一个文件对应一个引用。</li>
+</ul>
+<ol>
+<li>存放内容</li>
+</ol>
+<ul>
+<li>宽松格式内容一般是分支上当前修订的SHA-1标识符。</li>
+<li>类似origin/master这样的远程跟踪分支，会记录远程版本库上master分支用户最后编辑的位置。</li>
+</ul>
+<h2 id="2-2-内部修订查询"><a href="#2-2-内部修订查询" class="headerlink" title="2.2 内部修订查询"></a>2.2 内部修订查询</h2><h3 id="2-2-1-大部分情况下，Git命令需要使用参数，默认情况下使用HEAD"><a href="#2-2-1-大部分情况下，Git命令需要使用参数，默认情况下使用HEAD" class="headerlink" title="2.2.1 大部分情况下，Git命令需要使用参数，默认情况下使用HEAD"></a>2.2.1 大部分情况下，Git命令需要使用参数，默认情况下使用HEAD</h3><h3 id="2-2-2-引用名称消除歧义的有限匹配原则"><a href="#2-2-2-引用名称消除歧义的有限匹配原则" class="headerlink" title="2.2.2 引用名称消除歧义的有限匹配原则"></a>2.2.2 引用名称消除歧义的有限匹配原则</h3><ol>
+<li>顶层的标识符名称，例如HEAD</li>
+<li>标签名称</li>
+<li>本地分支</li>
+<li>远程跟踪分支</li>
+<li>远程默认分支<h3 id="2-2-4-父引用"><a href="#2-2-4-父引用" class="headerlink" title="2.2.4 父引用"></a>2.2.4 父引用</h3></li>
+</ol>
+<ul>
+<li>HEAD~3 表示曾祖父提交</li>
+<li>HEAD^3 表示合并提交的父提交中的第三个</li>
+</ul>
+<h3 id="2-2-5-修订声明"><a href="#2-2-5-修订声明" class="headerlink" title="2.2.5 修订声明"></a>2.2.5 修订声明</h3><p><code>git describe</code>会基于最近的带附注标签生成HEAD的版本号。例如v1.0.4-14-g2414721t</p>
+<h3 id="2-2-6-reflog的简称：-n-语法"><a href="#2-2-6-reflog的简称：-n-语法" class="headerlink" title="2.2.6 reflog的简称：@{n}语法"></a>2.2.6 reflog的简称：<code>@&#123;n&#125;</code>语法</h3><h3 id="2-2-7-上游远程跟踪分支"><a href="#2-2-7-上游远程跟踪分支" class="headerlink" title="2.2.7 上游远程跟踪分支"></a>2.2.7 上游远程跟踪分支</h3><p>用户无法在远程跟踪分支上创建新的提交</p>
+<p><code>@&#123;u&#125;</code>代表当前本地分支的上游</p>
+<h3 id="2-2-8-根据提交信息查询修订"><a href="#2-2-8-根据提交信息查询修订" class="headerlink" title="2.2.8 根据提交信息查询修订"></a>2.2.8 根据提交信息查询修订</h3><ol>
+<li>在<code>git log</code>执行后的界面用/bugfix查找任意引用中符合模式的提交</li>
+<li><code>git log &#39;next^/&#123;fix bug&#125;&#39;</code>表示从next引用中查询包含fix bug的提交</li>
+<li>也可以用<code>git log --grep=&lt;模式&gt;</code>来实现</li>
+</ol>
+<h2 id="2-3-修订区间查询"><a href="#2-3-修订区间查询" class="headerlink" title="2.3 修订区间查询"></a>2.3 修订区间查询</h2><h3 id="2-3-2-双点符号"><a href="#2-3-2-双点符号" class="headerlink" title="2.3.2 双点符号"></a>2.3.2 双点符号</h3><p><code>A..B</code>是指在B可达的提交中排除A可达的提交</p>
+<h3 id="2-3-3-包含和排除修订"><a href="#2-3-3-包含和排除修订" class="headerlink" title="2.3.3 包含和排除修订"></a>2.3.3 包含和排除修订</h3><p><code>A..B</code>是<code>B ^A</code>的快捷方式</p>
+<h3 id="2-3-4-单个修订的修订区间，对于章鱼合并提交A而言："><a href="#2-3-4-单个修订的修订区间，对于章鱼合并提交A而言：" class="headerlink" title="2.3.4 单个修订的修订区间，对于章鱼合并提交A而言："></a>2.3.4 单个修订的修订区间，对于章鱼合并提交A而言：</h3><ul>
+<li>A^@ 代表A的所有父提交（A^1，A^2，……，A^n）</li>
+<li>A^! 代表的集合会将其所有祖先提交排除，可当做<code>A --not A^@</code><h3 id="2-3-5-三点符号"><a href="#2-3-5-三点符号" class="headerlink" title="2.3.5 三点符号"></a>2.3.5 三点符号</h3><code>A...B</code>表示可以到A或者B，但不能同时达到两者的提交。结合<code>git log --left-right</code>会显示出每个提交属于哪一边</li>
+</ul>
+<p>在diff命令中使用修订区间标识符：</p>
+<ul>
+<li><code>git diff A..B</code>等价于<code>git diff A B</code></li>
+<li><code>git diff A...B</code>等价于<code>git diff $(git merge-base A B) B</code></li>
+<li><code>git diff A^!</code>等价于<code>git diff A^ A</code></li>
+</ul>
+<h2 id="2-4-历史记录查询"><a href="#2-4-历史记录查询" class="headerlink" title="2.4 历史记录查询"></a>2.4 历史记录查询</h2><h3 id="2-4-1-git-log-2将会显示最近两天在当前分支上的工作提交记录"><a href="#2-4-1-git-log-2将会显示最近两天在当前分支上的工作提交记录" class="headerlink" title="2.4.1 git log -2将会显示最近两天在当前分支上的工作提交记录"></a>2.4.1 <code>git log -2</code>将会显示最近<strong>两天</strong>在当前分支上的工作提交记录</h3><h3 id="2-4-2-元数据查询"><a href="#2-4-2-元数据查询" class="headerlink" title="2.4.2 元数据查询"></a>2.4.2 元数据查询</h3><ol>
+<li>时间段查询：<code>--since、--until、--before、--after</code></li>
+</ol>
+<ul>
+<li>例如：<code>git log --since=2.week</code></li>
+</ul>
+<ol>
+<li>提交内容查询</li>
+</ol>
+<ul>
+<li>查询指定作者或提交者：–author、–committer</li>
+<li>搜索提交描述：–grep、-i（大小写敏感）、-F（字符串匹配）</li>
+<li>Git默认对多个选项找出的集合进行逻辑或操作，如果想执行逻辑与操作，需要使用–all-match</li>
+</ul>
+<ol>
+<li>父提交</li>
+</ol>
+<ul>
+<li><code>git log --first-parent</code>会只显示主线分支的一系列历史提交记录</li>
+<li>–merges只显示合并提交、–no-merges只显示非合并提交</li>
+<li><code>git log --max-parents=0</code>显示所有根提交</li>
+</ul>
+<h3 id="2-4-3-修订内部变更查询"><a href="#2-4-3-修订内部变更查询" class="headerlink" title="2.4.3 修订内部变更查询"></a>2.4.3 修订内部变更查询</h3><p><code>git log -S&lt;string&gt;</code>会查找给定字符串实例的引用或者移除产生的差异。</p>
+<p><code>git log -G&lt;string&gt;</code>会查找diff</p>
+<p><code>git blame</code>查看但个文件已经引入的变更记录</p>
+<h2 id="2-5-单个文件历史记录"><a href="#2-5-单个文件历史记录" class="headerlink" title="2.5 单个文件历史记录"></a>2.5 单个文件历史记录</h2><h3 id="2-5-1-路径约束"><a href="#2-5-1-路径约束" class="headerlink" title="2.5.1 路径约束"></a>2.5.1 路径约束</h3><p><code>git log -- &lt;路径名&gt;</code>显示给定路径下的所有修订历史记录。支持通配符*</p>
+<p>查询单个文件的历史版本时，系统并不会自动进行重命名。用户需要使用<code>git log --follow &lt;文件&gt;</code>，但不是在任何场景都能奏效，有时用户需要使用blame命令</p>
+<p><code>git log -L 起始行,结束行:文件</code>查看单个文件内部的历史演变记录</p>
+<h3 id="2-5-2-历史简化"><a href="#2-5-2-历史简化" class="headerlink" title="2.5.2 历史简化"></a>2.5.2 历史简化</h3><p>看不懂</p>
+<h3 id="2-5-3-blame与重命名"><a href="#2-5-3-blame与重命名" class="headerlink" title="2.5.3 blame与重命名"></a>2.5.3 blame与重命名</h3><p>blame的选项：</p>
+<ul>
+<li>-L 限制范围</li>
+<li>-M 追踪内容从一个文件剪切到另一个文件的记录</li>
+<li>-C 追踪文件之间的拷贝、粘贴操作</li>
+<li>-w 在跟踪时忽略空格</li>
+</ul>
+<p>Git跟踪重命名的注意事项：</p>
+<ul>
+<li>Git系统基于文件内容和路径的启发式相似解析，极个别情况下可能会失败</li>
+<li><code>git diff</code>命令默认没有启用重命名检测</li>
+<li><code>git blame</code>不仅可以处理整个文件的重命名，而且单个文件内部和多个文件之间的代码移动和粘贴操作也能显示出来。</li>
+</ul>
+<h2 id="2-6-bisect"><a href="#2-6-bisect" class="headerlink" title="2.6 bisect"></a>2.6 bisect</h2><p><code>git bisect run</code>可自动化问题查找。为此，用户需要提供一个脚本来测试变更记录是否存在问题。返回0表示正常，非0表示存在问题，125是特殊的返回代码，表示当前签出的变更记录无法测试。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git bitsect start v1.5 v1.4</span><br><span class="line">git bisect run .&#x2F;test-error.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7-日志的查询和格式化输出"><a href="#2-7-日志的查询和格式化输出" class="headerlink" title="2.7 日志的查询和格式化输出"></a>2.7 日志的查询和格式化输出</h2><h3 id="2-7-1-预定义和自定义输出格式"><a href="#2-7-1-预定义和自定义输出格式" class="headerlink" title="2.7.1 预定义和自定义输出格式"></a>2.7.1 预定义和自定义输出格式</h3><p>作者是创建变更得人，而提交者是在原作者创建的变更的基础上进一步优化该变更的人。</p>
+<h3 id="2-7-2-git-show-提交查看单个修订记录以及提交的元数据"><a href="#2-7-2-git-show-提交查看单个修订记录以及提交的元数据" class="headerlink" title="2.7.2 git show 提交查看单个修订记录以及提交的元数据"></a>2.7.2 <code>git show 提交</code>查看单个修订记录以及提交的元数据</h3><p>选项很多</p>
+<h3 id="2-7-3-git-shortlog用于统计贡献"><a href="#2-7-3-git-shortlog用于统计贡献" class="headerlink" title="2.7.3 git shortlog用于统计贡献"></a>2.7.3 git shortlog用于统计贡献</h3><h3 id="2-7-4-git-show-提交-路径可以用来显示目录和文件内容，比checkout方便"><a href="#2-7-4-git-show-提交-路径可以用来显示目录和文件内容，比checkout方便" class="headerlink" title="2.7.4 git show 提交:路径可以用来显示目录和文件内容，比checkout方便"></a>2.7.4 <code>git show 提交:路径</code>可以用来显示目录和文件内容，比checkout方便</h3><h1 id="ch03"><a href="#ch03" class="headerlink" title="ch03"></a>ch03</h1><h3 id="3-1-3-查看已提交的变更"><a href="#3-1-3-查看已提交的变更" class="headerlink" title="3.1.3 查看已提交的变更"></a>3.1.3 查看已提交的变更</h3><p><code>git status --short --ignore</code>简化输出格式</p>
+<p>|符号    |含义|<br>|M    |已修改|<br>|A    |已添加|<br>|D    |已删除|<br>|R    |已重命名|<br>|C    |已拷贝|<br>|空    |无变化|<br>|??    |未跟踪|<br>|!!    |已忽略|</p>
+<p>Git的统一diff格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a&#x2F;预映射 b&#x2F;提交映射</span><br><span class="line">扩展首部信息，描述重命名</span><br><span class="line">index 预映射SHA1..提交映射SHA1 100644</span><br><span class="line">+++ a&#x2F;预映射</span><br><span class="line">--- b&#x2F;提交映射</span><br><span class="line">@@ -&lt;源文件起点&gt;,&lt;源文件行数&gt; +&lt;目标文件起点&gt;&lt;目标文件行数&gt; @@</span><br><span class="line">差异描述</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-4-可查询的提交"><a href="#3-1-4-可查询的提交" class="headerlink" title="3.1.4 可查询的提交"></a>3.1.4 可查询的提交</h3><p>隔离变更集。一种做法是先创建提交，然后再修复它，具体的细节可以参考第八章。<br>不过有时候，其中某些变更急需马上上线，同时其余的变更还有待进一步完善。</p>
+<h4 id="文件提交查询"><a href="#文件提交查询" class="headerlink" title="文件提交查询"></a>文件提交查询</h4><p>最简单的情形就是这些不相关的变更分布于若干文件中：<code>git commit &lt;file&gt;</code>会忽略暂存区的内容，取而代之的是提交当前给定文件或目录</p>
+<h4 id="变更的交互式查询"><a href="#变更的交互式查询" class="headerlink" title="变更的交互式查询"></a>变更的交互式查询</h4><p>如果文件中的变更都集中到了一起，可以尝试<code>--interactive</code>选项；其中的pacth自命令会让系统弹出一个Update&gt;&gt;对话框</p>
+<h4 id="提交创建入门"><a href="#提交创建入门" class="headerlink" title="提交创建入门"></a>提交创建入门</h4><p><code>git stash save --keep-index</code>储藏不在暂存区中的变更，用于对暂存区进行测试</p>
+<p><code>git stash pop --index</code>恢复未暂存的变更</p>
+<h3 id="3-1-5-–amend"><a href="#3-1-5-–amend" class="headerlink" title="3.1.5 –amend"></a>3.1.5 –amend</h3><p><a href="#ch08">StGit 一个基于Git的提交历史批量管理工具</a></p>
+<h3 id="3-2-2-孤儿分支：git-checkout-orphan-gh-pages"><a href="#3-2-2-孤儿分支：git-checkout-orphan-gh-pages" class="headerlink" title="3.2.2 孤儿分支：git checkout --orphan gh-pages"></a>3.2.2 孤儿分支：<code>git checkout --orphan gh-pages</code></h3><h3 id="3-2-3-分支的查询和切换"><a href="#3-2-3-分支的查询和切换" class="headerlink" title="3.2.3 分支的查询和切换"></a>3.2.3 分支的查询和切换</h3><p><code>git branch --merge</code>和<code>git checkout -m</code>都会在新建分支时合并工作目录内容，可能会有合并冲突。</p>
+<h3 id="3-2-6-检查某分支是否已经和其他分支合并过：git-branch-contains-lt-branch-gt"><a href="#3-2-6-检查某分支是否已经和其他分支合并过：git-branch-contains-lt-branch-gt" class="headerlink" title="3.2.6 检查某分支是否已经和其他分支合并过：git branch --contains &lt;branch&gt;"></a>3.2.6 检查某分支是否已经和其他分支合并过：<code>git branch --contains &lt;branch&gt;</code></h3><h1 id="ch04"><a href="#ch04" class="headerlink" title="ch04"></a>ch04</h1><h2 id="4-1-忽略文件"><a href="#4-1-忽略文件" class="headerlink" title="4.1 忽略文件"></a>4.1 忽略文件</h2><h3 id="4-1-1-将文件刻意标记为不跟踪的"><a href="#4-1-1-将文件刻意标记为不跟踪的" class="headerlink" title="4.1.1 将文件刻意标记为不跟踪的"></a>4.1.1 将文件刻意标记为不跟踪的</h3><ul>
+<li><code>*.o</code>包括file.o和obj/file.o</li>
+<li><code>auto/</code>将会匹配顶层的auto目录以及src/auto目录，单不匹配auto文件或链接</li>
+<li><code>/TODO</code>将会忽略当前层级的TODO文件，但是不会忽略子目录中的src/TODO</li>
+<li><code>doc/**/index.html</code>匹配doc下的任意index.html</li>
+</ul>
+<h3 id="4-1-4-用底层命令做高级忽略"><a href="#4-1-4-用底层命令做高级忽略" class="headerlink" title="4.1.4 用底层命令做高级忽略"></a>4.1.4 用底层命令做高级忽略</h3><h2 id="4-2-文件属性"><a href="#4-2-文件属性" class="headerlink" title="4.2 文件属性"></a>4.2 文件属性</h2><h4 id="识别二进制文件和尾行转换"><a href="#识别二进制文件和尾行转换" class="headerlink" title="识别二进制文件和尾行转换"></a>识别二进制文件和尾行转换</h4><p>不同操作系统表示新行的方式</p>
+<ul>
+<li>UNIX:\n</li>
+<li>Windows:\n\r</li>
+<li>Mac OS:\r</li>
+</ul>
+<p>Git系统能够在版本库的提交操作中自动将换行符同义转换成\n，同时可以在签出状态下的工作目录中将他们转换为\n\r形式。</p>
+<p>用户甚至可以通过文本属性决定一个文件是否应该遵循换行符的约定。如果文件的文本属性未设置，Git系统会使用core.autocrlf的设置来决定是否将它们当作text=auto的情况来处理。</p>
+<h3 id="4-2-1-配置Diff和merge"><a href="#4-2-1-配置Diff和merge" class="headerlink" title="4.2.1 配置Diff和merge"></a>4.2.1 配置Diff和merge</h3><p>通过diff属性来比较二进制文件，有两个选项，就是告诉Git：</p>
+<ol>
+<li>如何将一个二进制文件转换为文本格式</li>
+<li>如何从二进制数据提取文本信息（例如元数据）</li>
+</ol>
+<p>用户可以使用诸如catdoc这类程序，将Word文档中的二进制数据转换成文本，使用exiftool从JPEG图片中提取EXIF元数据。因为转换过程可能会非常慢，Git系统提供了一种机制，通过布尔属性cachetextconv来让用户决定是否缓存输出结果。</p>
+<p>用户可以使用<code>git show</code>或者<code>git cat-file -p --textconv</code>查看经过textconv属性过滤的输出结果</p>
+<h3 id="4-2-2-文件转换（内容过滤）"><a href="#4-2-2-文件转换（内容过滤）" class="headerlink" title="4.2.2 文件转换（内容过滤）"></a>4.2.2 文件转换（内容过滤）</h3><p>当签出的文件符合模式时，过滤命令会将该文件作为标准输入，然后将标准输出结果更新工作目录中对应的文件。当声明一个命令时，用户可以使用%f符号替换过滤器处理的文件名。示例如下</p>
+<ol>
+<li>让ODF文档在签入时文本化（解压缩为XML），在签出时重新压缩</li>
+<li>对代码格式进行强制重排版。例如indent：用空格替换制表符缩进</li>
+<li>强制文件转换。例如配合git-media存储大型二进制文件</li>
+</ol>
+<ul>
+<li>内容过滤的另外一个用途是存储一些无法直接在版本库中使用的内容，然后在将它们签出时转换为可用格式。</li>
+<li>这样的示例就有诸如使用gitattributes存储大型的二进制文件。在Git版本库外部，开发人员只需要用到该文件中的一小部分；而在版本库内部，只需要提供一个标识符，方便用户获取外部存储内容即可。这就是git-media的工作原理。</li>
+</ul>
+<ol>
+<li>加密敏感信息</li>
+</ol>
+<ul>
+<li>用占位符替换某个应用程序必须的本体配置信息</li>
+<li>还需考虑配置文件本身的安全性，或者将实际的密码存放在一个外部的混淆脚本中，</li>
+<li>最好也建立一个预提交、预拉取和更新的钩子。</li>
+</ul>
+<h3 id="4-2-3-关键字替换表达式"><a href="#4-2-3-关键字替换表达式" class="headerlink" title="4.2.3 关键字替换表达式"></a>4.2.3 关键字替换表达式</h3><p>Git系统内部唯一支持的关键字表达式时$Id$。</p>
+<p>用户还可以自己编写支持相应过滤器的关键字表达式。例如把$Date$替换为文件的最后一次修改日期：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[filter &quot;dater&quot;]</span><br><span class="line">	clean	&#x3D; sed -e &#39;s&#x2F;\\\$Date[^\\\$]*\\\$&#x2F;\\\$Date\\\$&#x2F;&#39;</span><br><span class="line">	smudge	&#x3D; expand_date %f</span><br></pre></td></tr></table></figure>
+<p>其中expand_date是扩展日期脚本<code>git log --pretty=format:&quot;%ad&quot; &quot;$1&quot;</code></p>
+<p>可用<code>$Format:&lt;PLACEHOLDERS&gt;$</code>占位符告诉git archive进行不可逆的关键字替换</p>
+<h3 id="4-2-4-其他内置属性"><a href="#4-2-4-其他内置属性" class="headerlink" title="4.2.4 其他内置属性"></a>4.2.4 其他内置属性</h3><ul>
+<li>encoding</li>
+<li>whitespace</li>
+<li>export-ignore</li>
+</ul>
+<h3 id="4-2-5-属性宏定义"><a href="#4-2-5-属性宏定义" class="headerlink" title="4.2.5 属性宏定义"></a>4.2.5 属性宏定义</h3><h2 id="4-4-隐藏暂存变更"><a href="#4-4-隐藏暂存变更" class="headerlink" title="4.4 隐藏暂存变更"></a>4.4 隐藏暂存变更</h2><p><code>git stash --include-untracked</code>暂存未跟踪的文件</p>
+<h3 id="4-4-1-使用git-stash"><a href="#4-4-1-使用git-stash" class="headerlink" title="4.4.1 使用git stash"></a>4.4.1 使用git stash</h3><p>有时无法顺利执行<code>git stash pop</code>，可以使用<code>git stash branch 分支名</code>新建分支</p>
+<h3 id="4-4-2"><a href="#4-4-2" class="headerlink" title="4.4.2"></a>4.4.2</h3><h1 id="ch08"><a href="#ch08" class="headerlink" title="ch08"></a>ch08</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/20/2021-04-20-git-gao-shou-zhi-lu/" data-id="cl310rf2s0004gctkcwe8cbo1" data-title="《git高手之路》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/21/2021-04-21-ji-ji-xin-li-xue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《积极心理学》读书笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/12/2021-04-12-bao-xian/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">保险知识与投保计划</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/07/shell-program-demo/">shell例程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/06/unix-bian-cheng-yi-shu/">《UNIX编程艺术》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
