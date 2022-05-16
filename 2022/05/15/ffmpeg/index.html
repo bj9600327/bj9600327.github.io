@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《ffmpeg从入门到精通》读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言中文经典资料  雷霄骅 罗索实验室 chinaffmpeg  ch01 FFmpeg简介ffmpeg命令行选项中-i指定输入文件名，-f指定输出文件的容器格式 ch02 FFmpeg工具使用基础ffmpeg -i input.rmvb -vcodec mpeg4 -b:v 200k -r 15 -an output.mp4中各选项意思是：以input为输入文件，将视频编码转换为mpeg4格式，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《ffmpeg从入门到精通》读书笔记">
+<meta property="og:url" content="http://example.com/2022/05/15/ffmpeg/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言中文经典资料  雷霄骅 罗索实验室 chinaffmpeg  ch01 FFmpeg简介ffmpeg命令行选项中-i指定输入文件名，-f指定输出文件的容器格式 ch02 FFmpeg工具使用基础ffmpeg -i input.rmvb -vcodec mpeg4 -b:v 200k -r 15 -an output.mp4中各选项意思是：以input为输入文件，将视频编码转换为mpeg4格式，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-15T02:56:02.000Z">
+<meta property="article:modified_time" content="2022-05-15T08:21:57.105Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ffmpeg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/15/ffmpeg/" class="article-date">
+  <time class="dt-published" datetime="2022-05-15T02:56:02.000Z" itemprop="datePublished">2022-05-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《ffmpeg从入门到精通》读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>中文经典资料</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leixiaohua1020">雷霄骅</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.rosoo.net/">罗索实验室</a></li>
+<li><a target="_blank" rel="noopener" href="http://bbs.chinaffmpeg.com/">chinaffmpeg</a></li>
+</ul>
+<h2 id="ch01-FFmpeg简介"><a href="#ch01-FFmpeg简介" class="headerlink" title="ch01 FFmpeg简介"></a>ch01 FFmpeg简介</h2><p>ffmpeg命令行选项中<code>-i</code>指定输入文件名，<code>-f</code>指定输出文件的容器格式</p>
+<h2 id="ch02-FFmpeg工具使用基础"><a href="#ch02-FFmpeg工具使用基础" class="headerlink" title="ch02 FFmpeg工具使用基础"></a>ch02 FFmpeg工具使用基础</h2><p><code>ffmpeg -i input.rmvb -vcodec mpeg4 -b:v 200k -r 15 -an output.mp4</code>中各选项意思是：以input为输入文件，将视频编码转换为mpeg4格式，视频码率转换为200kbit/s，视频帧率转换为15fps，转码后的文件中不包括音频</p>
+<p><code>ffprobe -of csv -show_packets input.flv</code>可配合excel绘制直方图，与Elecard StreamEye的可视化图基本相同</p>
+<p><code>ffplay -vf &quot;subtitles=字幕文件.srt&quot; output.mp4</code>可加载字幕</p>
+<h2 id="ch03-FFmpeg转封装"><a href="#ch03-FFmpeg转封装" class="headerlink" title="ch03 FFmpeg转封装"></a>ch03 FFmpeg转封装</h2><h3 id="3-1-MP4是跨平台最好的格式"><a href="#3-1-MP4是跨平台最好的格式" class="headerlink" title="3.1 MP4是跨平台最好的格式"></a>3.1 MP4是跨平台最好的格式</h3><h4 id="3-1-1-MP4格式标准介绍"><a href="#3-1-1-MP4格式标准介绍" class="headerlink" title="3.1.1 MP4格式标准介绍"></a>3.1.1 MP4格式标准介绍</h4><p>概念：</p>
+<ul>
+<li>box<ul>
+<li>header</li>
+<li>data<ol>
+<li>可以是纯数据</li>
+<li>也可以是更多子box</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>fullBox</li>
+</ul>
+<p>MP4文件由许多个box和fullBox组成，fullBox是box的扩展，在header中增加8位version标志和24位的flags标志</p>
+<p>下面介绍解析时所需关键信息</p>
+<h5 id="moov容器"><a href="#moov容器" class="headerlink" title="moov容器"></a>moov容器</h5><p>moov至少包含以下三种atom中的一种</p>
+<ol>
+<li>mvhd：存放未压缩过的影片信息的头容器</li>
+<li>cmov：压缩过的影片信息容器（不常用）</li>
+<li>rmra：参考电影信息容器（不常用）</li>
+</ol>
+<h4 id="3-1-2-MP4分析工具"><a href="#3-1-2-MP4分析工具" class="headerlink" title="3.1.2 MP4分析工具"></a>3.1.2 MP4分析工具</h4><ol>
+<li>Elecard StreamEye</li>
+<li>mp4box</li>
+<li>mp4info</li>
+</ol>
+<h4 id="3-1-3-demuxer"><a href="#3-1-3-demuxer" class="headerlink" title="3.1.3 demuxer"></a>3.1.3 demuxer</h4><p>MP4的demuxer操作通常使用默认配置即可</p>
+<h4 id="3-1-4-muxer"><a href="#3-1-4-muxer" class="headerlink" title="3.1.4 muxer"></a>3.1.4 muxer</h4><p>muxer的可选参数多一些</p>
+<ol>
+<li>faststart：正常情况下ffmpeg生成moov是在mdat写完成之后再写入，可以通过选项<code>-movflags faststart</code>将移到前面。在互联网的视频点播中，如果希望MP4文件被快速打开，则需要将moov存放在mdat前面</li>
+<li><code>-movflags dash</code>可生成dash格式</li>
+<li><code>ffmpeg -re -i input.mp4 -c copy -movflags isml+frag_keyframe -f ismv Stream</code>可以发布ISML直播流</li>
+</ol>
+<h5 id="FFmpeg-CENC加密mp4文件"><a href="#FFmpeg-CENC加密mp4文件" class="headerlink" title="FFmpeg CENC加密mp4文件"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ea0761f6aa04">FFmpeg CENC加密mp4文件</a></h5><p><code>ffmpeg -h muxer=mp4</code>能看到mp4封装器提供的选项</p>
+<ol>
+<li>encryption_scheme：加密的方案，只支持cenc-aes-ctr。</li>
+<li>encryption_key：加密key，128比特(16bytes)，格式使用16进制的表示。加密和解密的时候使用。</li>
+<li>encryption_kid：加密key的标识，128比特(16bytes)，格式使用16进制的表示。加密时需要，解密不需要。具体作用尚未找到参考。</li>
+</ol>
+<p>加密示例</p>
+<p>ffmpeg -i julin_5s.mp4 -c:v copy -c:a copy -encryption_scheme cenc-aes-ctr -encryption_key 76a6c65c5ea762046bd749a2e632ccbb -encryption_kid a7e61c373e219033c21091fa607bf3b8 encryption.mp4</p>
+<p>播放示例</p>
+<p>ffplay encryption.mp4 -decryption_key 76a6c65c5ea762046bd749a2e632ccbb</p>
+<p>解密示例</p>
+<p>ffmpeg -decryption_key c7e16c4403654b85847037383f0c2db3 -i encryption.mp4 decryption.mp4</p>
+<h3 id="3-2-视频文件转FLV"><a href="#3-2-视频文件转FLV" class="headerlink" title="3.2 视频文件转FLV"></a>3.2 视频文件转FLV</h3><p>FLV常用于网络的直播与点播。其封装格式均以FLVTAG的形式独立存在</p>
+<h4 id="3-2-1-FLV格式标准介绍"><a href="#3-2-1-FLV格式标准介绍" class="headerlink" title="3.2.1 FLV格式标准介绍"></a>3.2.1 FLV格式标准介绍</h4><ol>
+<li>FLV文件头</li>
+<li>FLV文件内容</li>
+</ol>
+<h4 id="3-2-2-FFmpeg转FLV参数"><a href="#3-2-2-FFmpeg转FLV参数" class="headerlink" title="3.2.2 FFmpeg转FLV参数"></a>3.2.2 FFmpeg转FLV参数</h4><p>比较简单</p>
+<h4 id="3-2-3-FFmpeg文件转FLV举例"><a href="#3-2-3-FFmpeg文件转FLV举例" class="headerlink" title="3.2.3 FFmpeg文件转FLV举例"></a>3.2.3 FFmpeg文件转FLV举例</h4><p>内部的音频或者视频不符合标准时，会报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Audio codec ac3 not compatible with flv</span><br></pre></td></tr></table></figure>
+<p>为了解决这类问题，可以用<code>-acodec aac</code>将音频从ac3转换为aac或者mp3</p>
+<h4 id="3-2-4-FFmpeg生成带关键索引的FLV"><a href="#3-2-4-FFmpeg生成带关键索引的FLV" class="headerlink" title="3.2.4 FFmpeg生成带关键索引的FLV"></a>3.2.4 FFmpeg生成带关键索引的FLV</h4><p>在网络点播中常用yamdi工具为关键帧建立索引，用FFmpeg同样也可以实现，使用选项<code>flvflags add_keyframe_index</code></p>
+<h4 id="3-2-5-FLV文件格式分析工具flvparse"><a href="#3-2-5-FLV文件格式分析工具flvparse" class="headerlink" title="3.2.5 FLV文件格式分析工具flvparse"></a>3.2.5 FLV文件格式分析工具flvparse</h4><h3 id="3-3-视频文件转M3U8"><a href="#3-3-视频文件转M3U8" class="headerlink" title="3.3 视频文件转M3U8"></a>3.3 视频文件转M3U8</h3><p>M3U8主要以文件列表的形式存在，既支持直播又支持点播，尤其在Android、iOS等平台最为常用</p>
+<p>常规的从文件转换HLS直播时，使用的参数如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i input.mp4 -c copy -f hls -bsf:v h264_mp4toannexb output.m3u8</span><br></pre></td></tr></table></figure>
+<p>其中<code>-bsf:v h264_mp4toannexb</code>将H.264转换为AnnexB标准的编码，常见于实时传输流。如果源文件为FLV、TS则不需要这个参数。生成HLS时还有一些参数可以设置</p>
+<ol>
+<li><code>-start_number 300</code>设置列表中的第一篇的序号为300</li>
+<li><code>-hls_time 10</code>控制转码切片长度为10秒钟<strong>左右</strong>一片</li>
+<li><code>-lhs_list_size 3</code>设置M3U8列表中只保留3个TS分片</li>
+</ol>
+<h3 id="3-4-视频文件切片"><a href="#3-4-视频文件切片" class="headerlink" title="3.4 视频文件切片"></a>3.4 视频文件切片</h3><p>HLS切片只支持TS，还可以</p>
+<ol>
+<li>使用segment方式切片</li>
+<li>使用ss加上t参数进行切片</li>
+</ol>
+<h4 id="3-4-1-f-segment"><a href="#3-4-1-f-segment" class="headerlink" title="3.4.1 -f segment"></a>3.4.1 -f segment</h4><p><code>ffmpeg -re -i input.mp4 -c copy -f segment output-%d.mp4</code></p>
+<h4 id="3-4-2-FFmpeg切片segment举例"><a href="#3-4-2-FFmpeg切片segment举例" class="headerlink" title="3.4.2 FFmpeg切片segment举例"></a>3.4.2 FFmpeg切片segment举例</h4><ol>
+<li><code>-segment_format mp4</code>执行切片文件的格式为mp4<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i input.mp4 -c copy -f segment -segment_format mp4 output-%d.mp4</span><br></pre></td></tr></table></figure></li>
+<li>ffconcat格式常见于虚拟轮播等场景</li>
+</ol>
+<ul>
+<li><code>-segment_list_type ffconcat -segment_list output.lst</code>将生成ffconcat格式的索引文件名output.lst</li>
+<li><code>-segment_list_type csv -segment_list output.csv</code></li>
+<li><code>-segment_list_type m3u8 -segment_list output.m3u8</code></li>
+</ul>
+<ol start="3">
+<li><code>-reset_timestamps 1</code>使切片时间戳归零</li>
+<li><code>-segment_times 3,9,12</code>在第3、9、12秒进行切片</li>
+</ol>
+<h4 id="3-4-3-FFmpeg使用ss与t参数进行切片"><a href="#3-4-3-FFmpeg使用ss与t参数进行切片" class="headerlink" title="3.4.3 FFmpeg使用ss与t参数进行切片"></a>3.4.3 FFmpeg使用ss与t参数进行切片</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c copy -ss 9 -t 8 -output_ts_offset 7 output.mp4</span><br></pre></td></tr></table></figure>
+<p>output_ts_offset用于指定输出文件的start_time</p>
+<h3 id="3-5-音视频文件音视频流抽取"><a href="#3-5-音视频文件音视频流抽取" class="headerlink" title="3.5 音视频文件音视频流抽取"></a>3.5 音视频文件音视频流抽取</h3><h4 id="3-5-1-抽取acc音频流"><a href="#3-5-1-抽取acc音频流" class="headerlink" title="3.5.1 抽取acc音频流"></a>3.5.1 抽取acc音频流</h4><p><code>ffmpeg -i input.mp4 -vn -acodec copy output.aac</code></p>
+<h4 id="3-5-2-抽取H-264视频流"><a href="#3-5-2-抽取H-264视频流" class="headerlink" title="3.5.2 抽取H.264视频流"></a>3.5.2 抽取H.264视频流</h4><p><code>ffmpeg -i input.mp4 -vcodec copy -an output.h264</code></p>
+<h4 id="3-5-3-抽取H-265视频流"><a href="#3-5-3-抽取H-265视频流" class="headerlink" title="3.5.3 抽取H.265视频流"></a>3.5.3 抽取H.265视频流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vcodec copy -an -bsf hevc_mp4toannexb -f hevc output.hevc</span><br></pre></td></tr></table></figure>
+<p>由于mp4中存储的视频数据并不是标准的annexb格式，所以需要将mp4的视频存储格式存储为annexb格式，输出的hevc格式可以直接使用播放器进行观看</p>
+<h3 id="3-6-系统资源使用情况"><a href="#3-6-系统资源使用情况" class="headerlink" title="3.6 系统资源使用情况"></a>3.6 系统资源使用情况</h3><p>封装转换占CPU低，编码转换占CPU高</p>
+<h2 id="ch04-FFmpeg转码"><a href="#ch04-FFmpeg转码" class="headerlink" title="ch04 FFmpeg转码"></a>ch04 FFmpeg转码</h2><h3 id="4-1-软编码H-264与H-265"><a href="#4-1-软编码H-264与H-265" class="headerlink" title="4.1 软编码H.264与H.265"></a>4.1 软编码H.264与H.265</h3><p>FFmpeg本身并不支持H.264的编码器，而是由第三方模块支持。由于OpenH264开源比较晚，所以x264最常用。通过<code>ffmpeg -h encoder=libx264</code>可以查看到所支持的像素色彩格式</p>
+<h4 id="4-1-1-x264编码参数"><a href="#4-1-1-x264编码参数" class="headerlink" title="4.1.1 x264编码参数"></a>4.1.1 x264编码参数</h4><p>见表4-1。设置参数后编码生成的文件可以通过一些外部协助工具进行查看，如Elecard、Bitrate Viewer、ffprobe等</p>
+<h4 id="4-1-2-H-264编码举例"><a href="#4-1-2-H-264编码举例" class="headerlink" title="4.1.2 H.264编码举例"></a>4.1.2 H.264编码举例</h4><ol>
+<li>编码器预设参数设置<code>-preset slower</code></li>
+</ol>
+<ul>
+<li>ultrafast：最快</li>
+<li>superfast：超级快速</li>
+<li>veryfast：非常快速</li>
+<li>faster：稍微快速</li>
+<li>fast：快速</li>
+<li>medium：折中</li>
+<li>slow：慢</li>
+<li>slower：更慢</li>
+<li>veryslow：非常慢</li>
+<li>placebo：最慢</li>
+</ul>
+<ol>
+<li>使用tune参数调优H.264编码时，可以包含如下几个场景</li>
+</ol>
+<ul>
+<li>film：对视频的质量非常严格时使用该选项</li>
+<li>animation：动画</li>
+<li>grain：颗粒物很重，该选项适用于颗粒感很重的视频</li>
+<li>stillimage：用于静止画面比较多的视频</li>
+<li>psnr：提高峰值信噪比</li>
+<li>ssim：提高结构相似性</li>
+<li>fastdecode：快速解码</li>
+<li>zerolatency：零延迟，用于直播</li>
+</ul>
+<ol>
+<li>profile与level设置</li>
+<li>控制场景切换关键帧插入参数sc_threshold</li>
+<li>内部参数x264opts</li>
+<li>CBR恒定码率设置参数nal-hrd</li>
+</ol>
+<h3 id="4-2-FFmpeg硬编解码"><a href="#4-2-FFmpeg硬编解码" class="headerlink" title="4.2 FFmpeg硬编解码"></a>4.2 FFmpeg硬编解码</h3><h3 id="6-3-FFmpeg生成画中画"><a href="#6-3-FFmpeg生成画中画" class="headerlink" title="6.3 FFmpeg生成画中画"></a>6.3 FFmpeg生成画中画</h3><h3 id="6-8-绿幕抠图合并"><a href="#6-8-绿幕抠图合并" class="headerlink" title="6.8 绿幕抠图合并"></a>6.8 绿幕抠图合并</h3><h3 id="6-12-倍速处理"><a href="#6-12-倍速处理" class="headerlink" title="6.12 倍速处理"></a>6.12 倍速处理</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/15/ffmpeg/" data-id="cl38smqvs00005ktk3z9c5ipu" data-title="《ffmpeg从入门到精通》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/08/10/high-availability-linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《构建高可用Linux服务器》读书笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/15/ffmpeg/">《ffmpeg从入门到精通》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/07/shell-program-demo/">shell例程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
