@@ -192,7 +192,7 @@
 </ol>
 <h4 id="3-4-3-FFmpeg使用ss与t参数进行切片"><a href="#3-4-3-FFmpeg使用ss与t参数进行切片" class="headerlink" title="3.4.3 FFmpeg使用ss与t参数进行切片"></a>3.4.3 FFmpeg使用ss与t参数进行切片</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c copy -ss 9 -t 8 -output_ts_offset 7 output.mp4</span><br></pre></td></tr></table></figure>
 <p>output_ts_offset用于指定输出文件的start_time</p>
-<h3 id="3-5-音视频文件音视频流抽取"><a href="#3-5-音视频文件音视频流抽取" class="headerlink" title="3.5 音视频文件音视频流抽取"></a>3.5 音视频文件音视频流抽取</h3><h4 id="3-5-1-抽取acc音频流"><a href="#3-5-1-抽取acc音频流" class="headerlink" title="3.5.1 抽取acc音频流"></a>3.5.1 抽取acc音频流</h4><p><code>ffmpeg -i input.mp4 -vn -acodec copy output.aac</code></p>
+<h3 id="3-5-音视频文件音视频流抽取"><a href="#3-5-音视频文件音视频流抽取" class="headerlink" title="3.5 音视频文件音视频流抽取"></a>3.5 音视频文件音视频流抽取</h3><h4 id="3-5-1-抽取aac音频流"><a href="#3-5-1-抽取aac音频流" class="headerlink" title="3.5.1 抽取aac音频流"></a>3.5.1 抽取aac音频流</h4><p><code>ffmpeg -i input.mp4 -vn -acodec copy output.aac</code></p>
 <h4 id="3-5-2-抽取H-264视频流"><a href="#3-5-2-抽取H-264视频流" class="headerlink" title="3.5.2 抽取H.264视频流"></a>3.5.2 抽取H.264视频流</h4><p><code>ffmpeg -i input.mp4 -vcodec copy -an output.h264</code></p>
 <h4 id="3-5-3-抽取H-265视频流"><a href="#3-5-3-抽取H-265视频流" class="headerlink" title="3.5.3 抽取H.265视频流"></a>3.5.3 抽取H.265视频流</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vcodec copy -an -bsf hevc_mp4toannexb -f hevc output.hevc</span><br></pre></td></tr></table></figure>
 <p>由于mp4中存储的视频数据并不是标准的annexb格式，所以需要将mp4的视频存储格式存储为annexb格式，输出的hevc格式可以直接使用播放器进行观看</p>
@@ -233,7 +233,26 @@
 <li>内部参数x264opts</li>
 <li>CBR恒定码率设置参数nal-hrd</li>
 </ol>
-<h3 id="4-2-FFmpeg硬编解码"><a href="#4-2-FFmpeg硬编解码" class="headerlink" title="4.2 FFmpeg硬编解码"></a>4.2 FFmpeg硬编解码</h3><h3 id="6-3-FFmpeg生成画中画"><a href="#6-3-FFmpeg生成画中画" class="headerlink" title="6.3 FFmpeg生成画中画"></a>6.3 FFmpeg生成画中画</h3><h3 id="6-8-绿幕抠图合并"><a href="#6-8-绿幕抠图合并" class="headerlink" title="6.8 绿幕抠图合并"></a>6.8 绿幕抠图合并</h3><h3 id="6-12-倍速处理"><a href="#6-12-倍速处理" class="headerlink" title="6.12 倍速处理"></a>6.12 倍速处理</h3>
+<h3 id="4-2-FFmpeg硬编解码"><a href="#4-2-FFmpeg硬编解码" class="headerlink" title="4.2 FFmpeg硬编解码"></a>4.2 FFmpeg硬编解码</h3><h3 id="6-3-FFmpeg生成画中画"><a href="#6-3-FFmpeg生成画中画" class="headerlink" title="6.3 FFmpeg生成画中画"></a>6.3 FFmpeg生成画中画</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i input.mp4 -vf &quot;movie&#x3D;sub.mp4,scale&#x3D;480x320[test]; [in][test] overlay [out]&quot; -vcodec libx264 output.flv</span><br></pre></td></tr></table></figure>
+<p>执行完命令之后会将sub.mp4视频文件缩放成宽480、高320的视频，然后显示在视频input.mp4的坐标为(0,0)的位置。如果希望子视频显示在指定位置，则需要用到overlay中的x坐标与y坐标的内部变量，如下所示，其中main_w为主画面宽度、main_h为主画面高度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i input.mp4 -vf &quot;movie&#x3D;sub.mp4,scale&#x3D;480x320[test]; [in][test] overlay&#x3D;x&#x3D;main_w-480:y&#x3D;main_h-320 [out]&quot; -vcodec libx264 output.flv</span><br></pre></td></tr></table></figure>
+<p>以上两种视频画中画的处理均为静态位置处理，此外还可以配合正则表达式进行跑马灯式画中画处理，动态地改变子画面的x坐标与y坐标。如下所示，子视频将会从主视频的左侧开始渐入视频从左向右游动，效果如图6-11所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i input.mp4 -vf &quot;movie&#x3D;sub.mp4,scale&#x3D;480x320[test]; [in][test] overlay&#x3D;x&#x3D;&#39;if(gte(t,2), -w+(t-2)*20, NAN)&#39;:y&#x3D;0 [out]&quot; -vcodec libx264 output.flv</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-8-绿幕抠图合并"><a href="#6-8-绿幕抠图合并" class="headerlink" title="6.8 绿幕抠图合并"></a>6.8 绿幕抠图合并</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -i input_green.mp4 -filter_complex &quot;[1:v]chromakey&#x3D;Green:0.1:0.2[ckout];[0:v][ckout]overlay[out]&quot; -map &quot;[out]&quot; output.mp4</span><br></pre></td></tr></table></figure>
+<p>将input_green.mp4绿色背景中的人物抠出来，设置标签为ckout，将其铺在input.mp4上</p>
+<h3 id="6-12-倍速处理"><a href="#6-12-倍速处理" class="headerlink" title="6.12 倍速处理"></a>6.12 倍速处理</h3><p>ffmpeg对于倍速处理支持跳帧播放和不跳帧播放</p>
+<h4 id="atempo音频倍速处理"><a href="#atempo音频倍速处理" class="headerlink" title="atempo音频倍速处理"></a>atempo音频倍速处理</h4><p>这个滤镜只有一个参数：<code>0.5&lt;tempo&lt;2</code></p>
+<ol>
+<li>半速处理<code>ffmpeg -i -input.wav -filter_complex &quot;atempo=tempo=0.5&quot; -acodec aac output.aac</code></li>
+<li>2倍速处理<code>ffmpeg -i -input.wav -filter_complex &quot;atempo=tempo=2.0&quot; -acodec aac output.aac</code></li>
+</ol>
+<h4 id="setpts视频倍速处理"><a href="#setpts视频倍速处理" class="headerlink" title="setpts视频倍速处理"></a>setpts视频倍速处理</h4><p>这个滤镜只有一个参数：expr。常见值见表6-7</p>
+<ol>
+<li>半速处理<code>ffmpeg -re -i input.mp4 -filter_complex &quot;setpts=PTS*2&quot; output.mp4</code></li>
+<li>2背速处理<code>ffmpeg -i input.mp4 -filter_complex &quot;setpts=PTS/2&quot; output.mp4</code></li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
