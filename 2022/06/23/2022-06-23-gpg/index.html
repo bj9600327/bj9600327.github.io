@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《gpg》读书笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="IntroductionThis book is not meant to be the definitive tome（权威著作） on thesubject. It will not teach you how to compute public encryptionkeys by hand, nor will it survey all the encryption algorithmsan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《gpg》读书笔记">
+<meta property="og:url" content="http://example.com/2022/06/23/2022-06-23-gpg/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IntroductionThis book is not meant to be the definitive tome（权威著作） on thesubject. It will not teach you how to compute public encryptionkeys by hand, nor will it survey all the encryption algorithmsan">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-23T06:18:36.000Z">
+<meta property="article:modified_time" content="2022-06-23T09:07:44.715Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022-06-23-gpg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/23/2022-06-23-gpg/" class="article-date">
+  <time class="dt-published" datetime="2022-06-23T06:18:36.000Z" itemprop="datePublished">2022-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《gpg》读书笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This book is not meant to be the definitive tome（权威著作） on the<br>subject. It will not teach you how to compute public encryption<br>keys by hand, nor will it survey all the encryption algorithms<br>and techniques available today. However, it will teach you<br>enough about the ideas behind encryption and digital signatures that you’ll be able to make intelligent choices about<br>which of the available options you should use in any given circumstance</p>
+<h3 id="The-Story-of-PGP"><a href="#The-Story-of-PGP" class="headerlink" title="The Story of PGP"></a>The Story of PGP</h3><p>跳过</p>
+<h3 id="Stop-Wasting-My-Precious-Time-What-Do-I-Need-to-Read"><a href="#Stop-Wasting-My-Precious-Time-What-Do-I-Need-to-Read" class="headerlink" title="Stop Wasting My Precious Time. What Do I Need to Read?"></a>Stop Wasting My Precious Time. What Do I Need to Read?</h3><p>If you choose GnuPG, read the general OpenPGP chapters and those dedicated to GnuPG: Chapters 1–2, 4–5, 7–8,<br>and 11. GnuPG chapters tend to be longer than PGP chapters<br>because GnuPG people must learn more.</p>
+<h2 id="ch01"><a href="#ch01" class="headerlink" title="ch01"></a>ch01</h2><h2 id="附录B"><a href="#附录B" class="headerlink" title="附录B"></a>附录B</h2><h3 id="Output-Control"><a href="#Output-Control" class="headerlink" title="Output Control"></a>Output Control</h3><p>The -a (or –armor) flag tells<br>GnuPG to give output in human-readable format, instead<br>of the default binary format. Similarly, the –output flag tells<br>GnuPG to send its output to a file, rather than dumping it<br>directly to the screen.</p>
+<h3 id="Keypair-Creation-Revocation（吊销）-and-Exports"><a href="#Keypair-Creation-Revocation（吊销）-and-Exports" class="headerlink" title="Keypair Creation, Revocation（吊销）, and Exports"></a>Keypair Creation, Revocation（吊销）, and Exports</h3><p>To create a new GnuPG keypair, use the interactive –gen-key<br>option. GnuPG will walk you through the key-creation process. (We discussed key creation and management in detail in<br>Chapter 4.)</p>
+<h4 id="Revoking-a-Key"><a href="#Revoking-a-Key" class="headerlink" title="Revoking a Key"></a>Revoking a Key</h4><p>跳过</p>
+<h4 id="Exporting-a-Key"><a href="#Exporting-a-Key" class="headerlink" title="Exporting a Key"></a>Exporting a Key</h4><p><code>gpg --output pubkey.asc --armor --export UID</code></p>
+<h4 id="Sending-a-Key-to-a-Keyserver"><a href="#Sending-a-Key-to-a-Keyserver" class="headerlink" title="Sending a Key to a Keyserver"></a>Sending a Key to a Keyserver</h4><p>To send a public key to a keyserver, use the –send-keys option.<br>The –keyserver option lets you choose to which keyserver you<br>want to submit the key. If you don’t choose a keyserver, GnuPG<br>will use the default keyserver specified in gpg.conf.</p>
+<h3 id="Managing-Keyrings"><a href="#Managing-Keyrings" class="headerlink" title="Managing Keyrings"></a>Managing Keyrings</h3><h4 id="Viewing-Keys"><a href="#Viewing-Keys" class="headerlink" title="Viewing Keys"></a>Viewing Keys</h4><ul>
+<li>option –list-keys. This will print all the keys on your keyring, so you can include a UID or portion thereof to list only particular keys.</li>
+<li>To see the secret keys on your keyring, use the option –list-secret-keys.</li>
+<li>To view the fingerprint of a key, use –fingerprint and the UID of the key or a subset thereof.<h4 id="Adding-and-Removing-Keys"><a href="#Adding-and-Removing-Keys" class="headerlink" title="Adding and Removing Keys"></a>Adding and Removing Keys</h4>To import a public key from a file, use the –import option<br>and the name of the file. No other options are required.<br>To remove a key from your keyring, use the –delete-keys<br>option and give the UID or keyid of the key you want to<br>delete.</li>
+</ul>
+<h3 id="Key-Signatures"><a href="#Key-Signatures" class="headerlink" title="Key Signatures"></a>Key Signatures</h3><h3 id="Encryption-and-Decryption"><a href="#Encryption-and-Decryption" class="headerlink" title="Encryption and Decryption"></a>Encryption and Decryption</h3><p>Use the –encrypt option to encrypt files, giving the name of<br>the file you want to encrypt as an argument. GnuPG will interactively ask you for the UID of each public key you want to use<br>in the encryption process and then encrypt the files so that<br>they can only be read with the corresponding private key(s).</p>
+<p>To decrypt a file, use the –decrypt option. GnuPG will<br>prompt you for your passphrase and print the decrypted message to the terminal.</p>
+<h3 id="Signing-Files"><a href="#Signing-Files" class="headerlink" title="Signing Files"></a>Signing Files</h3><h3 id="Output-Formats"><a href="#Output-Formats" class="headerlink" title="Output Formats"></a>Output Formats</h3><p>By default, GnuPG produces encrypted files and keys in binary<br>format and uses filenames based on the original filenames. You<br>can modify this with the –armor and –output options.</p>
+<p><strong>The –armor and –output options must be used before either –sign or –encrypt.</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/23/2022-06-23-gpg/" data-id="cl4qsxk730000notk58242jt6" data-title="《gpg》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/14/2022-06-14-jing-tong-git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《精通git》读书笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bao-xian/">bao-xian</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/book-note/">book-note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/humor/">humor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll-update/">jekyll update</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/23/2022-06-23-gpg/">《gpg》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/2022-06-14-jing-tong-git/">《精通git》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/15/ffmpeg/">《ffmpeg从入门到精通》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/20/2021-08-19-work-log/">网管工作日志</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

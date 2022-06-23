@@ -71,6 +71,410 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2022-06-23-gpg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/23/2022-06-23-gpg/" class="article-date">
+  <time class="dt-published" datetime="2022-06-23T06:18:36.000Z" itemprop="datePublished">2022-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/23/2022-06-23-gpg/">《gpg》读书笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This book is not meant to be the definitive tome（权威著作） on the<br>subject. It will not teach you how to compute public encryption<br>keys by hand, nor will it survey all the encryption algorithms<br>and techniques available today. However, it will teach you<br>enough about the ideas behind encryption and digital signatures that you’ll be able to make intelligent choices about<br>which of the available options you should use in any given circumstance</p>
+<h3 id="The-Story-of-PGP"><a href="#The-Story-of-PGP" class="headerlink" title="The Story of PGP"></a>The Story of PGP</h3><p>跳过</p>
+<h3 id="Stop-Wasting-My-Precious-Time-What-Do-I-Need-to-Read"><a href="#Stop-Wasting-My-Precious-Time-What-Do-I-Need-to-Read" class="headerlink" title="Stop Wasting My Precious Time. What Do I Need to Read?"></a>Stop Wasting My Precious Time. What Do I Need to Read?</h3><p>If you choose GnuPG, read the general OpenPGP chapters and those dedicated to GnuPG: Chapters 1–2, 4–5, 7–8,<br>and 11. GnuPG chapters tend to be longer than PGP chapters<br>because GnuPG people must learn more.</p>
+<h2 id="ch01"><a href="#ch01" class="headerlink" title="ch01"></a>ch01</h2><h2 id="附录B"><a href="#附录B" class="headerlink" title="附录B"></a>附录B</h2><h3 id="Output-Control"><a href="#Output-Control" class="headerlink" title="Output Control"></a>Output Control</h3><p>The -a (or –armor) flag tells<br>GnuPG to give output in human-readable format, instead<br>of the default binary format. Similarly, the –output flag tells<br>GnuPG to send its output to a file, rather than dumping it<br>directly to the screen.</p>
+<h3 id="Keypair-Creation-Revocation（吊销）-and-Exports"><a href="#Keypair-Creation-Revocation（吊销）-and-Exports" class="headerlink" title="Keypair Creation, Revocation（吊销）, and Exports"></a>Keypair Creation, Revocation（吊销）, and Exports</h3><p>To create a new GnuPG keypair, use the interactive –gen-key<br>option. GnuPG will walk you through the key-creation process. (We discussed key creation and management in detail in<br>Chapter 4.)</p>
+<h4 id="Revoking-a-Key"><a href="#Revoking-a-Key" class="headerlink" title="Revoking a Key"></a>Revoking a Key</h4><p>跳过</p>
+<h4 id="Exporting-a-Key"><a href="#Exporting-a-Key" class="headerlink" title="Exporting a Key"></a>Exporting a Key</h4><p><code>gpg --output pubkey.asc --armor --export UID</code></p>
+<h4 id="Sending-a-Key-to-a-Keyserver"><a href="#Sending-a-Key-to-a-Keyserver" class="headerlink" title="Sending a Key to a Keyserver"></a>Sending a Key to a Keyserver</h4><p>To send a public key to a keyserver, use the –send-keys option.<br>The –keyserver option lets you choose to which keyserver you<br>want to submit the key. If you don’t choose a keyserver, GnuPG<br>will use the default keyserver specified in gpg.conf.</p>
+<h3 id="Managing-Keyrings"><a href="#Managing-Keyrings" class="headerlink" title="Managing Keyrings"></a>Managing Keyrings</h3><h4 id="Viewing-Keys"><a href="#Viewing-Keys" class="headerlink" title="Viewing Keys"></a>Viewing Keys</h4><ul>
+<li>option –list-keys. This will print all the keys on your keyring, so you can include a UID or portion thereof to list only particular keys.</li>
+<li>To see the secret keys on your keyring, use the option –list-secret-keys.</li>
+<li>To view the fingerprint of a key, use –fingerprint and the UID of the key or a subset thereof.<h4 id="Adding-and-Removing-Keys"><a href="#Adding-and-Removing-Keys" class="headerlink" title="Adding and Removing Keys"></a>Adding and Removing Keys</h4>To import a public key from a file, use the –import option<br>and the name of the file. No other options are required.<br>To remove a key from your keyring, use the –delete-keys<br>option and give the UID or keyid of the key you want to<br>delete.</li>
+</ul>
+<h3 id="Key-Signatures"><a href="#Key-Signatures" class="headerlink" title="Key Signatures"></a>Key Signatures</h3><h3 id="Encryption-and-Decryption"><a href="#Encryption-and-Decryption" class="headerlink" title="Encryption and Decryption"></a>Encryption and Decryption</h3><p>Use the –encrypt option to encrypt files, giving the name of<br>the file you want to encrypt as an argument. GnuPG will interactively ask you for the UID of each public key you want to use<br>in the encryption process and then encrypt the files so that<br>they can only be read with the corresponding private key(s).</p>
+<p>To decrypt a file, use the –decrypt option. GnuPG will<br>prompt you for your passphrase and print the decrypted message to the terminal.</p>
+<h3 id="Signing-Files"><a href="#Signing-Files" class="headerlink" title="Signing Files"></a>Signing Files</h3><h3 id="Output-Formats"><a href="#Output-Formats" class="headerlink" title="Output Formats"></a>Output Formats</h3><p>By default, GnuPG produces encrypted files and keys in binary<br>format and uses filenames based on the original filenames. You<br>can modify this with the –armor and –output options.</p>
+<p><strong>The –armor and –output options must be used before either –sign or –encrypt.</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/23/2022-06-23-gpg/" data-id="cl4qsxk730000notk58242jt6" data-title="《gpg》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022-06-14-jing-tong-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/14/2022-06-14-jing-tong-git/" class="article-date">
+  <time class="dt-published" datetime="2022-06-14T06:18:36.000Z" itemprop="datePublished">2022-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/book-note/">book-note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/14/2022-06-14-jing-tong-git/">《精通git》读书笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="3-5-远程分支"><a href="#3-5-远程分支" class="headerlink" title="3.5 远程分支"></a>3.5 远程分支</h2><p>如果不想每次推送时都键入密码，可以设置一个凭据缓存（credential cache）。请参阅<a href="#%E5%87%AD%E6%8D%AE%E5%AD%98%E5%82%A8">7.14节</a></p>
+<p><code>git branch -vv</code>列出每个分支的名字及其跟踪的远程分支信息，以及领先或落后的信息。要注意的是，这条命令和<code>git status</code>都不会与服务器通信以获取最新信息。</p>
+<h2 id="3-6-变基"><a href="#3-6-变基" class="headerlink" title="3.6 变基"></a>3.6 变基</h2><h3 id="3-6-1-变基的工作原理"><a href="#3-6-1-变基的工作原理" class="headerlink" title="3.6.1 变基的工作原理"></a>3.6.1 变基的工作原理</h3><ol>
+<li>找到共同祖先</li>
+<li>取得每次提交引入的更改（diff）</li>
+<li>依次引入更改  </li>
+</ol>
+<h1 id="ch04"><a href="#ch04" class="headerlink" title="ch04"></a>ch04</h1><p>如果你对自己运行git服务器不感兴趣，可以跳过本章的前面几节，直接阅读4.9节。</p>
+<h2 id="4-1-协议"><a href="#4-1-协议" class="headerlink" title="4.1 协议"></a>4.1 协议</h2><h3 id="4-1-1-本地协议"><a href="#4-1-1-本地协议" class="headerlink" title="4.1.1 本地协议"></a>4.1.1 本地协议</h3><p>使用file://前缀的主要原因是希望取出仓库中的外部引用或多余对象。</p>
+<h3 id="4-1-2-HTTP协议"><a href="#4-1-2-HTTP协议" class="headerlink" title="4.1.2 HTTP协议"></a>4.1.2 HTTP协议</h3><p>智能HTTP协议最普遍。既支持匿名访问，也支持用户验证。</p>
+<h3 id="4-1-3-SSH协议"><a href="#4-1-3-SSH协议" class="headerlink" title="4.1.3 SSH协议"></a>4.1.3 SSH协议</h3><p>SSH不能实现匿名访问</p>
+<h3 id="4-1-4-git协议"><a href="#4-1-4-git协议" class="headerlink" title="4.1.4 git协议"></a>4.1.4 git协议</h3><p>git协议不提供任何身份验证方式</p>
+<h2 id="4-2-在服务器上搭建git"><a href="#4-2-在服务器上搭建git" class="headerlink" title="4.2 在服务器上搭建git"></a>4.2 在服务器上搭建git</h2><h3 id="4-2-1-将裸仓库放置在服务器上"><a href="#4-2-1-将裸仓库放置在服务器上" class="headerlink" title="4.2.1 将裸仓库放置在服务器上"></a>4.2.1 将裸仓库放置在服务器上</h3><p>如果你只需要与几个人协作完成一个私有项目，那么只需要SSH服务器和裸仓库就够了</p>
+<h3 id="4-2-2-小型团队配置"><a href="#4-2-2-小型团队配置" class="headerlink" title="4.2.2 小型团队配置"></a>4.2.2 小型团队配置</h3><p>配置git服务器时最麻烦的一个方面就是用户管理</p>
+<h2 id="4-3-生成个人的ssh公钥"><a href="#4-3-生成个人的ssh公钥" class="headerlink" title="4.3 生成个人的ssh公钥"></a>4.3 生成个人的ssh公钥</h2><p>让git服务器的管理员把公钥添加到git用户的<code>~/.ssh/authorized_keys</code>文件中即可访问</p>
+<h2 id="4-4-设置服务器"><a href="#4-4-设置服务器" class="headerlink" title="4.4 设置服务器"></a>4.4 设置服务器</h2><p>每次创建新项目时，都需要有人通过SSH方式登录该服务器并创建一个新的裸仓库</p>
+<p>如果该服务器搭建在内网，并且已经配置好DNS，使得gitserver指向该服务器，那么你就可以直接克隆<code>git@gitserver:/srv/git/project.git</code></p>
+<h2 id="4-5-git守护进程"><a href="#4-5-git守护进程" class="headerlink" title="4.5 git守护进程"></a>4.5 git守护进程</h2><p>无需授权，提供公开项目的访问</p>
+<h2 id="4-6-智能HTTP"><a href="#4-6-智能HTTP" class="headerlink" title="4.6 智能HTTP"></a>4.6 智能HTTP</h2><p>git自带一个叫做git-http-backend的CGI脚本，你可以调用它来实现通过HTTP协议发送和接收数据</p>
+<h2 id="4-7-GitWeb"><a href="#4-7-GitWeb" class="headerlink" title="4.7 GitWeb"></a>4.7 GitWeb</h2><p>在Linux上lighttpd一般都已经装好，可以直接在项目目录下执行<code>git instaweb</code>来通过web展示git项目和数据</p>
+<h2 id="4-8-GitLab"><a href="#4-8-GitLab" class="headerlink" title="4.8 GitLab"></a>4.8 GitLab</h2><p>每个项目都归属于单个命名空间</p>
+<ol>
+<li>用户命名空间</li>
+<li>组命名空间</li>
+</ol>
+<p>钩子会触发HTTP POST操作，其中携带的描述性信息采用的是JSON格式。以便自动化</p>
+<h1 id="ch05"><a href="#ch05" class="headerlink" title="ch05"></a>ch05</h1><h2 id="5-1-分布式工作流"><a href="#5-1-分布式工作流" class="headerlink" title="5.1 分布式工作流"></a>5.1 分布式工作流</h2><h3 id="5-1-1-集中式工作流"><a href="#5-1-1-集中式工作流" class="headerlink" title="5.1.1 集中式工作流"></a>5.1.1 集中式工作流</h3><p>中枢接受代码，所有人以此同步各自的工作</p>
+<h3 id="5-1-2-集成管理者工作流"><a href="#5-1-2-集成管理者工作流" class="headerlink" title="5.1.2 集成管理者工作流"></a>5.1.2 集成管理者工作流</h3><p>开发人员fork，集成管理者处理pull request</p>
+<h3 id="5-1-3-司令官与副官工作流"><a href="#5-1-3-司令官与副官工作流" class="headerlink" title="5.1.3 司令官与副官工作流"></a>5.1.3 司令官与副官工作流</h3><p>用于Linux内核等等超大型项目或高度层次化环境。</p>
+<h2 id="5-2-为项目做贡献"><a href="#5-2-为项目做贡献" class="headerlink" title="5.2 为项目做贡献"></a>5.2 为项目做贡献</h2><h3 id="5-2-1-提交准则"><a href="#5-2-1-提交准则" class="headerlink" title="5.2.1 提交准则"></a>5.2.1 提交准则</h3><p>提交之前执行<code>git diff --check</code>列出可能存在的空白字符错误</p>
+<p>提交消息的第一行不应该超过50个字符</p>
+<h3 id="5-2-4-用rebase-i将工作内容压缩成单个提交可能会方便维护人员评审补丁。"><a href="#5-2-4-用rebase-i将工作内容压缩成单个提交可能会方便维护人员评审补丁。" class="headerlink" title="5.2.4 用rebase -i将工作内容压缩成单个提交可能会方便维护人员评审补丁。"></a>5.2.4 用<code>rebase -i</code>将工作内容压缩成单个提交可能会方便维护人员评审补丁。</h3><p>CF：<a href="#%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">7.6节</a>会对交互式变基做更详尽的介绍。</p>
+<h3 id="5-2-5-用git-format-patch来生成要通过电子邮件发送的mbox格式的文件"><a href="#5-2-5-用git-format-patch来生成要通过电子邮件发送的mbox格式的文件" class="headerlink" title="5.2.5 用git format-patch来生成要通过电子邮件发送的mbox格式的文件"></a>5.2.5 用<code>git format-patch</code>来生成要通过电子邮件发送的mbox格式的文件</h3><p>用<code>git send-email</code>之前需要配置</p>
+<h3 id="确定引入内容"><a href="#确定引入内容" class="headerlink" title="确定引入内容"></a>确定引入内容</h3><p>CF：<a href="#%E9%80%89%E6%8B%A9%E4%BF%AE%E8%AE%A2%E7%89%88%E6%9C%AC">7.1 选择修订版本</a><br>双点语法：<code>git log master..contrib</code>显示在contrib中但不在master中的提交<br>三点语法：<code>git diff master...contrib</code>显示contrib与master分岔后的diff</p>
+<h3 id="5-3-5-大型合并工作流"><a href="#5-3-5-大型合并工作流" class="headerlink" title="5.3.5 大型合并工作流"></a>5.3.5 大型合并工作流</h3><p>将主题分支合并到next并推送共享，如果主题分支仍需改进则合并到pu分支，稳定下来后重新和并入master。这意味着master始终快近，next偶尔变基，pu频繁变基。maint用于提供向后移植补丁。</p>
+<h3 id="5-3-9-汇总自v1-1-1之后所有提交"><a href="#5-3-9-汇总自v1-1-1之后所有提交" class="headerlink" title="5.3.9 汇总自v1.1.1之后所有提交"></a>5.3.9 汇总自v1.1.1之后所有提交</h3><p><code>git shortlog --no-merges master --not v1.1.1</code></p>
+<h1 id="ch06"><a href="#ch06" class="headerlink" title="ch06"></a>ch06</h1><h3 id="6-3-2-添加协作人员：Collaborators"><a href="#6-3-2-添加协作人员：Collaborators" class="headerlink" title="6.3.2 添加协作人员：Collaborators"></a>6.3.2 添加协作人员：Collaborators</h3><h2 id="6-5-GitHub脚本化"><a href="#6-5-GitHub脚本化" class="headerlink" title="6.5 GitHub脚本化"></a>6.5 GitHub脚本化</h2><h3 id="6-5-1-钩子系统"><a href="#6-5-1-钩子系统" class="headerlink" title="6.5.1 钩子系统"></a>6.5.1 钩子系统</h3><h3 id="6-5-2-GitHub-API"><a href="#6-5-2-GitHub-API" class="headerlink" title="6.5.2 GitHub API"></a>6.5.2 GitHub API</h3><h1 id="ch07"><a href="#ch07" class="headerlink" title="ch07"></a>ch07</h1><h2 id="选择修订版本"><a href="#选择修订版本" class="headerlink" title="选择修订版本"></a>选择修订版本</h2><h3 id="显示出提交属于哪一侧的分支"><a href="#显示出提交属于哪一侧的分支" class="headerlink" title="显示出提交属于哪一侧的分支"></a>显示出提交属于哪一侧的分支</h3><p><code>git log --left-right master...experiment</code>。CF：<a href="#%E7%A1%AE%E5%AE%9A%E5%BC%95%E5%85%A5%E5%86%85%E5%AE%B9">5.3.4 确定引入内容</a></p>
+<h2 id="7-3-储藏"><a href="#7-3-储藏" class="headerlink" title="7.3 储藏"></a>7.3 储藏</h2><h3 id="7-3-3-从储藏中创建分支"><a href="#7-3-3-从储藏中创建分支" class="headerlink" title="7.3.3 从储藏中创建分支"></a>7.3.3 从储藏中创建分支</h3><p><code>git stash branch 新分支名</code></p>
+<h3 id="清理工作目录"><a href="#清理工作目录" class="headerlink" title="清理工作目录"></a>清理工作目录</h3><ul>
+<li><code>git stash -all</code>以储藏形式保存全部内容</li>
+<li><code>git clean -n</code>做一次删除的演习</li>
+<li><code>git clean -f</code>进行实际删除</li>
+</ul>
+<h2 id="7-5-搜索"><a href="#7-5-搜索" class="headerlink" title="7.5 搜索"></a>7.5 搜索</h2><h3 id="7-5-1-工作目录搜索"><a href="#7-5-1-工作目录搜索" class="headerlink" title="7.5.1 工作目录搜索"></a>7.5.1 工作目录搜索</h3><ul>
+<li><code>git grep 模式</code>默认只查找工作目录下的文件</li>
+<li><code>git grep --count 模式</code>输出总结信息：每个匹配的文件中有多少处匹配</li>
+<li><code>git grep -p 模式</code>显示所查找到的匹配属于哪个方法或函数</li>
+</ul>
+<p>还可以使用–and选项来查找复杂的字符串组合</p>
+<h3 id="7-5-2-日志搜索"><a href="#7-5-2-日志搜索" class="headerlink" title="7.5.2 日志搜索"></a>7.5.2 日志搜索</h3><ul>
+<li><code>git log -S 字符串</code>显示出添加过或删除过该字符串的那些提交</li>
+<li><code>git log -G 模式</code>等同于-S但使用正则表达式进行模式匹配</li>
+<li><code>git log -L 模式:文件</code>显示所有匹配的改动记录</li>
+</ul>
+<h2 id="重写历史"><a href="#重写历史" class="headerlink" title="重写历史"></a>重写历史</h2><h3 id="7-6-3-重排提交：在交互式变基中改变行的顺序"><a href="#7-6-3-重排提交：在交互式变基中改变行的顺序" class="headerlink" title="7.6.3 重排提交：在交互式变基中改变行的顺序"></a>7.6.3 重排提交：在交互式变基中改变行的顺序</h3><h3 id="7-6-4-压缩提交：在交互式变基中用squash"><a href="#7-6-4-压缩提交：在交互式变基中用squash" class="headerlink" title="7.6.4 压缩提交：在交互式变基中用squash"></a>7.6.4 压缩提交：在交互式变基中用squash</h3><h3 id="7-6-5-拆分提交：在交互式变基中用edit"><a href="#7-6-5-拆分提交：在交互式变基中用edit" class="headerlink" title="7.6.5 拆分提交：在交互式变基中用edit"></a>7.6.5 拆分提交：在交互式变基中用edit</h3><h3 id="7-6-6-超强命令：filter-branch"><a href="#7-6-6-超强命令：filter-branch" class="headerlink" title="7.6.6 超强命令：filter-branch"></a>7.6.6 超强命令：filter-branch</h3><ol>
+<li>从所有提交中删除某个文件：<code>git filter-branch --tree-filter &#39;rm -f 文件&#39; HEAD</code>。要想在所有分支上执行filter-branch，可以传入–all选项</li>
+<li>将子目录设置为新的根目录：<code>git filter-branch --subdirectory-filter 目录 HEAD</code></li>
+<li>全面修改邮件地址：利用shell中的if语句配合GIT_AUTHOR环境变量</li>
+</ol>
+<h2 id="7-7-重置揭秘：reset和checkout"><a href="#7-7-重置揭秘：reset和checkout" class="headerlink" title="7.7 重置揭秘：reset和checkout"></a>7.7 重置揭秘：reset和checkout</h2><h3 id="7-7-5-要压缩最新的几个提交，只需git-reset-soft-旧提交然后commit"><a href="#7-7-5-要压缩最新的几个提交，只需git-reset-soft-旧提交然后commit" class="headerlink" title="7.7.5 要压缩最新的几个提交，只需git reset --soft 旧提交然后commit"></a>7.7.5 要压缩最新的几个提交，只需<code>git reset --soft 旧提交</code>然后commit</h3><h3 id="7-7-7-文件级别与提交级别"><a href="#7-7-7-文件级别与提交级别" class="headerlink" title="7.7.7 文件级别与提交级别"></a>7.7.7 文件级别与提交级别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>索引</th>
+<th>工作目录</th>
+<th>覆盖是否安全</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>提交级别</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>reset –soft COMMIT</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>reset –mixed COMMIT</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>reset –hard COMMIT</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>checkout COMMIT</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>文件级别</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>reset COMMIT FILE</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>checkout COMMIT FILE</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="7-8-1-合并冲突"><a href="#7-8-1-合并冲突" class="headerlink" title="7.8.1 合并冲突"></a>7.8.1 合并冲突</h3><ul>
+<li><code>git merge -Xignore-all-space</code>忽略空白字符的变更</li>
+<li><code>git checkout --conflict=diff3 冲突文件名</code>在冲突标记中提供内嵌的base版本</li>
+<li><code>git checkout</code>还可以接受–ours和–theirs作为选项，这是一种只选择其中一侧的快速方法。</li>
+</ul>
+<h3 id="7-8-2-还原提交"><a href="#7-8-2-还原提交" class="headerlink" title="7.8.2 还原提交"></a>7.8.2 还原提交</h3><p>对合并提交执行<code>git revert</code>需要用-m选项指明要还原哪个父节点引入的变更</p>
+<p>如果使用<code>git revert -m 1 HEAD</code>来抵消合并，会影响这两个分支以后的合并基础</p>
+<h3 id="7-8-3-Xours与-s-ours"><a href="#7-8-3-Xours与-s-ours" class="headerlink" title="7.8.3 -Xours与-s ours"></a>7.8.3 <code>-Xours</code>与<code>-s ours</code></h3><p>给merge传入-Xours或-Xtheirs选项就不再添加冲突标记。任何能够合并的差异，git会选择合并。任何有冲突的差异，git会简单地选择你所指定的那一侧。</p>
+<p>更严格的策略是<code>-s ours</code>。这个方法基本上做的是一次假合并。它会记录一个</p>
+<h3 id="子树合并"><a href="#子树合并" class="headerlink" title="子树合并"></a>子树合并</h3><p>git能够聪明地发现一个子目录是另一个的子树</p>
+<p>这给我们提供了一种方法，可以在不使用子模块的情况下拥有一种类似于子模块流程的工作方式。其不足之处在于略有些复杂，容易出现操作错误</p>
+<h2 id="7-9-rerere"><a href="#7-9-rerere" class="headerlink" title="7.9 rerere"></a>7.9 rerere</h2><p>在有些情况下，重用冲突解决方案相当方便。例如：</p>
+<ul>
+<li>想确保一个长期的topic分支能够干净地合并，但又不想要一堆用于<strong>中间阶段</strong>的合并提交。你可以启动rerere功能，偶尔进行合并、解决冲突、<strong>然后退出合并</strong>。如果你一直这么做，那么最终的合并应该会很容易。变基也同理</li>
+<li>选用一个已合并的分支，修复了一堆冲突后决定对其进行变基操作，这样你可能就不必再去解决同样的冲突了。</li>
+<li>偶尔将多个尚在改进的topic分支合并到一个可测试的头部。如果测试失败，你可以返回合并之前，不使用导致失败的topic分支，然后再次合并，无需再次重新解决冲突。</li>
+</ul>
+<h2 id="7-10-使用git调试"><a href="#7-10-使用git调试" class="headerlink" title="7.10 使用git调试"></a>7.10 使用git调试</h2><h3 id="7-10-1-文件标注"><a href="#7-10-1-文件标注" class="headerlink" title="7.10.1  文件标注"></a>7.10.1  文件标注</h3><p><code>git blame -L 起始行,结束行 文件</code>查看每一行的最后一次修改者和修改时间</p>
+<p>加入-C参数要求git找出代码移动的原始出处</p>
+<h3 id="7-10-2-git-bisect帮助尽快确定问题是由那、哪一次提交引发的"><a href="#7-10-2-git-bisect帮助尽快确定问题是由那、哪一次提交引发的" class="headerlink" title="7.10.2 git bisect帮助尽快确定问题是由那、哪一次提交引发的"></a>7.10.2 <code>git bisect</code>帮助尽快确定问题是由那、哪一次提交引发的</h3><h2 id="7-11-子模块"><a href="#7-11-子模块" class="headerlink" title="7.11 子模块"></a>7.11 子模块</h2><h3 id="7-11-1-开始使用子模块"><a href="#7-11-1-开始使用子模块" class="headerlink" title="7.11.1 开始使用子模块"></a>7.11.1 开始使用子模块</h3><p>在已有的git仓库中执行<code>git submodule add https://github.com/chaconinc/DbConnector</code>会将子项目放入DbConnector文件夹中；还会自动在.gitmodules保存url与路径的映射关系</p>
+<p>因为其他用户会首先尝试从.gitmodules文件中的url处进行克隆/获取，所以要确保大家都能访问到该url。如果你用来推送的url和别人拉取时用的url不一样，那么换一个别人能够访问到的。你可以在本地执行<code>git config submodule.DbConnector.url PRIVATE_URL</code>来覆盖这个值，以供自己使用。如果可以，采用相对路径是一个不错的选择</p>
+<p>执行<code>git diff --cached DbConnector</code>会发现git并不会跟踪其中的内容，而是把它看作仓库中的一次特殊的提交。</p>
+<p>如果你希望diff的输出美观一些，可以给<code>git diff</code>传入<code>--submodule</code>选项。如果不想在每次执行<code>git diff</code>时都键入<code>--submodule</code>，可以设置<code>git config --global diff.submodule log</code></p>
+<p>在提交时，会看到<code>create mode 160000 DbConnector</code>。模式为160000的rack条目表示你将一次提交作为一个目录项（而非子目录或文件）进行记录</p>
+<h3 id="7-11-2-克隆含有子模块的项目"><a href="#7-11-2-克隆含有子模块的项目" class="headerlink" title="7.11.2 克隆含有子模块的项目"></a>7.11.2 克隆含有子模块的项目</h3><p>克隆时，默认会得到含有子模块的目录，但是目录中并没有文件。你必须分别执行两条命令</p>
+<ol>
+<li>git submodule init 用于初始化本地配置文件</li>
+<li>git submodule update 用于从项目中获取所有数据并检出父项目中适合的提交</li>
+</ol>
+<p>更简单的做法是在clone时传入<code>--recursive</code>选项</p>
+<h3 id="7-11-3-开发含有子模块的项目"><a href="#7-11-3-开发含有子模块的项目" class="headerlink" title="7.11.3 开发含有子模块的项目"></a>7.11.3 开发含有子模块的项目</h3><h4 id="拉取上游变更"><a href="#拉取上游变更" class="headerlink" title="拉取上游变更"></a>拉取上游变更</h4><p>进入DbConnector目录执行fetch和merge</p>
+<p>返回主项目执行<code>git diff --submodule</code>就会看到子模块已经得到了更新</p>
+<p>更简单的做法是执行<code>git submodule update --remote</code>自动更新所有子模块。该命令默认会假定你要将检出更新为子模块仓库的master分支。可以在两个地方修改</p>
+<ol>
+<li><code>git config -f .gitmodules submodule.DbConnector.branch stable</code>修改.gitmodules文件（这样其他人也可以跟踪到）</li>
+<li>去掉选项<code>-f .gitmodules</code>将只修改本地的<code>.git/config</code>，只对你有效</li>
+</ol>
+<p><strong>跳过复杂操作</strong></p>
+<h3 id="7-11-4-foreach与别名"><a href="#7-11-4-foreach与别名" class="headerlink" title="7.11.4 foreach与别名"></a>7.11.4 foreach与别名</h3><p><code>git submodule foreach &#39;git diff&#39;</code></p>
+<h3 id="7-11-5-子模块的问题"><a href="#7-11-5-子模块的问题" class="headerlink" title="7.11.5 子模块的问题"></a>7.11.5 子模块的问题</h3><p>在分支A中加入子模块后切换回没有子模块的分支B，会留下一个未被跟踪的子模块目录。</p>
+<p>如果删除该目录，然后切换回分支A，需要执行<code>submodule update --init</code>来重新填充</p>
+<p>另一个要重点注意的地方涉及从子目录到子模块的切换</p>
+<h2 id="7-12-打包"><a href="#7-12-打包" class="headerlink" title="7.12 打包"></a>7.12 打包</h2><p><code>git bundle create repo.bundle HEAD master</code>创建的repo.bundle文件包含了重建仓库master分支所需的所有数据</p>
+<p><code>git clone repo.bundle repo</code>可以从二进制文件克隆到一个目录中。如果在create时没有在引用中包含HEAD，那还得指定<code>-b master</code>或者其他被引入的分支</p>
+<p>也可以只打包部分提交，与format-patch的区别在于只生成一个文件</p>
+<h2 id="7-13-替换"><a href="#7-13-替换" class="headerlink" title="7.13 替换"></a>7.13 替换</h2><p>历史记录拆分后可用replace重新嫁接</p>
+<h2 id="凭据存储"><a href="#凭据存储" class="headerlink" title="凭据存储"></a>凭据存储</h2><p>git凭据系统提供的选项</p>
+<ol>
+<li>默认不缓存任何内容。所有连接都会提醒你输入输入用户名和密码</li>
+<li>cache模式会将凭据保存在内存15分钟，绝不会将密码存储在磁盘上。</li>
+<li>store模式将凭据保存在磁盘上的纯文本文件中，且永不过期。</li>
+<li>Mac还有osxkeychain模式，会把凭据以加密形式存放在磁盘上</li>
+<li>Win可以安装<code>Git Credential Manager for Windows</code>使用<code>Windows Credential Store</code>来控制敏感信息</li>
+</ol>
+<p><code>git config --global credential.helper cache --timeout 30000</code>设置将凭据保存在内存中约8小时</p>
+<p><code>git config --global credential.helper store --file 路径</code>设置将凭据保存在硬盘</p>
+<p>如果你的凭据文件保存在u盘上，希望在没有插入u盘的时候使用内存缓存来保存凭据。那么.gitconfig看起来如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">	helper &#x3D; store --file &#x2F;mnt&#x2F;thumbdrive&#x2F;.git-credentials</span><br><span class="line">	helper &#x3D; cache --timeout 30000</span><br></pre></td></tr></table></figure>
+<h3 id="7-14-1-底层实现"><a href="#7-14-1-底层实现" class="headerlink" title="7.14.1 底层实现"></a>7.14.1 底层实现</h3><h3 id="7-14-2-自定义凭据缓存"><a href="#7-14-2-自定义凭据缓存" class="headerlink" title="7.14.2 自定义凭据缓存"></a>7.14.2 自定义凭据缓存</h3><h1 id="ch08-自定义git"><a href="#ch08-自定义git" class="headerlink" title="ch08 自定义git"></a>ch08 自定义git</h1><h2 id="8-1-配置git"><a href="#8-1-配置git" class="headerlink" title="8.1 配置git"></a>8.1 配置git</h2><h3 id="8-1-1-基本配置"><a href="#8-1-1-基本配置" class="headerlink" title="8.1.1 基本配置"></a>8.1.1 基本配置</h3><p><code>git config --global commit.template ~/.gitmessage.txt</code>设置默认的提交消息占位符</p>
+<p>如果你要创建签署过的附注标签（在7.4节中讨论过），那么将你的GPG签署密钥作为配置项设置会更方便。进行下述设置以后再签署标签时只需<code>git tag -s &lt;tag-name&gt;</code></p>
+<p><code>git config --global user.signingkey &lt;gpg-key-id&gt;</code></p>
+<p>core.excludesfile可用于设置系统级ignore</p>
+<p>将help.autocorrect设置为1可以在输错命令时将git推测出的命令自动执行；将其设置为50会在执行纠正命令前给你留出5秒钟的考虑时间</p>
+<h3 id="8-1-2-自定义配色"><a href="#8-1-2-自定义配色" class="headerlink" title="8.1.2 自定义配色"></a>8.1.2 自定义配色</h3><h3 id="8-1-3-外部的合并与diff工具"><a href="#8-1-3-外部的合并与diff工具" class="headerlink" title="8.1.3 外部的合并与diff工具"></a>8.1.3 外部的合并与diff工具</h3><p><code>git config --global merge.tool kdiff3</code></p>
+<h3 id="8-1-4-格式化与空白字符"><a href="#8-1-4-格式化与空白字符" class="headerlink" title="8.1.4 格式化与空白字符"></a>8.1.4 格式化与空白字符</h3><ol>
+<li>core.autocrlf 处理行终止符。win适合把它置为true，unix适合把它置为input。</li>
+<li>core.whitespace 用于检测、修正与空白字符相关的问题</li>
+</ol>
+<ul>
+<li>（默认）blank-at-eol 会查找行尾的空格</li>
+<li>（默认）blank-at-eof 会查看文件末尾的空行</li>
+<li>（默认）space-before-tab 会查找行首制表符之前的空格</li>
+</ul>
+<ol start="3">
+<li>如果提交了存在空白字符问题的文件，可以执行<code>git rebase --whitespace=fix</code>自动修复</li>
+</ol>
+<h3 id="8-1-5-服务器配置"><a href="#8-1-5-服务器配置" class="headerlink" title="8.1.5 服务器配置"></a>8.1.5 服务器配置</h3><p>设置<code>git config --system receive.fsckObjects true</code>能够确认在推送过程中接收到的每一个对象的有效性以及是否匹配其SHA-1校验和。但代价太高，有可能拖慢其他操作，尤其是在处理大型仓库或推送大文件的时候。</p>
+<p>设置<code>git config --system receive.denyNonFastForwards true</code>可以拒绝<code>push -f</code>。另一种实现方法是通过服务器端的接收钩子，能够让你完成一些更复杂的操作</p>
+<p>有一种方法可以绕开denyNonFastForwards：先删除分支然后再推送。为了避免这种情况，可以将receive.denyDeletes设置为true禁止删除远程分支</p>
+<h2 id="8-2-git属性"><a href="#8-2-git属性" class="headerlink" title="8.2 git属性"></a>8.2 git属性</h2><p>针对路径的配置被称为git属性。如果你不希望将属性文件连同项目一起提交，也可以在.git/info/atttibutes文件中设置</p>
+<h3 id="8-2-1-二进制文件"><a href="#8-2-1-二进制文件" class="headerlink" title="8.2.1 二进制文件"></a>8.2.1 二进制文件</h3><ol>
+<li><code>*.pbxproj binary</code>告诉git把后缀为.pbxproj的文件当做二进制文件来处理</li>
+<li>比较二进制文件</li>
+</ol>
+<ul>
+<li><code>*.docx diff=word</code>配合<code>git config diff.word.textconv docx2txt</code>可比较word文件的文字改动</li>
+<li><code>*.png diff=exif</code>配合<code>git config diff.exif.textconv exiftool</code>可比较图像的元信息</li>
+</ul>
+<h3 id="8-2-2-关键字扩展"><a href="#8-2-2-关键字扩展" class="headerlink" title="8.2.2 关键字扩展"></a>8.2.2 关键字扩展</h3><p><code>*.txt ident</code>让git在检出时将blob对象的SHA-1写入$Id$字段。用途有限</p>
+<p>可以编写自己的smudge和clean后，在文件检出时会运行smudge过滤器，在文件暂存时会运行clean过滤器</p>
+<h3 id="8-2-3-有2个属性用于git-archive"><a href="#8-2-3-有2个属性用于git-archive" class="headerlink" title="8.2.3 有2个属性用于git archive"></a>8.2.3 有2个属性用于git archive</h3><h3 id="8-2-4-合并时忽略特性分支的变更"><a href="#8-2-4-合并时忽略特性分支的变更" class="headerlink" title="8.2.4 合并时忽略特性分支的变更"></a>8.2.4 合并时忽略特性分支的变更</h3><p>设置<code>git config --global merge.ours.driver true</code>并添加属性<code>db.xml merge=ours</code>可以让db.xml文件不受特性分支影响</p>
+<h2 id="8-3-钩子"><a href="#8-3-钩子" class="headerlink" title="8.3 钩子"></a>8.3 钩子</h2><h3 id="8-3-1-安装钩子"><a href="#8-3-1-安装钩子" class="headerlink" title="8.3.1 安装钩子"></a>8.3.1 安装钩子</h3><p>想启用一个钩子脚本，需要将不含.sample后缀的可执行文件放入.git/hooks</p>
+<h3 id="8-3-2-客户端钩子"><a href="#8-3-2-客户端钩子" class="headerlink" title="8.3.2 客户端钩子"></a>8.3.2 客户端钩子</h3><h4 id="提交工作流钩子"><a href="#提交工作流钩子" class="headerlink" title="提交工作流钩子"></a>提交工作流钩子</h4><ol>
+<li>pre-commit钩子在键入提交消息前运行。如果以非零值退出，提交会被中止，但可以使用<code>git commit --no-verify</code>来绕过这个环节</li>
+<li>prapare-commit-msg钩子的运行时机是在提交消息编辑器启动之前，默认消息被创建之后。一般用于 那些自动生成默认消息的提交。如</li>
+</ol>
+<ul>
+<li>提交消息模板</li>
+<li>合并提交</li>
+<li>压缩提交</li>
+<li>修正提交</li>
+</ul>
+<ol>
+<li>commit-msg钩子用于在提交通过前验证项目状态或提交信息。在<a href="#git%E5%BC%BA%E5%88%B6%E7%AD%96%E7%95%A5%E7%A4%BA%E4%BE%8B">8.4节</a>演示</li>
+<li>post-commit钩子在提交结束后运行，通常用于通知</li>
+</ol>
+<h4 id="基于电子邮件的3个钩子都是由git-am调用的"><a href="#基于电子邮件的3个钩子都是由git-am调用的" class="headerlink" title="基于电子邮件的3个钩子都是由git am调用的"></a>基于电子邮件的3个钩子都是由git am调用的</h4><h4 id="其他客户端钩子"><a href="#其他客户端钩子" class="headerlink" title="其他客户端钩子"></a>其他客户端钩子</h4><ol>
+<li>pre-rebase钩子在变基前运行，如果以非零值退出，那么变基过程就会被挂起</li>
+<li>post-rewrite钩子由那些执行提交替换的命令调用，包括–amend和rebase，但不包括filter-branch。该脚本的唯一参数是触发重写的命令名称，它从stdin中接收一系列重写的提交。</li>
+<li>post-checkout钩子在checkout成功执行后被调用，可用于移入不想纳入版本控制的大型文件</li>
+<li>post-merge钩子会在merge成功执行后运行，可用于</li>
+</ol>
+<ul>
+<li>恢复git无法跟踪的权限数据</li>
+<li>验证是否有不受git控制的文件存在</li>
+</ul>
+<ol>
+<li>pre-push钩子的调用时机是在远程引用被更新之后，尚未传输对象之前。如果以非零值退出，中止推送</li>
+<li>pre-auto-gc钩子会在git gc开始前被调用</li>
+</ol>
+<h3 id="8-3-3-服务器端钩子"><a href="#8-3-3-服务器端钩子" class="headerlink" title="8.3.3 服务器端钩子"></a>8.3.3 服务器端钩子</h3><p>在推送之前运行的服务器端钩子可以随时以非零值退出，拒绝推送操作，并在客户端输出错误提示</p>
+<ol>
+<li>pre-receive在收到推送时首先运行，它会从stdin处接收一系列被推送的引用</li>
+<li>update脚本类似于pre-receive，但它会为每一个要更新的分支都运行一次。它不会从stdin处读取内容，它接受3个参数：引用名称（分支）、推送之前的SHA-1、推送内容的SHA-1。如果以非零值退出，只有对应的引用会被拒绝，其他引用仍然会被更新</li>
+<li>post-receive钩子无法阻止推送过程，但在推送结束之前会一直保持连接，因此进行一些耗时较长的操作需谨慎</li>
+</ol>
+<h2 id="git强制策略示例"><a href="#git强制策略示例" class="headerlink" title="git强制策略示例"></a>git强制策略示例</h2><p>用Ruby编写脚本实现：检查提交消息的格式，只允许特定的用户修改项目中特定的子目录</p>
+<h1 id="ch09-git与其他系统"><a href="#ch09-git与其他系统" class="headerlink" title="ch09 git与其他系统"></a>ch09 git与其他系统</h1><h3 id="9-1-1-git-svn与Subversion双向桥接"><a href="#9-1-1-git-svn与Subversion双向桥接" class="headerlink" title="9.1.1 git svn与Subversion双向桥接"></a>9.1.1 git svn与Subversion双向桥接</h3><p>建议保持线性：只变基不合并</p>
+<p>不要向单独的git服务器推送任何不包含git-svn-id的内容</p>
+<p><strong>跳过</strong></p>
+<h3 id="9-2-5-自定义导入工具"><a href="#9-2-5-自定义导入工具" class="headerlink" title="9.2.5 自定义导入工具"></a>9.2.5 自定义导入工具</h3><p>git fast-import从stdin中读取简单的指令来写入特定的git数据。比起执行原始的git命令或是编写原始对象要容易</p>
+<h1 id="ch10-git内幕"><a href="#ch10-git内幕" class="headerlink" title="ch10 git内幕"></a>ch10 git内幕</h1><p>git本质上是一个可按内容寻址的文件系统</p>
+<h2 id="10-1-底层命令和高层命令"><a href="#10-1-底层命令和高层命令" class="headerlink" title="10.1 底层命令和高层命令"></a>10.1 底层命令和高层命令</h2><p>.git目录中，有4项很重要</p>
+<ol>
+<li>objects存储了个人数据库的所有内容</li>
+<li>refs存储指针，指向提交对象</li>
+<li>HEAD指向当前检出的分支</li>
+<li>index保存暂存区信息</li>
+</ol>
+<h2 id="10-2-git对象"><a href="#10-2-git对象" class="headerlink" title="10.2 git对象"></a>10.2 git对象</h2><p>git的核心就是“键-值”数据存储。</p>
+<p>blob对象保存文件内容</p>
+<h3 id="10-2-1-树对象"><a href="#10-2-1-树对象" class="headerlink" title="10.2.1 树对象"></a>10.2.1 树对象</h3><p>树类型对象解决了存储文件名的问题</p>
+<h3 id="10-2-2-提交对象"><a href="#10-2-2-提交对象" class="headerlink" title="10.2.2 提交对象"></a>10.2.2 提交对象</h3><p>提交对象指定单个树对象的SHA-1、父提交对象和提交信息</p>
+<h3 id="10-2-3-对象存储"><a href="#10-2-3-对象存储" class="headerlink" title="10.2.3 对象存储"></a>10.2.3 对象存储</h3><p>git构造出以对象类型作为开头的头部信息，例如”blob #{content.length}\0”，将头部信息和原始内容拼接在一起，然后计算新内容的SHA-1；接着使用zlib压缩新内容；最后写道磁盘上的对象中</p>
+<h2 id="10-3-git引用"><a href="#10-3-git引用" class="headerlink" title="10.3 git引用"></a>10.3 git引用</h2><ol>
+<li><code>.git/HEAD</code>包含指向当前所在分支的符号引用；</li>
+<li><code>.git/refs/heads/</code>存储分支；</li>
+<li><code>.git/refs/tags/</code>存储标签；</li>
+<li><code>.git/refs/remotes/</code>存储最后一次推送到远程仓库的每个分支的值。是只读的，无法用commit命令来更新</li>
+</ol>
+<h2 id="包文件"><a href="#包文件" class="headerlink" title="包文件"></a>包文件</h2><p>执行git gc会查找名称和大小相近的文件，只保存不同版本文件之间的差异。</p>
+<p>包文件包含了删除的松散对象，索引文件包含了针对包文件内容的偏移（<strong>博主注：这似乎说明在加密文件系统中使用大型包文件可能会让索引记录的偏移失去意义，因为某些加密模式需要解密整个包文件</strong>CF：<a href="#%E7%BB%B4%E6%8A%A4">10.7.1</a>）</p>
+<ul>
+<li><code>.git/objects/info/packs</code></li>
+<li><code>.git/objects/pack/pack-*.idx</code></li>
+<li><code>.git/objects/pack/pack-*.pack</code></li>
+</ul>
+<p>底层命令<code>git verify-pack</code>可以用来查看打包的内容。CF：<a href="#%E7%A7%BB%E9%99%A4%E5%A4%A7%E5%AF%B9%E8%B1%A1">10.7.3</a></p>
+<h2 id="10-5-引用规格"><a href="#10-5-引用规格" class="headerlink" title="10.5 引用规格"></a>10.5 引用规格</h2><p><code>git remote add origin &lt;url&gt;</code>会在.git/config中添加3行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">        url &#x3D; &lt;url&gt;</span><br><span class="line">        fetch &#x3D; +refs&#x2F;heads&#x2F;*:refs&#x2F;remotes&#x2F;origin&#x2F;*</span><br></pre></td></tr></table></figure>
+<p>其中的加号指示即便在不能快进的情况下也更新引用</p>
+<p>可以通过添加一行<code>push = refs/heads/master:refs/remotes/qa/master</code>使得这成为<code>git push origin</code>的默认操作</p>
+<h2 id="10-6-git传输协议"><a href="#10-6-git传输协议" class="headerlink" title="10.6 git传输协议"></a>10.6 git传输协议</h2><h3 id="10-6-1-哑协议"><a href="#10-6-1-哑协议" class="headerlink" title="10.6.1 哑协议"></a>10.6.1 哑协议</h3><p>dumb协议的获取过程就是一系列的HTTP GET请求</p>
+<p>替代仓库是让派生项目共享对象的好办法。<code>objects/info/http-alternates</code>记录替代仓库URL列表</p>
+<h3 id="10-6-2-智能协议"><a href="#10-6-2-智能协议" class="headerlink" title="10.6.2 智能协议"></a>10.6.2 智能协议</h3><p>用ssh协议push时会尝试以ssh的方式在远程服务器上执行命令，就像</p>
+<p><code>ssh -x git@server &quot;git-receive-pack &#39;simplegit-progit.git&#39;&quot;</code></p>
+<p>收到服务器的状态后，send-pack进程就能够确定那些提交是自己拥有但服务器却没有的</p>
+<h2 id="10-7-维护与数据恢复"><a href="#10-7-维护与数据恢复" class="headerlink" title="10.7 维护与数据恢复"></a>10.7 维护与数据恢复</h2><h3 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h3><p>有7000个左右的松散对象或50个以上的包文件会触发gc，可以分别修改gc.auto和gc.autopacklimit配置设置来修改这些限制。CF：<a href="#%E5%8C%85%E6%96%87%E4%BB%B6">10.4</a></p>
+<h3 id="10-7-2-数据恢复"><a href="#10-7-2-数据恢复" class="headerlink" title="10.7.2 数据恢复"></a>10.7.2 数据恢复</h3><p><code>git reflog</code>展示HEAD曾经指向的引用</p>
+<p><code>git log -g</code>会将引用日志按照正常的log格式输出</p>
+<p>如果丢失了引用日志，例如误操作<code>rm -Rf .git/logs/</code>，可以使用<code>git fsck</code>检查数据的完整性，加上–full选项会显示出所有没被其他对象指向的对象</p>
+<h3 id="移除大对象"><a href="#移除大对象" class="headerlink" title="移除大对象"></a>移除大对象</h3><h4 id="首先找到哪些文件较大"><a href="#首先找到哪些文件较大" class="headerlink" title="首先找到哪些文件较大"></a>首先找到哪些文件较大</h4><p>先执行git gc把所有对象放到包文件中（博主注：包括二进制文件）</p>
+<p>然后用<code>git count-objects -v</code>查看是否只有1个包文件</p>
+<p>接着用<code>git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -n | tail</code>列出最大体积的对象。要查出文件名，还要用<code>git rev-list --objects --all | grep &lt;sha1&gt;</code></p>
+<h4 id="查看哪些提交修改了该大文件"><a href="#查看哪些提交修改了该大文件" class="headerlink" title="查看哪些提交修改了该大文件"></a>查看哪些提交修改了该大文件</h4><p><code>git log --oneline --branches -- &lt;path&gt;</code></p>
+<h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch -index-filter \</span><br><span class="line">	&#39;git rm --ignore-unmatch --cached &lt;path&gt;&#39; -- &lt;引入大文件的最早提交&gt;^..</span><br></pre></td></tr></table></figure>
+
+<p>其中–index-filter选项与<a href="#%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">7.6节</a>用过的–tree-filter类似，但它配合<code>git rm --cached</code>速度更快。–ignore-unmatch选项指明待删除文件不匹配时不显示错误</p>
+<h2 id="10-8-环境变量"><a href="#10-8-环境变量" class="headerlink" title="10.8 环境变量"></a>10.8 环境变量</h2><h3 id="10-8-2-仓库位置"><a href="#10-8-2-仓库位置" class="headerlink" title="10.8.2 仓库位置"></a>10.8.2 仓库位置</h3><p>GIT_CEILING_DIRECTORIES控制.git目录的查找行为。如果你访问到加载速度缓慢的目录（磁带或慢速网络），你可能会想要git趁早停止。</p>
+<p>GIT_ALTERNATE_OBJECT_DIRECTORIES是一个由冒号分隔的列表，用于告诉git，如果对象不再<code>.git/object</code>中，应该去哪里检查对象。用于大量项目中共享相同内容的大文件，避免存储过多的副本</p>
+<h3 id="10-8-5-网络"><a href="#10-8-5-网络" class="headerlink" title="10.8.5 网络"></a>10.8.5 网络</h3><p>GIT_SSL_NO_VERIFY告诉git不验证ssl证书。如果你使用自签名证书通过https搭建git服务器，还没有安装完整的证书，这个选项就很有必要了</p>
+<p>如果http操作的数据速率低于GIT_HTTP_LOW_SPEED_LIMIT字节/秒、持续时间超过GIT_HTTP_LOW_SPEED_TIME秒，git将中止该操作。这些值会覆盖http.lowSpeedLimit和http.lowSpeedTime配置值</p>
+<h3 id="10-8-7-调试"><a href="#10-8-7-调试" class="headerlink" title="10.8.7 调试"></a>10.8.7 调试</h3><h3 id="10-8-8-杂项"><a href="#10-8-8-杂项" class="headerlink" title="10.8.8 杂项"></a>10.8.8 杂项</h3><p>GIT_FLUSH强制git在向stdout中增量写入的时候使用非缓冲I/O。取值为1会使得git更频繁地刷新，取值为0会缓冲所有的输出。默认不设置此变量会根据活动情况和输出模式来选择合适的缓冲方案</p>
+<h2 id="A-6-powershell"><a href="#A-6-powershell" class="headerlink" title="A.6 powershell"></a>A.6 powershell</h2><p>Post-Git包为powershell中的git提供命令补全功能</p>
+<h2 id="B-在应用程序中嵌入git"><a href="#B-在应用程序中嵌入git" class="headerlink" title="B 在应用程序中嵌入git"></a>B 在应用程序中嵌入git</h2><h2 id="C-2-2-clone"><a href="#C-2-2-clone" class="headerlink" title="C.2.2 clone"></a>C.2.2 clone</h2><p>默认的<code>git clone</code>像是多条命令的包装器：创建新目录、进入该目录，init，remote add，fetch，checkout</p>
+<h2 id="C-3-3-diff"><a href="#C-3-3-diff" class="headerlink" title="C.3.3 diff"></a>C.3.3 diff</h2><p>使用-b选项来过滤掉空白字符造成的差异</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/14/2022-06-14-jing-tong-git/" data-id="cl4qsxk780001notk5w51676u" data-title="《精通git》读书笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-ffmpeg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/05/15/ffmpeg/" class="article-date">
@@ -4113,244 +4517,6 @@
 
 
   
-    <article id="post-web-scraping-with-python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/05/web-scraping-with-python/" class="article-date">
-  <time class="dt-published" datetime="2021-05-05T09:27:47.000Z" itemprop="datePublished">2021-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/book-note/">book-note</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/05/web-scraping-with-python/">《python网络爬虫权威指南》读书笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a href="#%E5%89%8D%E8%A8%80">前言</a><br><a href="#ch01-%E5%88%9D%E8%A7%81%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB">ch01 初见网络爬虫</a><br><a href="#ch06-%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE">ch06 存储数据</a><br><a href="#ch0">ch0 </a><br><a href="#ch11-%E6%8A%93%E5%8F%96-JavaScript">ch11 抓取-JavaScript</a><br><a href="#15-3-Selenium-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">15.3 Selenium 单元测试</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="建议所有读者学习第一部分，并根据自己的实际需求深入探索第二部分"><a href="#建议所有读者学习第一部分，并根据自己的实际需求深入探索第二部分" class="headerlink" title="建议所有读者学习第一部分，并根据自己的实际需求深入探索第二部分"></a>建议所有读者学习第一部分，并根据自己的实际需求深入探索第二部分</h2><p>按初、中级Python编程水平来编写书中的概念和代码示例</p>
-<h2 id="大体上，你遇到的90-的网页爬取项目使用的都是前6章介绍的技术"><a href="#大体上，你遇到的90-的网页爬取项目使用的都是前6章介绍的技术" class="headerlink" title="大体上，你遇到的90%的网页爬取项目使用的都是前6章介绍的技术"></a>大体上，你遇到的90%的网页爬取项目使用的都是前6章介绍的技术</h2><h1 id="ch01-初见网络爬虫"><a href="#ch01-初见网络爬虫" class="headerlink" title="ch01 初见网络爬虫"></a>ch01 初见网络爬虫</h1><h2 id="本章将首先向网络服务器发送GET请求。只有三行代码的scrapetest-py即可实现。"><a href="#本章将首先向网络服务器发送GET请求。只有三行代码的scrapetest-py即可实现。" class="headerlink" title="本章将首先向网络服务器发送GET请求。只有三行代码的scrapetest.py即可实现。"></a>本章将首先向网络服务器发送GET请求。只有三行代码的scrapetest.py即可实现。</h2><h3 id="1-1-网络连接"><a href="#1-1-网络连接" class="headerlink" title="1.1 网络连接"></a>1.1 网络连接</h3><p>当Web浏览器遇到一个标签时，比如<code>&lt;img src=&quot;cuteKitten.jpg&gt;</code>，会向服务器发起另一个请求以获取图片文件。你的Python程序没有请求多个文件的逻辑，它只能读取你直接请求的单个HTML文件。</p>
-<h3 id="1-2-BeautifulSoup简介"><a href="#1-2-BeautifulSoup简介" class="headerlink" title="1.2 BeautifulSoup简介"></a>1.2 BeautifulSoup简介</h3><h4 id="1-2-1-安装BeautifulSoup"><a href="#1-2-1-安装BeautifulSoup" class="headerlink" title="1.2.1 安装BeautifulSoup"></a>1.2.1 安装BeautifulSoup</h4><h4 id="1-2-2-运行BeautifulSoup"><a href="#1-2-2-运行BeautifulSoup" class="headerlink" title="1.2.2 运行BeautifulSoup"></a>1.2.2 运行BeautifulSoup</h4><p><code>bs = BeautifulSoup(html.read(), &#39;html.parser&#39;) </code>第二个参数指定了解析器，在大多数情况下，你选择任何一个解析器都差别不大。</p>
-<p><code>print(bs.h1)</code>仅仅显示了页面上的<strong>第一个</strong> h1 标签。</p>
-<h4 id="1-2-3-可靠的网络连接以及异常的处理"><a href="#1-2-3-可靠的网络连接以及异常的处理" class="headerlink" title="1.2.3 可靠的网络连接以及异常的处理"></a>1.2.3 可靠的网络连接以及异常的处理</h4><p>函数urlopen主要会发生两种异常</p>
-<ul>
-<li>网页在服务器上不存在（或者获取页面的时候出现错误）：会抛出HTTPError异常</li>
-<li>服务器不存在：会抛出URLError异常</li>
-</ul>
-<p>即使从服务器成功获取网页，网页上的内容可能并非完全是我们期望的那样。</p>
-<ul>
-<li>如果你想要调用的标签不存在，BeautifulSoup就会返回None对象。</li>
-<li>如果再调用这个None对象下面的子标签，就会发生AttributeError错误</li>
-</ul>
-<h1 id="ch06-存储数据"><a href="#ch06-存储数据" class="headerlink" title="ch06 存储数据"></a>ch06 存储数据</h1><p>3种数据管理方法：写入数据库、存到硬盘、发邮件</p>
-<h2 id="这一章的内容其实是实现第二部分许多示例的基础"><a href="#这一章的内容其实是实现第二部分许多示例的基础" class="headerlink" title="这一章的内容其实是实现第二部分许多示例的基础"></a>这一章的内容其实是实现第二部分许多示例的基础</h2><h3 id="6-1-媒体文件"><a href="#6-1-媒体文件" class="headerlink" title="6.1 媒体文件"></a>6.1 媒体文件</h3><p>用<code>urllib.request.urlretrieve</code>下载图片</p>
-<h3 id="6-2-把数据存储到CSV"><a href="#6-2-把数据存储到CSV" class="headerlink" title="6.2 把数据存储到CSV"></a>6.2 把数据存储到CSV</h3><p>Python的CSV库可以非常简单地修改CSV文件</p>
-<h2 id="本章剩余内容跳过"><a href="#本章剩余内容跳过" class="headerlink" title="本章剩余内容跳过"></a>本章剩余内容跳过</h2><h1 id="ch11-抓取-JavaScript"><a href="#ch11-抓取-JavaScript" class="headerlink" title="ch11 抓取 JavaScript"></a>ch11 抓取 JavaScript</h1><p>两种客户端脚本语言</p>
-<ul>
-<li>ActionScript：开发Flash应用的语言，需求并不多</li>
-<li>JavaScript：它可以手机用户跟踪数据，不需要重载页面直接提交表单，在页面中嵌入多媒体文件，甚至运行在线游戏。你可以在网页源代码的<code>&lt;script&gt;</code>标签之间看到它们。</li>
-</ul>
-<h3 id="11-1-JavaScript简介"><a href="#11-1-JavaScript简介" class="headerlink" title="11.1 JavaScript简介"></a>11.1 JavaScript简介</h3><h4 id="了解语法"><a href="#了解语法" class="headerlink" title="了解语法"></a>了解语法</h4><h4 id="常用JavaScript库"><a href="#常用JavaScript库" class="headerlink" title="常用JavaScript库"></a>常用JavaScript库</h4><ol>
-<li>jQuery</li>
-<li>Google Analytics</li>
-<li>Google Map</li>
-</ol>
-<h3 id="11-2-Ajax和动态HTML"><a href="#11-2-Ajax和动态HTML" class="headerlink" title="11.2 Ajax和动态HTML"></a>11.2 Ajax和动态HTML</h3><p>如果提交表单之后，网站的页面不需要重新加载，那么你访问的网站很可能使用了Ajax技术。</p>
-<p>两种途径：</p>
-<ul>
-<li>直接从JavaScript代码里抓取内容</li>
-<li>用Python的第三方库执行JavaScript，直接抓取你在浏览器里看到的页面</li>
-</ul>
-<h4 id="11-2-1-Selenium"><a href="#11-2-1-Selenium" class="headerlink" title="11.2.1 Selenium"></a>11.2.1 Selenium</h4><p>页面的加载时间时不确定的。高效的方法是，让Selenium不断地检查某个元素是否存在，以次确定页面是否已经完全加载。</p>
-<p>Selenium的选择器<code>find_element_by_css_selector(&#39;#content&#39;)</code>也可以用复数<code>find_elements_by_css_selector(&#39;#content&#39;)</code>来返回一个Python列表</p>
-<p>想用BeautifulSoup来解析网页内容，可以用driver.page_source返回页面的源代码字符串</p>
-<p>隐式等待时等DOM中某个状态发生后再继续运行代码。可捕获TimeoutException</p>
-<p>触发的期望条件有4种。大多数期望条件在使用前都需要你先指定等待的目标元素。元素用定位器指定。定位器与选择器是不一样的。定位器是一种抽象的查询语言，用By对象表示，可以用于不同的场合，包括创建选择器。By的策略包括：</p>
-<ul>
-<li>IF</li>
-<li>CLASS_NAME</li>
-<li>CSS_SELECTOR</li>
-<li>LINK_TEXT：通过链接文字查找<code>&lt;a&gt;</code>标签</li>
-<li>PARTIAL_LINK_TEXT：只通过部分链接文字查找</li>
-<li>NAME</li>
-<li>TAG_NAME</li>
-<li>XPATH</li>
-</ul>
-<h4 id="11-2-2-webdriver-Firefox"><a href="#11-2-2-webdriver-Firefox" class="headerlink" title="11.2.2 webdriver.Firefox"></a>11.2.2 webdriver.Firefox</h4><h3 id="11-3-处理重定向"><a href="#11-3-处理重定向" class="headerlink" title="11.3 处理重定向"></a>11.3 处理重定向</h3><ul>
-<li>服务器端重定向可以轻松地通过urllib库解决</li>
-<li>客户端重定向的主要问题是什么时候停止页面执行。</li>
-</ul>
-<p>检测客户端重定向是否已完成的智能方法：从页面开始加载时就监视DOM中的一个元素，然后重复调用这个元素，直到抛出StaleElementReferenceException异常。</p>
-<p>等待元素的出现和消失是Selenium中一个常见的任务</p>
-<h3 id="11-4-如果你仍然难以应对某种复杂的JavaScript情形，可以到第15章查找关于Selenium以及直接与动态网站交互的信息。"><a href="#11-4-如果你仍然难以应对某种复杂的JavaScript情形，可以到第15章查找关于Selenium以及直接与动态网站交互的信息。" class="headerlink" title="11.4 如果你仍然难以应对某种复杂的JavaScript情形，可以到第15章查找关于Selenium以及直接与动态网站交互的信息。"></a>11.4 如果你仍然难以应对某种复杂的JavaScript情形，可以到第15章查找关于Selenium以及直接与动态网站交互的信息。</h3><h1 id="ch14-避开抓取陷阱"><a href="#ch14-避开抓取陷阱" class="headerlink" title="ch14 避开抓取陷阱"></a>ch14 避开抓取陷阱</h1><h3 id="14-2-让网络机器人看着像人类用户"><a href="#14-2-让网络机器人看着像人类用户" class="headerlink" title="14.2 让网络机器人看着像人类用户"></a>14.2 让网络机器人看着像人类用户</h3><h4 id="14-2-1-修改请求头"><a href="#14-2-1-修改请求头" class="headerlink" title="14.2.1 修改请求头"></a>14.2.1 修改请求头</h4><p>参考ch10</p>
-<p>经典的Python爬虫在使用urllib时，都会发送如下的请求头<code>User-Agent=Python-urllib/3.4</code></p>
-<h4 id="14-2-2-用JavaScript处理cookie"><a href="#14-2-2-用JavaScript处理cookie" class="headerlink" title="14.2.2 用JavaScript处理cookie"></a>14.2.2 用JavaScript处理cookie</h4><h4 id="14-2-3-时间就是一切"><a href="#14-2-3-时间就是一切" class="headerlink" title="14.2.3 时间就是一切"></a>14.2.3 时间就是一切</h4><h3 id="14-3-常见表单安全措施"><a href="#14-3-常见表单安全措施" class="headerlink" title="14.3 常见表单安全措施"></a>14.3 常见表单安全措施</h3><h3 id="14-4-问题检查表"><a href="#14-4-问题检查表" class="headerlink" title="14.4 问题检查表"></a>14.4 问题检查表</h3><ul>
-<li>如果收到的页面是空白的或与浏览器上看到的不一样，有可能是因为JavaScript执行有问题。</li>
-<li>POST请求要检查字段和格式是否正确</li>
-<li>无法保持登录状态，请检查你的cookie</li>
-<li>遇到HTTP错误，尤其是403禁止访问错误，这可能说明网站已经把你的IP地址当做机器人了。你要么等待，要么换个IP地址（可以去星巴克上网，或者看看第17章的内容）。为了确保不会再次被封杀，请做到以下几点：<ul>
-<li>给爬虫增加延迟，让它们在夜深人静的时候运行</li>
-<li>修改请求头</li>
-<li>确认你没有点击或访问任何人类用户通常不能点击或访问的信息</li>
-<li>联系网管</li>
-</ul>
-</li>
-</ul>
-<h3 id="15-3-Selenium-单元测试"><a href="#15-3-Selenium-单元测试" class="headerlink" title="15.3 Selenium 单元测试"></a>15.3 Selenium 单元测试</h3><p>Selenium可以对任何给定元素执行很多操作：click,click_and_hold,release,double_click,send_keys_to_element</p>
-<p>除了一次性完成一个元素的多个操作，还可以将一组操作组合成一个动作链</p>
-<h4 id="拖放与截屏"><a href="#拖放与截屏" class="headerlink" title="拖放与截屏"></a>拖放与截屏</h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/05/05/web-scraping-with-python/" data-id="cl310rf3v0014gctk1kpl02tk" data-title="《python网络爬虫权威指南》读书笔记" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-jing-tong-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/29/jing-tong-git/" class="article-date">
-  <time class="dt-published" datetime="2021-04-29T13:33:37.000Z" itemprop="datePublished">2021-04-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/book-note/">book-note</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/29/jing-tong-git/">《精通git》读书笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="3-5-远程分支"><a href="#3-5-远程分支" class="headerlink" title="3.5 远程分支"></a>3.5 远程分支</h2><p>远程分支是指针，存在于本地且<strong>无法被移动</strong>。当你与服务器进行网络通信时，它们会自动更新。远程分支有点像书签，它们会提示你上一次连接服务器时远程仓库中每个分支的位置。</p>
-<p>git fetch会更新远程分支指针</p>
-<h3 id="3-5-1-推送"><a href="#3-5-1-推送" class="headerlink" title="3.5.1 推送"></a>3.5.1 推送</h3><p><code>git push origin serverfix</code>实际上是<code>git push origin refs/heads/serverfix:refs/heads/serverfix</code></p>
-<p>如果不想每次推送时都键入密码，可以设置一个凭据缓存（credential cache）。请参阅<a href="#7-14-%E5%87%AD%E6%8D%AE%E5%AD%98%E5%82%A8">7.14节</a></p>
-<p>上游分支的简单写法：如果你已经设置好了上游分支，就可以通过@{u}来使用。例如在master上用<code>git merge @&#123;u&#125;</code>来代替<code>git merge origin/master</code></p>
-<p><code>git branch -vv</code>列出每个分支的名字及其跟踪的远程分支信息，以及领先或落后的信息。要注意的是，这条命令和<code>git status</code>都不会与服务器通信以获取最新信息。</p>
-<h3 id="3-5-4-删除远程分支：git-push-origin-delete-serverfix"><a href="#3-5-4-删除远程分支：git-push-origin-delete-serverfix" class="headerlink" title="3.5.4 删除远程分支：git push origin --delete serverfix"></a>3.5.4 删除远程分支：<code>git push origin --delete serverfix</code></h3><h2 id="3-6-变基"><a href="#3-6-变基" class="headerlink" title="3.6 变基"></a>3.6 变基</h2><h3 id="3-6-1-变基的工作原理"><a href="#3-6-1-变基的工作原理" class="headerlink" title="3.6.1 变基的工作原理"></a>3.6.1 变基的工作原理</h3><ol>
-<li>找到共同祖先</li>
-<li>取得每次提交引入的更改（diff）</li>
-<li>依次引入更改  </li>
-</ol>
-<h1 id="ch04"><a href="#ch04" class="headerlink" title="ch04"></a>ch04</h1><p>如果你对自己运行Git服务器不感兴趣，可以跳过本章的前面几节，直接阅读4.9节。</p>
-<h2 id="4-1-协议"><a href="#4-1-协议" class="headerlink" title="4.1 协议"></a>4.1 协议</h2><h3 id="4-1-1-本地协议"><a href="#4-1-1-本地协议" class="headerlink" title="4.1.1 本地协议"></a>4.1.1 本地协议</h3><p>使用file://前缀的主要原因是希望取出仓库中的外部引用或多余对象。</p>
-<h3 id="4-1-2-HTTP协议"><a href="#4-1-2-HTTP协议" class="headerlink" title="4.1.2 HTTP协议"></a>4.1.2 HTTP协议</h3><p>智能HTTP协议最普遍。既支持匿名访问，也支持用户验证。</p>
-<h3 id="4-1-3-SSH协议"><a href="#4-1-3-SSH协议" class="headerlink" title="4.1.3 SSH协议"></a>4.1.3 SSH协议</h3><p>SSH不能实现匿名访问</p>
-<h3 id="4-1-4-Git协议"><a href="#4-1-4-Git协议" class="headerlink" title="4.1.4 Git协议"></a>4.1.4 Git协议</h3><p>Git协议不提供任何身份验证方式</p>
-<h1 id="ch05"><a href="#ch05" class="headerlink" title="ch05"></a>ch05</h1><h2 id="5-1-分布式工作流"><a href="#5-1-分布式工作流" class="headerlink" title="5.1 分布式工作流"></a>5.1 分布式工作流</h2><h3 id="5-1-1-集中式工作流"><a href="#5-1-1-集中式工作流" class="headerlink" title="5.1.1 集中式工作流"></a>5.1.1 集中式工作流</h3><p>中枢接受代码，所有人以此同步各自的工作</p>
-<h3 id="5-1-2-集成管理者工作流"><a href="#5-1-2-集成管理者工作流" class="headerlink" title="5.1.2 集成管理者工作流"></a>5.1.2 集成管理者工作流</h3><p>开发人员fork，继承管理者处理pull request</p>
-<h3 id="5-1-3-司令官与副官工作流"><a href="#5-1-3-司令官与副官工作流" class="headerlink" title="5.1.3 司令官与副官工作流"></a>5.1.3 司令官与副官工作流</h3><p>用于Linux内核等等超大型项目或高度层次化环境。</p>
-<h2 id="5-2-为项目做贡献"><a href="#5-2-为项目做贡献" class="headerlink" title="5.2 为项目做贡献"></a>5.2 为项目做贡献</h2><h3 id="5-2-1-提交准则"><a href="#5-2-1-提交准则" class="headerlink" title="5.2.1 提交准则"></a>5.2.1 提交准则</h3><p>提交之前执行<code>git diff --check</code>列出可能存在的空白字符错误</p>
-<p>提交消息的第一行不应该超过50个字符</p>
-<h3 id="5-2-4-用rebase-i将工作内容压缩成单个提交可能会方便维护人员评审补丁。7-6节会对交互式变基做更详尽的介绍。"><a href="#5-2-4-用rebase-i将工作内容压缩成单个提交可能会方便维护人员评审补丁。7-6节会对交互式变基做更详尽的介绍。" class="headerlink" title="5.2.4 用rebase -i将工作内容压缩成单个提交可能会方便维护人员评审补丁。7.6节会对交互式变基做更详尽的介绍。"></a>5.2.4 用<code>rebase -i</code>将工作内容压缩成单个提交可能会方便维护人员评审补丁。7.6节会对交互式变基做更详尽的介绍。</h3><h3 id="5-2-5-用git-format-patch来生成要通过电子邮件发送的mbox格式的文件"><a href="#5-2-5-用git-format-patch来生成要通过电子邮件发送的mbox格式的文件" class="headerlink" title="5.2.5 用git format-patch来生成要通过电子邮件发送的mbox格式的文件"></a>5.2.5 用<code>git format-patch</code>来生成要通过电子邮件发送的mbox格式的文件</h3><p>用<code>git send-email</code>之前需要配置</p>
-<h3 id="5-3-4-确定引入内容"><a href="#5-3-4-确定引入内容" class="headerlink" title="5.3.4 确定引入内容"></a>5.3.4 确定引入内容</h3><p><a href="#7-1-%E9%80%89%E6%8B%A9%E4%BF%AE%E8%AE%A2%E7%89%88%E6%9C%AC">CF:7.1 选择修订版本</a><br>双点语法：<code>git log master..contrib</code>显示在contrib中但不在master中的提交<br>三点语法：<code>git diff master...contrib</code>显示contrib与master分岔后的diff</p>
-<h3 id="5-3-5-大型合并工作流"><a href="#5-3-5-大型合并工作流" class="headerlink" title="5.3.5 大型合并工作流"></a>5.3.5 大型合并工作流</h3><p>将主题分支合并到next并推送共享，如果主题分支仍需改进则合并到pu分支，稳定下来后重新和并入master。这意味着master始终快近，next偶尔变基，pu频繁变基。maint用于提供向后移植补丁。</p>
-<h3 id="5-3-9-汇总自上次v1-1-1之后所有提交：git-shortlog-no-merges-master-not-v1-1-1"><a href="#5-3-9-汇总自上次v1-1-1之后所有提交：git-shortlog-no-merges-master-not-v1-1-1" class="headerlink" title="5.3.9 汇总自上次v1.1.1之后所有提交：git shortlog --no-merges master --not v1.1.1"></a>5.3.9 汇总自上次v1.1.1之后所有提交：<code>git shortlog --no-merges master --not v1.1.1</code></h3><h1 id="ch06"><a href="#ch06" class="headerlink" title="ch06"></a>ch06</h1><h3 id="6-3-2-添加协作人员：Collaborators"><a href="#6-3-2-添加协作人员：Collaborators" class="headerlink" title="6.3.2 添加协作人员：Collaborators"></a>6.3.2 添加协作人员：Collaborators</h3><h2 id="6-5-GitHub脚本化"><a href="#6-5-GitHub脚本化" class="headerlink" title="6.5 GitHub脚本化"></a>6.5 GitHub脚本化</h2><h3 id="6-5-1-钩子系统"><a href="#6-5-1-钩子系统" class="headerlink" title="6.5.1 钩子系统"></a>6.5.1 钩子系统</h3><h3 id="6-5-2-GitHub-API"><a href="#6-5-2-GitHub-API" class="headerlink" title="6.5.2 GitHub API"></a>6.5.2 GitHub API</h3><h1 id="ch07"><a href="#ch07" class="headerlink" title="ch07"></a>ch07</h1><h2 id="7-1-选择修订版本"><a href="#7-1-选择修订版本" class="headerlink" title="7.1 选择修订版本"></a>7.1 选择修订版本</h2><h3 id="git-log-left-right-master-experiment可以显示出提交属于哪一侧的分支。CF-5-3-4-确定引入内容"><a href="#git-log-left-right-master-experiment可以显示出提交属于哪一侧的分支。CF-5-3-4-确定引入内容" class="headerlink" title="git log --left-right master...experiment可以显示出提交属于哪一侧的分支。CF:5.3.4 确定引入内容"></a><code>git log --left-right master...experiment</code>可以显示出提交属于哪一侧的分支。<a href="#5-3-4-%E7%A1%AE%E5%AE%9A%E5%BC%95%E5%85%A5%E5%86%85%E5%AE%B9">CF:5.3.4 确定引入内容</a></h3><h2 id="7-3-储藏"><a href="#7-3-储藏" class="headerlink" title="7.3 储藏"></a>7.3 储藏</h2><h3 id="7-3-3-从储藏中创建分支：git-stash-branch-新分支名"><a href="#7-3-3-从储藏中创建分支：git-stash-branch-新分支名" class="headerlink" title="7.3.3 从储藏中创建分支：git stash branch 新分支名"></a>7.3.3 从储藏中创建分支：<code>git stash branch 新分支名</code></h3><h3 id="清理工作目录"><a href="#清理工作目录" class="headerlink" title="清理工作目录"></a>清理工作目录</h3><p><code>git stash -all</code>以储藏形式保存全部内容<br><code>git clean -n</code>做一次删除的演习<br><code>git clean -f</code>进行实际删除</p>
-<h2 id="7-5-搜索"><a href="#7-5-搜索" class="headerlink" title="7.5 搜索"></a>7.5 搜索</h2><h3 id="7-5-1-工作目录搜索"><a href="#7-5-1-工作目录搜索" class="headerlink" title="7.5.1 工作目录搜索"></a>7.5.1 工作目录搜索</h3><p><code>git grep 模式</code>默认只查找工作目录下的文件</p>
-<p><code>git grep --count 模式</code>输出总结信息：每个匹配的文件中有多少处匹配</p>
-<p><code>git grep -p 模式</code>显示所查找到的匹配属于哪个方法或函数</p>
-<p>还可以使用–and选项来查找复杂的字符串组合</p>
-<h3 id="7-5-2-日志搜索"><a href="#7-5-2-日志搜索" class="headerlink" title="7.5.2 日志搜索"></a>7.5.2 日志搜索</h3><p><code>git log -S 字符串</code>显示出添加过或删除过该字符串的那些提交</p>
-<p><code>git log -G 模式</code>等同于-S但使用正则表达式进行模式匹配</p>
-<p><code>git log -L 模式:文件</code>显示所有匹配的改动记录</p>
-<h2 id="7-6-重写历史"><a href="#7-6-重写历史" class="headerlink" title="7.6 重写历史"></a>7.6 重写历史</h2><h3 id="7-6-3-重排提交：在交互式变基中改变行的顺序"><a href="#7-6-3-重排提交：在交互式变基中改变行的顺序" class="headerlink" title="7.6.3 重排提交：在交互式变基中改变行的顺序"></a>7.6.3 重排提交：在交互式变基中改变行的顺序</h3><h3 id="7-6-4-压缩提交：在交互式变基中用squash"><a href="#7-6-4-压缩提交：在交互式变基中用squash" class="headerlink" title="7.6.4 压缩提交：在交互式变基中用squash"></a>7.6.4 压缩提交：在交互式变基中用squash</h3><h3 id="7-6-5-拆分提交：在交互式变基中用edit"><a href="#7-6-5-拆分提交：在交互式变基中用edit" class="headerlink" title="7.6.5 拆分提交：在交互式变基中用edit"></a>7.6.5 拆分提交：在交互式变基中用edit</h3><h3 id="7-6-6-超强命令：filter-branch"><a href="#7-6-6-超强命令：filter-branch" class="headerlink" title="7.6.6 超强命令：filter-branch"></a>7.6.6 超强命令：filter-branch</h3><ol>
-<li>从所有提交中删除某个文件：<code>git filter-branch --tree-filter &#39;rm -f 文件&#39; HEAD</code>。要想在所有分支上执行filter-branch，可以传入–all选项</li>
-<li>将子目录设置为新的根目录：<code>git filter-branch --subdirectory-filter 目录 HEAD</code></li>
-<li>全面修改邮件地址：利用shell中的if语句配合GIT_AUTHOR环境变量</li>
-</ol>
-<h2 id="7-7-重置揭秘：reset和checkout"><a href="#7-7-重置揭秘：reset和checkout" class="headerlink" title="7.7 重置揭秘：reset和checkout"></a>7.7 重置揭秘：reset和checkout</h2><h3 id="7-7-5-要压缩最新的几个提交，只需git-reset-soft-旧提交然后commit"><a href="#7-7-5-要压缩最新的几个提交，只需git-reset-soft-旧提交然后commit" class="headerlink" title="7.7.5 要压缩最新的几个提交，只需git reset --soft 旧提交然后commit"></a>7.7.5 要压缩最新的几个提交，只需<code>git reset --soft 旧提交</code>然后commit</h3><h3 id="7-7-7-文件级别与提交级别"><a href="#7-7-7-文件级别与提交级别" class="headerlink" title="7.7.7 文件级别与提交级别"></a>7.7.7 文件级别与提交级别</h3><p>|            |索引|工作目录|覆盖是否安全|<br>|提交级别||||<br>|reset –soft COMMIT    ||||<br>|reset –mixed COMMIT<br>|reset –hard COMMIT<br>|checkout COMMIT<br>|文件级别||||<br>|reset COMMIT FILE<br>|checkout COMMIT FILE    </p>
-<h3 id="7-8-1-合并冲突"><a href="#7-8-1-合并冲突" class="headerlink" title="7.8.1 合并冲突"></a>7.8.1 合并冲突</h3><p><code>git mrege -Xignore-all-space</code>忽略空白字符的变更</p>
-<p><code>git checkout --conflict=diff3 冲突文件名</code>在冲突标记中提供内嵌的base版本</p>
-<p><code>git checkout</code>还可以接受–ours和–theirs作为选项，这是一种只选择其中一侧的快速方法。</p>
-<h3 id="7-8-2-还原提交"><a href="#7-8-2-还原提交" class="headerlink" title="7.8.2 还原提交"></a>7.8.2 还原提交</h3><p>对合并提交执行<code>git revert</code>需要用-m选项指明要还原哪个父节点引入的扁钢</p>
-<p>如果使用<code>git revert -m 1 HEAD</code>来抵消合并，会影响这两个分支以后的合并基础</p>
-<h3 id="7-8-3-Xours与-s-ours"><a href="#7-8-3-Xours与-s-ours" class="headerlink" title="7.8.3 -Xours与-s ours"></a>7.8.3 <code>-Xours</code>与<code>-s ours</code></h3><p>给merge传入-Xours或-Xtheirs选项就不再添加冲突标记。任何能够合并的差异，Git会选择合并。任何有冲突的差异，Git会简单地选择你所指定的那一侧。</p>
-<p>更严格的策略是<code>-s ours</code>。这个方法基本上做的是一次假合并。它会记录一个</p>
-<h4 id="读完ch10回来看子树合并"><a href="#读完ch10回来看子树合并" class="headerlink" title="读完ch10回来看子树合并"></a>读完ch10回来看子树合并</h4><h2 id="7-9-rerere"><a href="#7-9-rerere" class="headerlink" title="7.9 rerere"></a>7.9 rerere</h2><p>在有些情况下，重用冲突解决方案相当方便。例如：</p>
-<ul>
-<li>想确保一个长期的topic分支能够干净地合并，但又不想要一堆用于<strong>中间阶段</strong>的合并提交。你可以启动rerere功能，偶尔进行合并、解决冲突、<strong>然后退出合并</strong>。如果你一直这么做，那么最终的合并应该会很容易。变基也同理</li>
-<li>选用一个已合并的分支，修复了一堆冲突后决定对其进行变基操作，这样你可能就不必再去解决同样的冲突了。</li>
-<li>偶尔将多个尚在改进的topic分支合并到一个可测试的头部。如果测试失败，你可以返回合并之前，不使用导致失败的topic分支，然后再次合并，无需再次重新解决冲突。</li>
-</ul>
-<h2 id="7-10-使用Git调试"><a href="#7-10-使用Git调试" class="headerlink" title="7.10 使用Git调试"></a>7.10 使用Git调试</h2><h3 id="7-10-1-文件标注"><a href="#7-10-1-文件标注" class="headerlink" title="7.10.1  文件标注"></a>7.10.1  文件标注</h3><p><code>git blame -L 起始行,结束行 文件</code>查看每一行的最后一次修改者和修改时间</p>
-<p>加入-C参数要求Git找出代码移动的原始出处</p>
-<h3 id="7-10-2-git-bisect帮助尽快确定问题是由那、哪一次提交引发的"><a href="#7-10-2-git-bisect帮助尽快确定问题是由那、哪一次提交引发的" class="headerlink" title="7.10.2 git bisect帮助尽快确定问题是由那、哪一次提交引发的"></a>7.10.2 <code>git bisect</code>帮助尽快确定问题是由那、哪一次提交引发的</h3><h2 id="7-11-子模块"><a href="#7-11-子模块" class="headerlink" title="7.11 子模块"></a>7.11 子模块</h2><h2 id="7-12-打包bundle"><a href="#7-12-打包bundle" class="headerlink" title="7.12 打包bundle"></a>7.12 打包bundle</h2><h2 id="7-13-替换：历史记录拆分后可用replace重新嫁接"><a href="#7-13-替换：历史记录拆分后可用replace重新嫁接" class="headerlink" title="7.13 替换：历史记录拆分后可用replace重新嫁接"></a>7.13 替换：历史记录拆分后可用replace重新嫁接</h2><h2 id="7-14-凭据存储"><a href="#7-14-凭据存储" class="headerlink" title="7.14 凭据存储"></a>7.14 凭据存储</h2><p><code>git config --global credential.helper cache --timeout 900</code>设置将凭据保存在内存中15分钟</p>
-<p><code>git config --global credential.helper store --file 路径</code>设置将凭据保存在硬盘</p>
-<h1 id="ch08-自定义Git"><a href="#ch08-自定义Git" class="headerlink" title="ch08 自定义Git"></a>ch08 自定义Git</h1><h2 id="8-1-配置Git"><a href="#8-1-配置Git" class="headerlink" title="8.1 配置Git"></a>8.1 配置Git</h2><h3 id="8-1-1-基本配置"><a href="#8-1-1-基本配置" class="headerlink" title="8.1.1 基本配置"></a>8.1.1 基本配置</h3><p><code>git config --global commit.template ~/.gitmessage.txt</code>设置默认的提交消息占位符</p>
-<h3 id="8-1-3-外部的合并与diff工具"><a href="#8-1-3-外部的合并与diff工具" class="headerlink" title="8.1.3 外部的合并与diff工具"></a>8.1.3 外部的合并与diff工具</h3><p><code>git config --global merge.tool kdiff3</code></p>
-<h3 id="8-1-4-格式化与空白字符"><a href="#8-1-4-格式化与空白字符" class="headerlink" title="8.1.4 格式化与空白字符"></a>8.1.4 格式化与空白字符</h3><ol>
-<li>core.autocrlf 处理行终止符。win适合把它置为true，unix适合把它置为input。</li>
-<li>core.whitespace 用于检测、修正与空白字符相关的问题</li>
-</ol>
-<ul>
-<li>（默认）blank-at-eol 会查找行尾的空格</li>
-<li>（默认）blank-at-eof 会查看文件末尾的空行</li>
-<li>（默认）space-before-tab 会查找行首制表符之前的空格</li>
-</ul>
-<ol start="3">
-<li>如果提交了存在空白字符问题的文件，可以执行<code>git rebase --whitespace=fix</code>自动修复</li>
-</ol>
-<h2 id="8-2-Git属性"><a href="#8-2-Git属性" class="headerlink" title="8.2 Git属性"></a>8.2 Git属性</h2><p>针对路径的配置被称为Git属性</p>
-<h3 id="8-2-1-二进制文件"><a href="#8-2-1-二进制文件" class="headerlink" title="8.2.1 二进制文件"></a>8.2.1 二进制文件</h3><ol>
-<li><code>*.pbxproj binary</code>告诉Git把<code>*.pbxproj</code>当做二进制文件来处理</li>
-<li>比较二进制文件</li>
-</ol>
-<ul>
-<li><code>*.docx diff=word</code>配合<code>git config diff.word.textconv docx2txt</code>可比较word文件的文字改动</li>
-</ul>
-<ol>
-<li><code>*.png diff=exif</code>配合<code>git config diff.exif.textconv exiftool</code>可比较图像的元信息<h3 id="8-2-2-关键字扩展"><a href="#8-2-2-关键字扩展" class="headerlink" title="8.2.2 关键字扩展"></a>8.2.2 关键字扩展</h3></li>
-<li><code>*.txt ident</code>让Git在检出时将blob对象的SHA-1写入$Id$字段。用途有限</li>
-<li>编写自己的smudge和clean</li>
-</ol>
-<p><a href="#%E8%AF%BB%E5%AE%8Cch10%E5%9B%9E%E6%9D%A5%E7%9C%8B%E5%AD%90%E6%A0%91%E5%90%88%E5%B9%B6">读完ch10回来看子树合并</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/29/jing-tong-git/" data-id="cl310rf3j000pgctkfu7cbb4w" data-title="《精通git》读书笔记" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -4381,7 +4547,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1021/04/">April 1021</a></li></ul>
     </div>
   </div>
 
@@ -4394,6 +4560,14 @@
       <ul>
         
           <li>
+            <a href="/2022/06/23/2022-06-23-gpg/">《gpg》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/2022-06-14-jing-tong-git/">《精通git》读书笔记</a>
+          </li>
+        
+          <li>
             <a href="/2022/05/15/ffmpeg/">《ffmpeg从入门到精通》读书笔记</a>
           </li>
         
@@ -4403,14 +4577,6 @@
         
           <li>
             <a href="/2021/08/10/high-availability-linux/">《构建高可用Linux服务器》读书笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/21/mysql-ji-shu-nei-mu/">《mysql技术内幕》读书笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/19/ubuntu-linux-os/">Ubuntu相关读书笔记</a>
           </li>
         
       </ul>
