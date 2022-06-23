@@ -14,7 +14,7 @@
 <meta property="og:description" content="3.5 远程分支如果不想每次推送时都键入密码，可以设置一个凭据缓存（credential cache）。请参阅7.14节 git branch -vv列出每个分支的名字及其跟踪的远程分支信息，以及领先或落后的信息。要注意的是，这条命令和git status都不会与服务器通信以获取最新信息。 3.6 变基3.6.1 变基的工作原理 找到共同祖先 取得每次提交引入的更改（diff） 依次引入更改">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-14T06:18:36.000Z">
-<meta property="article:modified_time" content="2022-06-23T09:10:22.168Z">
+<meta property="article:modified_time" content="2022-06-23T09:33:18.710Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -310,7 +310,7 @@
 <h2 id="8-3-钩子"><a href="#8-3-钩子" class="headerlink" title="8.3 钩子"></a>8.3 钩子</h2><h3 id="8-3-1-安装钩子"><a href="#8-3-1-安装钩子" class="headerlink" title="8.3.1 安装钩子"></a>8.3.1 安装钩子</h3><p>想启用一个钩子脚本，需要将不含.sample后缀的可执行文件放入.git/hooks</p>
 <h3 id="8-3-2-客户端钩子"><a href="#8-3-2-客户端钩子" class="headerlink" title="8.3.2 客户端钩子"></a>8.3.2 客户端钩子</h3><h4 id="提交工作流钩子"><a href="#提交工作流钩子" class="headerlink" title="提交工作流钩子"></a>提交工作流钩子</h4><ol>
 <li>pre-commit钩子在键入提交消息前运行。如果以非零值退出，提交会被中止，但可以使用<code>git commit --no-verify</code>来绕过这个环节</li>
-<li>prapare-commit-msg钩子的运行时机是在提交消息编辑器启动之前，默认消息被创建之后。一般用于 那些自动生成默认消息的提交。如</li>
+<li>prapare-commit-msg钩子的运行时机是在提交消息编辑器启动之前，默认消息被创建之后。它接受一个路径参数，指向用户编写的提交信息。在8.4节有示例。一般用于 那些自动生成默认消息的提交。如</li>
 </ol>
 <ul>
 <li>提交消息模板</li>
@@ -343,6 +343,7 @@
 <li>post-receive钩子无法阻止推送过程，但在推送结束之前会一直保持连接，因此进行一些耗时较长的操作需谨慎</li>
 </ol>
 <h2 id="git强制策略示例"><a href="#git强制策略示例" class="headerlink" title="git强制策略示例"></a>git强制策略示例</h2><p>用Ruby编写脚本实现：检查提交消息的格式，只允许特定的用户修改项目中特定的子目录</p>
+<p>在钩子脚本中用<code>#!</code>指定脚本的解释器，如果是ruby脚本，用ARGV[0]提取首个参数</p>
 <h1 id="ch09-git与其他系统"><a href="#ch09-git与其他系统" class="headerlink" title="ch09 git与其他系统"></a>ch09 git与其他系统</h1><h3 id="9-1-1-git-svn与Subversion双向桥接"><a href="#9-1-1-git-svn与Subversion双向桥接" class="headerlink" title="9.1.1 git svn与Subversion双向桥接"></a>9.1.1 git svn与Subversion双向桥接</h3><p>建议保持线性：只变基不合并</p>
 <p>不要向单独的git服务器推送任何不包含git-svn-id的内容</p>
 <p><strong>跳过</strong></p>
